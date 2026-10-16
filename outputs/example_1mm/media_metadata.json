@@ -1,0 +1,17 @@
+{
+  "fps": 12,
+  "width": 1920,
+  "height": 1080,
+  "gif_width": 960,
+  "display_threshold_n_over_K": 0.02,
+  "simulation_days": 180.0,
+  "video_seconds": 11.583333333333334,
+  "formats": [
+    "mp4",
+    "gif"
+  ],
+  "codec": "H.264",
+  "pixel_format": "yuv420p",
+  "gif_frames": 121,
+  "gif_seconds": 11.12
+}

@@ -1,0 +1,17 @@
+{
+  "source": "https://brainweb.bic.mni.mcgill.ca/cgi/brainweb1",
+  "model": "BrainWeb original normal phantom (not the 20-subject models)",
+  "anatomy": "https://brainweb.bic.mni.mcgill.ca/anatomic_normal.html",
+  "files": {
+    "t1_icbm_normal_1mm_pn0_rf0.nii.gz": {
+      "sha256": "aa40262b2702653188fd51bdec844a393b825650fe1155a84d8606f5dfd99eb3",
+      "bytes": 8299415,
+      "brainweb_alias": "T1 ICBM normal 1mm pn0 rf0"
+    },
+    "phantom_1.0mm_normal_crisp.nii.gz": {
+      "sha256": "afdff78fc1b06ad7c7d8216cf96be737a1450ef5b6abf27eb732c0bf8b66fac0",
+      "bytes": 947188,
+      "brainweb_alias": "phantom_1.0mm_normal_crisp"
+    }
+  }
+}
