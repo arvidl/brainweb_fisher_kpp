@@ -1,0 +1,394 @@
+{
+  "summary_sha256": "2e1d43ff6fa092272bbb270d181f20e5f6084e2f5b98c41b43b6b2a3e39c87f7",
+  "source_sha256": {
+    "pat16.py": "c7c9c6b198c17f4ea8beb10801a6a215e3236bd3596cf188297887539fce720c",
+    "anisotropic.py": "b007274fe1c6c803d97ad90bacbd38f3727669cdca209fb8c1034722b048511e",
+    "pat16_inference.py": "c9d7f5e4cc79f282ed7767372c4f3bc2ed1df76549594142a0f0e8ee8f201b2d",
+    "pat16_prediction.py": "568dfbb376b41e06295424a82fc5bc00ced08f01699ca19eb8137e2b36105c92"
+  },
+  "output_sha256": {
+    "primary.npz": "678014bebf69ece084dcc77846f89a657372cfa1058616d6f41aa0eb285cd8e1",
+    "trials/trial_000.npz": "9acc9863c5096b9f348469f6d7832bf21d74fb7a7868ff43821d4785583d7a3e",
+    "trials/trial_000.json": "98f159a0068026b9bcdb2b8775b4fc24800198eb5b03539a91a8342d658ccf6e",
+    "trials/trial_001.npz": "f84daf8feb7203546b4ec3f79ec8bdf78c88c5d6ab21f0e61eae15981aee4a4d",
+    "trials/trial_001.json": "3f0891f0c3386dbd1f73bcd899fd97d61ac3a0a11a3a2afb238a22bb38348477",
+    "trials/trial_002.npz": "107f8d3f5070a4058f9985eab8163d4db895730b4b86e229d5df115c2fc468e7",
+    "trials/trial_002.json": "9c113e41d693dad57a13b538726b39904b144ce3f4ac1289140c4c7bdfd0f3d0",
+    "trials/trial_003.npz": "679eb1a146ffe4b943559197a0e153ab4cf6ddfe8f81a71458ef37ac23eac587",
+    "trials/trial_003.json": "6820cdb8b76ea2d41c3f3c9561f93f664283f78a255b70de7b7c1b798837417c",
+    "trials/trial_004.npz": "d6ab0dde26dbfa8faaefc757a75c57564383a3633ade1f2c5fc9f3589500352c",
+    "trials/trial_004.json": "46c49d4d4442a180221c287a82b4178aefd5411cf98ecf06b1b2cbb51751bc1f",
+    "trials/trial_005.npz": "dd1b9cc7f7822af68e0b80b63c67555263e2e8fb3a06f0a69f0aa2f966fd570c",
+    "trials/trial_005.json": "0348b7a24b56d098e369567694a1af085c619222ccd197b1e319ead9770b325d",
+    "trials/trial_006.npz": "b0b538e3d3ce5d308396e12298174e214200f30b6fd3ede4a3b1b975583e51ae",
+    "trials/trial_006.json": "e123bef0ae593153350fb4902890495dc05e39d3915465b35aa1837effb0f526",
+    "trials/trial_007.npz": "104d2be23fc9894298ebc7e34a9bb8a0ea7f5a43dc3c769aba078506e748d79e",
+    "trials/trial_007.json": "3627c84a2d55024f25eff6cdc207a68ef268579a855dd6711299282638a3b7c7",
+    "trials/trial_008.npz": "95499b94e1bef3500d82eeb4e247995695cf0404ae53d0c23317d85704bcc9af",
+    "trials/trial_008.json": "5619d807b7e63b6a5fac021fce9e41654ea4f182b76089acbd814bd1570e817f",
+    "trials/trial_009.npz": "506e0031275a9c694576a6d5a7938fec1abc56f8536f6629a2ac24a4428c6054",
+    "trials/trial_009.json": "6ac045a1e97a5b1906b220a0c44d50825d73c17111c2abe5327dc9c8e225cc7b",
+    "trials/trial_010.npz": "67df53e354d303d6407eee09e3a55ccb7f1ffea56185e4fea3cbe42a082c5bac",
+    "trials/trial_010.json": "14633e933f8a509090abd655fd1cfdd1ed051de9e969b22efb068cf48f2b683e",
+    "trials/trial_011.npz": "1c697858e65c35f0e3fd0d478173f8395218141e1d6d506b0526307b4938f94e",
+    "trials/trial_011.json": "498f25362376a05985b2ae80843b548c5cdf7a49c760fed0e603bfd0c0e76148",
+    "trials/trial_012.npz": "af497182c76da33387842355a156835231bf4f14ece216778a4b08f2e015b8fe",
+    "trials/trial_012.json": "7bbda2c99cad483304fad37811f7d6492a89e8651d5db461ce4d623dd4502543",
+    "trials/trial_013.npz": "2d464b625eb8908e66756db8ba99e17970146e72e7a62742ac7d2b55d050f573",
+    "trials/trial_013.json": "40dcc543c19a771e205c4091e5df8e854e17ab7ebeb94703d5669e8b19cb0719",
+    "trials/trial_014.npz": "693f742097388d7c58c24cfe9a0101ffce1c5327d48cb5bdc8c758929f5e473c",
+    "trials/trial_014.json": "f68c7c5985f8f45c5fa939a5a6b5dce0c0168d44e11f4fe37522bf90aa33eb02",
+    "trials/trial_015.npz": "25d8871494cbee311e41816d290b452974612308e0938cde53c481086fad218e",
+    "trials/trial_015.json": "a86b797ea62e2306ed8e400ff3c1649330dfc4d0af392342101d1e6337f41412",
+    "trials/trial_016.npz": "dc535478f82e85ba908928ff323011b14821dd18fe2aa66099095ba19c8e8152",
+    "trials/trial_016.json": "02c8f64bc6bf2b7d126f5456f7b514e784eb3bb319606ca537ad3b9dd6ac642c",
+    "trials/trial_017.npz": "a2e7d1ec037810542324da96c5f7e66012e7f4422a83d68c5b3af725cc5b8649",
+    "trials/trial_017.json": "5e9239a8b88bf8ece396fdac1ab72fc0e07615cb15cbb02c0e5b3bdc7d65bed6",
+    "trials/trial_018.npz": "e21277bfa44b346570a8a3e82c4b052ff3ce7c93f65748840158b215f419c8d4",
+    "trials/trial_018.json": "38124b9b73fc493e1201ca28d5bbe70b98bbce312e188ff5c1d10dfa6d75dc69",
+    "trials/trial_019.npz": "f6c862c598905121df23000f87f26fdcbbba5abc710a37e2a1fbc4c3026202d9",
+    "trials/trial_019.json": "b45a9dfdcfe6a44678ada951fbbde1cc0130077eb0aa11ddf120cf22eab70aa2",
+    "trials/trial_020.npz": "ed713ee6d7137d0f3df2d1b3322726f9b90445f4624fc772899aa08c278be075",
+    "trials/trial_020.json": "66cd862d3295f37bc9778a11586b0f988365f0d3dbec2a6a26bb82a67d5b2cea",
+    "trials/trial_021.npz": "f995ef86c438a70c10c255a1951e83369da6a469925e6c34bdfecee88f66568d",
+    "trials/trial_021.json": "b789d00db31dbe6e88e26fa91dd018efb54e385006866fca1eb73945252f3e66",
+    "trials/trial_022.npz": "627270ebd101729494802beec012ac22f9116343c7206b2744eee1efc8e8e63b",
+    "trials/trial_022.json": "952c3beafa20b0bfbe3ad5ab70a4401cea2c8d0cfc33fc2cd124efed2fe9e9c4",
+    "trials/trial_023.npz": "67272a47d61550dfd55ac36a0adaa2fe250437c0aced1b03c4b0700d623a5c28",
+    "trials/trial_023.json": "048422776a59b937f5732e211fbd6a0fdc2a40e0aef219b7ce2f6e55f4c80edf",
+    "trials/trial_024.npz": "350c8edd91d5f2d1fee1318f7a325dd585e18a04694fdcb6b74678215bf3d1f8",
+    "trials/trial_024.json": "4da7442ff17595462255d0d33650dcf9c0245322ab62c03d9fbeec007e614239",
+    "trials/trial_025.npz": "b1507281077267822d8c2d819e08a4878e64e9e8084f86d7271258e68869067b",
+    "trials/trial_025.json": "da14bee1a43af2315f70b162a04ac657903f0e9d5c888f48859d58aeb010d935",
+    "trials/trial_026.npz": "0f3cc421b794671282d3b0d7211c6474bdbf20fd895063e31591f0c3093484c8",
+    "trials/trial_026.json": "53eda25d25ff4dc2ff1d95489c809099c2b2548720ec47d5dc33b33706e18241",
+    "trials/trial_027.npz": "86346fb2977ac07cc6b891caee7bf571c9525a0740a691892ba7be059c751dd4",
+    "trials/trial_027.json": "cbc1b309cfe8d5dfec4098f58430422a22df13c9e9b00dc168c99c73d5734d1e",
+    "trials/trial_028.npz": "cd281ba9a3d4079316837b6b69f6e179b70422c5f47ae4cea443a5e95d29e2ec",
+    "trials/trial_028.json": "c153cbef173a6d5ada393bdeede467a042067f87a5052e4dfb4ac81b55b7bdbb",
+    "trials/trial_029.npz": "6509b9a3b0ace7f94b326e090253edccf89efd5f09f4a89972a4c73d04cb289e",
+    "trials/trial_029.json": "326b6a1fb95bd7fd63ef465badc3fca763513fef83c8625f078e8c872ca556d8",
+    "trials/trial_030.npz": "de1356a38daa89bfafc60ed9c554f03942b413c87a0585ca979f6116277ee056",
+    "trials/trial_030.json": "3b04915fc3bbb5603a8b5e0ed5441fd022abd097053d72cd118f374ecf7c3d5f",
+    "trials/trial_031.npz": "7b23c123efaff86a7eae8e190cf0f9215465e583886cb20cdb94e3399c045cdb",
+    "trials/trial_031.json": "e470deafe883845fdcef31bfc24f967e1efb9a2ce88832d4d885dbff4d09682b",
+    "trials/trial_032.npz": "70589c3aa5b68eb925bb0c57fed97ba4d07715bd0fdd23500e0f45b4095c14cf",
+    "trials/trial_032.json": "2c31d5b8fe1b44e1547216959f11da10e1f7c969e215715bc155e20508400533",
+    "trials/trial_033.npz": "8f4955fd27414c5d78948635dc081fb19b5c9d20d94224ec785253f938a2a715",
+    "trials/trial_033.json": "d475004f25b178c9ddd084c7e1ce539ab92913a2ce4f166bcff872cabbd011a5",
+    "trials/trial_034.npz": "c84b02b55cfda26930d81e719b3fb28ed4e277d4882c76f6fa4e131c181e82da",
+    "trials/trial_034.json": "526f791a7cfb479ce9552d3f350886c1ef05da0a71d4562b093c33e83b05bb6f",
+    "trials/trial_035.npz": "913043e3f48e8993cdc0d6cc2436be4f7d84466cf7ced96c6c1c9cc3038afcc3",
+    "trials/trial_035.json": "ae8f2f8db42b15a318f1ea22dd577fb47e0e580b39b97fc54040feb44b6c288a",
+    "trials/trial_036.npz": "49eb8406586a2c681baad2ac2ee2dd05a466b0e5b31317d27d2eee64d4e68063",
+    "trials/trial_036.json": "6d8b9935570196f8de2d39d25a2836b682b114b19531d2494ec4a8ab8fbf52c4",
+    "trials/trial_037.npz": "f0b1d5e160ff536e20c9b105342580d8f73dc99e72b4e9fd247053971043e91f",
+    "trials/trial_037.json": "93efbc2c6fbc59b2d43f2bbb103b096f8da93a4493e0bb199bef830a9df0ef74",
+    "trials/trial_038.npz": "474c0fe42e7084b63bf9bb9760e7fd34daadbddab60770e02e46f3fa19346e85",
+    "trials/trial_038.json": "ce964b8f77f94f327cdecad58c1429689cb39b7017d54c0220aed4a6f2eca0ce",
+    "trials/trial_039.npz": "eddc2a60b092ef89ed642c136f29f481066bed9d8d0689d3f9f1020aa957803a",
+    "trials/trial_039.json": "f86ee07d828d52084a06884b21c79535a76f144712856d31687420176a04d568"
+  },
+  "settings": {
+    "trials": 40,
+    "bootstrap": 100,
+    "predictive_draws": 20000,
+    "seed": 161027
+  },
+  "verified": [
+    "record hashes",
+    "primary predictive draws and exact quantiles",
+    "all independent training/test noise streams",
+    "all legacy quantiles and Gaussian-mixture CDF endpoints",
+    "all trial containment/width/proper scores and expected coverage",
+    "trial-level Monte Carlo intervals",
+    "paired changes and fixed-voxel exact binomial coverage"
+  ],
+  "coverage": [
+    {
+      "method": "legacy_100",
+      "region": "full",
+      "day": 75.0,
+      "mean_coverage": 0.9337384259259259,
+      "coverage_mc_interval": [
+        0.9321882480509386,
+        0.9352886038009133
+      ],
+      "mean_width": 0.05643596107162778,
+      "mean_interval_score": 0.07250549014612089,
+      "mean_expected_coverage": 0.9325630845739159,
+      "paired_coverage_change_from_legacy": 0.0,
+      "paired_change_mc_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "method": "legacy_100",
+      "region": "full",
+      "day": 90.0,
+      "mean_coverage": 0.9331886574074074,
+      "coverage_mc_interval": [
+        0.9314006545284681,
+        0.9349766602863467
+      ],
+      "mean_width": 0.05643480685324257,
+      "mean_interval_score": 0.07288039246254477,
+      "mean_expected_coverage": 0.9323231804493937,
+      "paired_coverage_change_from_legacy": 0.0,
+      "paired_change_mc_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "method": "legacy_100",
+      "region": "near",
+      "day": 75.0,
+      "mean_coverage": 0.9316071428571429,
+      "coverage_mc_interval": [
+        0.9271754950926685,
+        0.9360387906216172
+      ],
+      "mean_width": 0.056537244317344734,
+      "mean_interval_score": 0.07338943080045779,
+      "mean_expected_coverage": 0.932875660636849,
+      "paired_coverage_change_from_legacy": 0.0,
+      "paired_change_mc_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "method": "legacy_100",
+      "region": "near",
+      "day": 90.0,
+      "mean_coverage": 0.9299107142857143,
+      "coverage_mc_interval": [
+        0.9253368902508313,
+        0.9344845383205972
+      ],
+      "mean_width": 0.05649215181390641,
+      "mean_interval_score": 0.0740790880696046,
+      "mean_expected_coverage": 0.9328156276852478,
+      "paired_coverage_change_from_legacy": 0.0,
+      "paired_change_mc_interval": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "method": "mc_20000",
+      "region": "full",
+      "day": 75.0,
+      "mean_coverage": 0.951345486111111,
+      "coverage_mc_interval": [
+        0.9499394724871703,
+        0.9527514997350518
+      ],
+      "mean_width": 0.058855377458100856,
+      "mean_interval_score": 0.07007382208885152,
+      "mean_expected_coverage": 0.9498839899949811,
+      "paired_coverage_change_from_legacy": 0.017607060185185187,
+      "paired_change_mc_interval": [
+        0.016507808362853867,
+        0.018706312007516507
+      ]
+    },
+    {
+      "method": "mc_20000",
+      "region": "full",
+      "day": 90.0,
+      "mean_coverage": 0.950245949074074,
+      "coverage_mc_interval": [
+        0.948603614528687,
+        0.951888283619461
+      ],
+      "mean_width": 0.05888543443545766,
+      "mean_interval_score": 0.07023982936367752,
+      "mean_expected_coverage": 0.9498447539814368,
+      "paired_coverage_change_from_legacy": 0.01705729166666666,
+      "paired_change_mc_interval": [
+        0.01591025904277622,
+        0.018204324290557104
+      ]
+    },
+    {
+      "method": "mc_20000",
+      "region": "near",
+      "day": 75.0,
+      "mean_coverage": 0.948392857142857,
+      "coverage_mc_interval": [
+        0.9451318296643225,
+        0.9516538846213916
+      ],
+      "mean_width": 0.058877982860846334,
+      "mean_interval_score": 0.0702331490674049,
+      "mean_expected_coverage": 0.9498754059814296,
+      "paired_coverage_change_from_legacy": 0.016785714285714293,
+      "paired_change_mc_interval": [
+        0.01417084706975558,
+        0.019400581501673005
+      ]
+    },
+    {
+      "method": "mc_20000",
+      "region": "near",
+      "day": 90.0,
+      "mean_coverage": 0.947232142857143,
+      "coverage_mc_interval": [
+        0.9430575162570258,
+        0.9514067694572601
+      ],
+      "mean_width": 0.058871533469642204,
+      "mean_interval_score": 0.07118615448152187,
+      "mean_expected_coverage": 0.9498671390785969,
+      "paired_coverage_change_from_legacy": 0.01732142857142858,
+      "paired_change_mc_interval": [
+        0.014321119167199104,
+        0.020321737975658057
+      ]
+    },
+    {
+      "method": "gaussian_mixture",
+      "region": "full",
+      "day": 75.0,
+      "mean_coverage": 0.9514322916666667,
+      "coverage_mc_interval": [
+        0.9500752305640818,
+        0.9527893527692515
+      ],
+      "mean_width": 0.05886750037290458,
+      "mean_interval_score": 0.07007651593084852,
+      "mean_expected_coverage": 0.9499727826259072,
+      "paired_coverage_change_from_legacy": 0.017693865740740732,
+      "paired_change_mc_interval": [
+        0.016567775366174507,
+        0.018819956115306957
+      ]
+    },
+    {
+      "method": "gaussian_mixture",
+      "region": "full",
+      "day": 90.0,
+      "mean_coverage": 0.9503038194444444,
+      "coverage_mc_interval": [
+        0.9487094062240503,
+        0.9518982326648385
+      ],
+      "mean_width": 0.058900735453889075,
+      "mean_interval_score": 0.07022748448258984,
+      "mean_expected_coverage": 0.9499459096856935,
+      "paired_coverage_change_from_legacy": 0.01711516203703704,
+      "paired_change_mc_interval": [
+        0.01593871984799024,
+        0.01829160422608384
+      ]
+    },
+    {
+      "method": "gaussian_mixture",
+      "region": "near",
+      "day": 75.0,
+      "mean_coverage": 0.9491071428571429,
+      "coverage_mc_interval": [
+        0.9458584483347806,
+        0.9523558373795052
+      ],
+      "mean_width": 0.05889388435044783,
+      "mean_interval_score": 0.0702309465415222,
+      "mean_expected_coverage": 0.9499781708030082,
+      "paired_coverage_change_from_legacy": 0.01750000000000001,
+      "paired_change_mc_interval": [
+        0.014789650091607959,
+        0.02021034990839206
+      ]
+    },
+    {
+      "method": "gaussian_mixture",
+      "region": "near",
+      "day": 90.0,
+      "mean_coverage": 0.9475000000000001,
+      "coverage_mc_interval": [
+        0.9434662778724355,
+        0.9515337221275647
+      ],
+      "mean_width": 0.05888760499672365,
+      "mean_interval_score": 0.07114390004770114,
+      "mean_expected_coverage": 0.9499722229578982,
+      "paired_coverage_change_from_legacy": 0.017589285714285727,
+      "paired_change_mc_interval": [
+        0.014535517244958355,
+        0.0206430541836131
+      ]
+    }
+  ],
+  "sentinel": [
+    {
+      "method": "legacy_100",
+      "day": 75.0,
+      "hits": 37,
+      "trials": 40,
+      "fraction": 0.925,
+      "exact_binomial_interval": [
+        0.796135251267101,
+        0.9842578201489585
+      ]
+    },
+    {
+      "method": "legacy_100",
+      "day": 90.0,
+      "hits": 38,
+      "trials": 40,
+      "fraction": 0.95,
+      "exact_binomial_interval": [
+        0.8308031360405824,
+        0.9938863534006491
+      ]
+    },
+    {
+      "method": "mc_20000",
+      "day": 75.0,
+      "hits": 39,
+      "trials": 40,
+      "fraction": 0.975,
+      "exact_binomial_interval": [
+        0.8684141415172343,
+        0.9993672550679505
+      ]
+    },
+    {
+      "method": "mc_20000",
+      "day": 90.0,
+      "hits": 38,
+      "trials": 40,
+      "fraction": 0.95,
+      "exact_binomial_interval": [
+        0.8308031360405824,
+        0.9938863534006491
+      ]
+    },
+    {
+      "method": "gaussian_mixture",
+      "day": 75.0,
+      "hits": 39,
+      "trials": 40,
+      "fraction": 0.975,
+      "exact_binomial_interval": [
+        0.8684141415172343,
+        0.9993672550679505
+      ]
+    },
+    {
+      "method": "gaussian_mixture",
+      "day": 90.0,
+      "hits": 38,
+      "trials": 40,
+      "fraction": 0.95,
+      "exact_binomial_interval": [
+        0.8308031360405824,
+        0.9938863534006491
+      ]
+    }
+  ],
+  "interpretation": "Pointwise intervals conditional on the specified anatomy, initialization, operator and known noise. Independent complete datasets are the coverage replicates. Monte Carlo intervals for mean spatial coverage use Student t across datasets, not a pooled voxel binomial. Fixed-voxel coverage has exact binomial intervals. Gaussian convolution removes predictive noise sampling error, not finite-bootstrap error or model discrepancy. No quantiles or width corrections were selected using withheld observations."
+}

@@ -1,0 +1,186 @@
+{
+  "scope": "Manuscript claims checked against saved PAT16 arrays and the recorded inference implementation; no refitting.",
+  "source_sha256": {
+    "pat16.py": "c7c9c6b198c17f4ea8beb10801a6a215e3236bd3596cf188297887539fce720c",
+    "anisotropic.py": "b007274fe1c6c803d97ad90bacbd38f3727669cdca209fb8c1034722b048511e",
+    "pat16_inference.py": "c9d7f5e4cc79f282ed7767372c4f3bc2ed1df76549594142a0f0e8ee8f201b2d",
+    "pat16_recovery.py": "5dbb7a4cec317b8d30a87840191c13d96debeb6b687229debd7758709d6e86f9"
+  },
+  "record_sha256": {
+    "summary.json": "404306bf5f0efd05cf0044b5f1423cf54d430b28f441737b961eb425cf34c236",
+    "recovery_data.npz": "81bfc7ea7642db36c2d0547b8fd6f8ed4ebefa9da874dd4d7f4183b0a1689858",
+    "parameters.csv": "fe3a2a795af8d6d39fe65f6941757b92a1e647744f93d629b9f629d5691ea73c"
+  },
+  "verified": [
+    "fixed design, units and bounds",
+    "primary-noise stream and multistart selection",
+    "known-noise log-Wald covariance/intervals and correlations",
+    "bootstrap marginal/signal quantiles",
+    "predictive-noise stream and prediction quantiles",
+    "all fit failures and boundary flags",
+    "marginal coverage denominators and exact binomial intervals",
+    "trial bias and RMSE",
+    "physical evaluation regions",
+    "both regional forecast errors, containment and widths",
+    "matched-model recovery and temporal-mismatch shifts"
+  ],
+  "parameters": [
+    {
+      "parameter": "D_WM_mm2_day",
+      "known": 0.5,
+      "estimate": 0.5044405539672416,
+      "relative_error_percent": 0.8881107934483268,
+      "local_interval": [
+        0.48429227837899363,
+        0.5254270692452464
+      ],
+      "bootstrap_interval": [
+        0.48611873068798234,
+        0.5264647120758613
+      ],
+      "local_contains_known": true,
+      "bootstrap_contains_known": true,
+      "noise_trial_mean": 0.5026679472464396,
+      "noise_trial_bias_percent": 0.533589449287919,
+      "noise_trial_rmse": 0.01041956595735034,
+      "local_coverage_hits": 59,
+      "local_coverage_trials": 60,
+      "local_coverage_fraction": 0.9833333333333333,
+      "local_coverage_binomial_interval": [
+        0.910600949942513,
+        0.999578125547658
+      ]
+    },
+    {
+      "parameter": "D_GM_mm2_day",
+      "known": 0.1,
+      "estimate": 0.10209121100538028,
+      "relative_error_percent": 2.091211005380278,
+      "local_interval": [
+        0.09799919250032804,
+        0.10635409434123848
+      ],
+      "bootstrap_interval": [
+        0.09881790184097707,
+        0.10630728319308742
+      ],
+      "local_contains_known": true,
+      "bootstrap_contains_known": true,
+      "noise_trial_mean": 0.09918135766258947,
+      "noise_trial_bias_percent": -0.8186423374105356,
+      "noise_trial_rmse": 0.0024333198044502297,
+      "local_coverage_hits": 55,
+      "local_coverage_trials": 60,
+      "local_coverage_fraction": 0.9166666666666666,
+      "local_coverage_binomial_interval": [
+        0.8161422166234142,
+        0.9723866896625736
+      ]
+    },
+    {
+      "parameter": "rho_per_day",
+      "known": 0.04,
+      "estimate": 0.03997603535944493,
+      "relative_error_percent": -0.059911601387674374,
+      "local_interval": [
+        0.03984439297896234,
+        0.04010811267480902
+      ],
+      "bootstrap_interval": [
+        0.039861214048968606,
+        0.04012603632186311
+      ],
+      "local_contains_known": true,
+      "bootstrap_contains_known": true,
+      "noise_trial_mean": 0.03998330139078325,
+      "noise_trial_bias_percent": -0.04174652304187454,
+      "noise_trial_rmse": 7.50631309138259e-05,
+      "local_coverage_hits": 56,
+      "local_coverage_trials": 60,
+      "local_coverage_fraction": 0.9333333333333333,
+      "local_coverage_binomial_interval": [
+        0.8380132448022711,
+        0.9815382224241185
+      ]
+    },
+    {
+      "parameter": "parallel_perpendicular",
+      "known": 2.5,
+      "estimate": 2.5857622674881764,
+      "relative_error_percent": 3.4304906995270557,
+      "local_interval": [
+        2.4241389650390452,
+        2.7581613927227564
+      ],
+      "bootstrap_interval": [
+        2.453540669878896,
+        2.758188451489951
+      ],
+      "local_contains_known": true,
+      "bootstrap_contains_known": true,
+      "noise_trial_mean": 2.5108563097656496,
+      "noise_trial_bias_percent": 0.43425239062597765,
+      "noise_trial_rmse": 0.08960444414102509,
+      "local_coverage_hits": 55,
+      "local_coverage_trials": 60,
+      "local_coverage_fraction": 0.9166666666666666,
+      "local_coverage_binomial_interval": [
+        0.8161422166234142,
+        0.9723866896625736
+      ]
+    }
+  ],
+  "forecast_full_region": [
+    {
+      "day": 75.0,
+      "voxels": 1728,
+      "truth_rmse": 0.0005838156361521365,
+      "observation_rmse_over_noise_sd": 0.9988786102611733,
+      "signal_interval_truth_fraction": 0.9785879629629629,
+      "prediction_interval_observation_fraction": 0.9484953703703703,
+      "mean_signal_interval_width": 0.0018334356793560196,
+      "mean_prediction_interval_width": 0.058862002973248076
+    },
+    {
+      "day": 90.0,
+      "voxels": 1728,
+      "truth_rmse": 0.0006615607646262654,
+      "observation_rmse_over_noise_sd": 1.00062867972266,
+      "signal_interval_truth_fraction": 0.9884259259259259,
+      "prediction_interval_observation_fraction": 0.9548611111111112,
+      "mean_signal_interval_width": 0.002230482065520795,
+      "mean_prediction_interval_width": 0.05889356827905128
+    }
+  ],
+  "forecast_near_center": [
+    {
+      "day": 75.0,
+      "voxels": 280,
+      "truth_rmse": 0.0005800158765388043,
+      "observation_rmse_over_noise_sd": 1.0138046959508544,
+      "signal_interval_truth_fraction": 0.9928571428571429,
+      "prediction_interval_observation_fraction": 0.9357142857142857,
+      "mean_signal_interval_width": 0.0027167339938641375,
+      "mean_prediction_interval_width": 0.058891158896342825
+    },
+    {
+      "day": 90.0,
+      "voxels": 280,
+      "truth_rmse": 0.0004862359630476388,
+      "observation_rmse_over_noise_sd": 0.9691182349961331,
+      "signal_interval_truth_fraction": 1.0,
+      "prediction_interval_observation_fraction": 0.9571428571428572,
+      "mean_signal_interval_width": 0.0025083668459009107,
+      "mean_prediction_interval_width": 0.05888657807167222
+    }
+  ],
+  "interpretation": {
+    "parameters": "Separate tissue diffusivities with joint uncertainty; independence is not imposed or established.",
+    "intervals": "Nominal marginal/pointwise 95% approximations; neither joint 95% parameter coverage nor simultaneous image coverage was assessed.",
+    "coverage": "60 noise trials audit local intervals only; broad binomial intervals do not establish calibration. Marginal bootstrap parameter-interval coverage is unaudited.",
+    "forecasts": "Final prediction intervals integrate Gaussian noise over bootstrap forecast means. A separate 40-dataset nested audit assesses pointwise predictive coverage; neither spatial fractions nor this fixed-design experiment establish simultaneous or clinical coverage.",
+    "density_scale": "Recovery uses u=c/K. Uniform K cancels from the normalized dynamics; neither absolute capacity nor cell counts are identified.",
+    "validation": "Known-value recovery on fixed patient-derived anatomy; no patient growth-rate or biological validation."
+  },
+  "prediction_summary_sha256": "2e1d43ff6fa092272bbb270d181f20e5f6084e2f5b98c41b43b6b2a3e39c87f7"
+}

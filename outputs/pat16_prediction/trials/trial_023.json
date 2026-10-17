@@ -1,0 +1,11 @@
+{
+  "index": 23,
+  "fingerprint": "8411f05ed152e5d5f87b8e12bdd1b30299738652d30418b5ab19f3e2378718e8",
+  "sha256": "67272a47d61550dfd55ac36a0adaa2fe250437c0aced1b03c4b0700d623a5c28",
+  "primary_failed": false,
+  "primary_boundary": false,
+  "usable": true,
+  "bootstrap_successful": 100,
+  "bootstrap_boundary": 0,
+  "failures": []
+}

@@ -1,5 +1,8 @@
 # BrainWeb tumor growth explorer
 
+For the reviewed 17 October 2026 checkpoint, backup restoration and complete
+rerun instructions, see [PROJECT_CHECKPOINT.md](PROJECT_CHECKPOINT.md).
+
 A standalone 3D tumor-growth demonstration with an interactive Jupyter notebook,
 a conservative numerical solver, and PowerPoint/Google Slides media exports.
 Choose the original Fisher–KPP model or coupled viable tumor, oxygen and
@@ -25,6 +28,11 @@ missing imaging is never replaced with synthetic data. See
 [input and execution instructions](examples/pat16_pilot.md),
 [day-90 comparison](outputs/pat16_pilot/day90_comparison.png) and
 [uncertainty/regions](outputs/pat16_pilot/uncertainty_and_regions.png).
+
+A separate [PAT16 synthetic parameter recovery notebook](pat16_synthetic_parameter_recovery.ipynb)
+now fits WM diffusion, GM diffusion, proliferation and anisotropy to generated
+longitudinal signals on that real anatomy. It reports confidence intervals,
+known-value checks and withheld forecasts. Its prediction intervals now compare 20,000 predictive draws with Gaussian-noise integration and a 40-dataset nested coverage audit (100 new bootstrap fits per dataset); see [the recovery guide](examples/pat16_recovery.md).
 
 At day 90, the 32 scenarios give:
 
@@ -86,7 +94,7 @@ PAT16 multimodal pilot:
    migration. Enhancement and FLAIR are not universal cell-density contours.
    Add oxygen/death parameters only with independent physiological information
    or justified priors; routine BOLD does not measure tissue oxygen concentration.
-2. **Quantify uncertainty.** Extend the homogeneous and BrainWeb recovery audits
+2. **Quantify uncertainty.** Extend the homogeneous, BrainWeb and PAT16 recovery audits
    across rates, seed locations and scan schedules, then infer parameter
    distributions from calibrated measurements. Propagate measurement,
    segmentation, registration, tract-direction, initialization, prior, model and
@@ -209,12 +217,56 @@ the replication counts for a more precise uncertainty audit; the defaults keep
 the demonstration practical. The coverage audit evaluates local Jacobian
 intervals; it does not establish bootstrap coverage.
 
+### Four-parameter recovery on PAT16 anatomy
+
+[pat16_synthetic_parameter_recovery.ipynb](pat16_synthetic_parameter_recovery.ipynb)
+extends recovery to the real PAT16 pre-operative tissue geometry and dMRI
+directions. It independently estimates **D_WM, D_GM, shared proliferation ρ,
+and the eligible-WM parallel/perpendicular migration ratio r**. The generating
+values are **0.500 mm²/day, 0.100 mm²/day, 0.040 day⁻¹ and 2.500**.
+Directional transport preserves local mean diffusivity while changing r;
+GM and WM without valid directions stay isotropic.
+
+Synthetic blurred, voxel-averaged cellularity proxies at days 20/40/60 calibrate
+the fit. Days 75/90 are withheld. Three optimization starts, local 95% confidence
+intervals, **100 parametric bootstrap fits**, **60 independent noise trials**,
+parameter correlations, exact binomial intervals for local coverage, and
+signal/observation forecast intervals are saved. A noise-free matched-model fit
+must recover the known values; a finer-time generator checks temporal mismatch.
+Time-zero-only inference, missing directional information and missing tissue
+classes are rejected as unidentifiable.
+
+The notebook replays hash-checked recorded results without external MRI by
+default. Set `RERUN = True` to refit with the real derivatives, or run:
+
+```bash
+# From brainweb_fisher_kpp; uses PAT16_SOURCE or the existing local source project
+uv run --locked python scripts/run_pat16_recovery.py
+# Replay records and save the executed notebook (no source MRI needed):
+uv run --locked python scripts/run_pat16_recovery_notebook.py
+# Refit within the notebook and save its executed outputs:
+uv run --locked python scripts/run_pat16_recovery_notebook.py --rerun
+```
+
+Allow several minutes for the full audit. [Recorded results](outputs/pat16_recovery/README.md)
+include a CSV parameter table, JSON summary/provenance, complete resampling
+arrays and three figures. The [implementation and assumptions](examples/pat16_recovery.md)
+distinguish fitted conditional confidence intervals from the original PAT16
+pilot's assumed-parameter sensitivity bands. Anatomy, initial density,
+directions and imaging/noise calibration remain known; spatial/model errors
+are not included. These are synthetic recovery results, not fitted patient
+rates or validation against longitudinal patient tumor measurements. The
+manuscript now includes the PAT16 recovery Methods, Results, technical appendix,
+four validation/uncertainty figures and four numerical tables, generated from
+these checked records.
+
 ## Scientific manuscript
 
 The [paper (PDF)](paper/output/pdf/brainweb_fisher_kpp_manuscript.pdf) and
 [LaTeX/BibTeX sources](paper/README.md) report the 90-day coupled comparison,
 controlled ablations, numerical refinement, homogeneous two-rate recovery and
-BrainWeb three-rate recovery with anatomy/grid sensitivity, and the separate
+BrainWeb three-rate recovery with anatomy/grid sensitivity, PAT16 four-parameter
+recovery with conditional uncertainty and known-value validation, and the separate
 PAT16 MRI-informed directional pilot. The recovery Methods
 and Results include local/bootstrap confidence intervals, independent noise
 trials, regional withheld-scan forecasts and the retained proliferation interval
@@ -228,6 +280,8 @@ or rerun the forward cases and both recovery experiments with
 `make -C paper reproduce` after `uv sync --locked`. Use `make -C paper recovery`
 to rerun both notebook recovery sections. The build verifies each recovery
 experiment's source/code/data hashes before generating manuscript assets.
+`make -C paper pat16-recovery` reruns the additional MRI-dependent PAT16 recovery
+audit; ordinary PDF builds use its recorded results without source MRI.
 The Discussion also sets out multimodal MRI observation roles and a proposed
 growth--brain digital twin, with explicit BTC data limits, functional validation
 targets and treatment-evaluation perspectives. PAT16 Methods, Results and a

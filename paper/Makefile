@@ -2,7 +2,7 @@ PYTHON ?= ../.venv/bin/python
 LATEXMK ?= latexmk
 PDF = output/pdf/brainweb_fisher_kpp_manuscript.pdf
 
-.PHONY: all figures pdf experiments recovery pat16 reproduce check clean
+.PHONY: all figures pdf experiments recovery pat16 pat16-recovery pat16-prediction reproduce check clean
 all: pdf
 
 figures:
@@ -10,6 +10,7 @@ figures:
 	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) make_recovery_figures.py
 	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) make_brainweb_recovery_figures.py
 	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) make_pat16_figures.py
+	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) make_pat16_recovery_figures.py
 
 pdf: figures
 	mkdir -p build output/pdf
@@ -25,6 +26,12 @@ recovery:
 pat16:
 	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) ../scripts/run_pat16_notebook.py
 	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) ../scripts/export_pat16_results.py
+
+pat16-recovery:
+	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) ../scripts/run_pat16_recovery.py
+
+pat16-prediction:
+	$(PYTHON) ../scripts/run_pat16_prediction.py
 
 # Phantom experiments are self-contained; PAT16 additionally needs external MRI.
 reproduce:

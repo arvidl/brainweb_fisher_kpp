@@ -1,0 +1,9 @@
+{
+  "checked_on": "2026-10-17",
+  "citation_key": "gneiting2007",
+  "doi": "10.1198/016214506000001437",
+  "publisher": "https://doi.org/10.1198/016214506000001437",
+  "author_copy": "https://sites.stat.washington.edu/people/raftery/Research/PDF/Gneiting2007jasa.pdf",
+  "verified": "Authors, title, year, journal, volume, issue, pages and DOI; interval-score definition in Eq. 43 and equivalent distance-penalty form in Eq. 61.",
+  "role": "Evaluate predictive intervals using width and penalties for observations beyond either endpoint."
+}

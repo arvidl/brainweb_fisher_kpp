@@ -1,0 +1,43 @@
+Computing 1,000 and 20,000 predictive draws and exact Gaussian-mixture quantiles...
+Refitting 40 independent datasets, each with 100 bootstrap fits (8 workers)...
+Coverage trial 4: 100/100 bootstrap fits; 1/40 datasets complete
+Coverage trial 1: 100/100 bootstrap fits; 2/40 datasets complete
+Coverage trial 7: 100/100 bootstrap fits; 3/40 datasets complete
+Coverage trial 5: 100/100 bootstrap fits; 4/40 datasets complete
+Coverage trial 3: 100/100 bootstrap fits; 5/40 datasets complete
+Coverage trial 2: 100/100 bootstrap fits; 6/40 datasets complete
+Coverage trial 6: 100/100 bootstrap fits; 7/40 datasets complete
+Coverage trial 8: 100/100 bootstrap fits; 8/40 datasets complete
+Coverage trial 9: 100/100 bootstrap fits; 9/40 datasets complete
+Coverage trial 12: 100/100 bootstrap fits; 10/40 datasets complete
+Coverage trial 10: 100/100 bootstrap fits; 11/40 datasets complete
+Coverage trial 13: 100/100 bootstrap fits; 12/40 datasets complete
+Coverage trial 11: 100/100 bootstrap fits; 13/40 datasets complete
+Coverage trial 14: 100/100 bootstrap fits; 14/40 datasets complete
+Coverage trial 15: 100/100 bootstrap fits; 15/40 datasets complete
+Coverage trial 16: 100/100 bootstrap fits; 16/40 datasets complete
+Coverage trial 17: 100/100 bootstrap fits; 17/40 datasets complete
+Coverage trial 18: 100/100 bootstrap fits; 18/40 datasets complete
+Coverage trial 22: 100/100 bootstrap fits; 19/40 datasets complete
+Coverage trial 20: 100/100 bootstrap fits; 20/40 datasets complete
+Coverage trial 19: 100/100 bootstrap fits; 21/40 datasets complete
+Coverage trial 21: 100/100 bootstrap fits; 22/40 datasets complete
+Coverage trial 24: 100/100 bootstrap fits; 23/40 datasets complete
+Coverage trial 23: 100/100 bootstrap fits; 24/40 datasets complete
+Coverage trial 26: 100/100 bootstrap fits; 25/40 datasets complete
+Coverage trial 25: 100/100 bootstrap fits; 26/40 datasets complete
+Coverage trial 28: 100/100 bootstrap fits; 27/40 datasets complete
+Coverage trial 27: 100/100 bootstrap fits; 28/40 datasets complete
+Coverage trial 32: 100/100 bootstrap fits; 29/40 datasets complete
+Coverage trial 31: 100/100 bootstrap fits; 30/40 datasets complete
+Coverage trial 29: 100/100 bootstrap fits; 31/40 datasets complete
+Coverage trial 30: 100/100 bootstrap fits; 32/40 datasets complete
+Coverage trial 33: 100/100 bootstrap fits; 33/40 datasets complete
+Coverage trial 34: 100/100 bootstrap fits; 34/40 datasets complete
+Coverage trial 35: 100/100 bootstrap fits; 35/40 datasets complete
+Coverage trial 37: 100/100 bootstrap fits; 36/40 datasets complete
+Coverage trial 38: 100/100 bootstrap fits; 37/40 datasets complete
+Coverage trial 40: 100/100 bootstrap fits; 38/40 datasets complete
+Coverage trial 36: 100/100 bootstrap fits; 39/40 datasets complete
+Coverage trial 39: 100/100 bootstrap fits; 40/40 datasets complete
+Saved prediction audit to /Users/arvid/prj/China_2026/glioma-growth-2026/brainweb_fisher_kpp/outputs/pat16_prediction

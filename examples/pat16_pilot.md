@@ -137,3 +137,13 @@ are regenerated from public compact records with hash and metric checks; the
 PDF build needs neither the external MRI nor the ignored 64 MB full state cache.
 `make -C paper pat16` combines notebook execution and compact export when the
 required MRI derivatives are available.
+
+## Synthetic recovery extension
+
+The separate [PAT16 recovery notebook](../pat16_synthetic_parameter_recovery.ipynb)
+fits independent WM diffusion, GM diffusion, shared proliferation and WM
+anisotropy to generated longitudinal signals on this same anatomy. It includes
+local/bootstrap confidence intervals, known-value checks, independent-noise
+coverage and withheld forecasts. See [the recovery guide](pat16_recovery.md).
+The pilot above retains its assumed-parameter sensitivity interpretation;
+neither experiment estimates rates from patient tumor measurements.

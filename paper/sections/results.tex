@@ -169,7 +169,8 @@ Fitting the noise-free 2 mm signal with the 3 mm model estimated $D_{\rm GM}=\BW
 \caption{Sensitivity to anatomy and numerical representation. (a) Full 3 mm tissue domain at RAS $z=30$ mm, with the known seed center and fixed 60 mm observation FOV. The forward PDE is not cropped to that box. (b) Difference between 2 mm and 3 mm noise-free generating signals at day 90, using identical physical observation voxels; the displayed observation plane is at $z=27$ mm. (c) Relative shifts after fitting the noise-free 2 mm data with the 3 mm inverse model. (d) Observation-space discrepancies at the known rates; temporal error on the shared 3 mm grid is smaller than the combined anatomy/grid effect. Both generators in the anatomy comparison use a 0.125-day step. No biological measurement or clinical validation is represented.}\label{fig:bw_anatomy}
 \end{figure}
 
-Both recovery experiments fit synthetic M0 observations only. The oxygen--necrosis parameters and the dense-seed forward comparisons remain assigned inputs; no patient parameters, oxygen/death rates or clinical predictive errors were estimated.
+The two phantom recovery experiments fit synthetic M0 observations only; the subsequent PAT16 recovery uses its tensor-transport counterpart. The oxygen--necrosis parameters and the dense-seed forward comparisons remain assigned inputs; no patient parameters, oxygen/death rates or clinical predictive errors were estimated.
 \FloatBarrier
 
 \input{sections/pat16_results}
+\input{sections/pat16_recovery_results}

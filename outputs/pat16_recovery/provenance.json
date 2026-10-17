@@ -1,0 +1,141 @@
+{
+  "anatomy": {
+    "subject": "sub-PAT16",
+    "session": "ses-preop",
+    "dataset": "OpenNeuro ds001226 (BTC)",
+    "source_repository": "https://github.com/arvidl/glioma-brain-digital-twin-public",
+    "source_files": {
+      "t1": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/anat/sub-PAT16_ses-preop_desc-preproc_T1w.nii.gz",
+        "sha256": "7bfe2005403a413ab716b4acd9a5d24d980aec27aa78be4e49a0465b566854a1"
+      },
+      "brain": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/anat/sub-PAT16_ses-preop_desc-brain_mask.nii.gz",
+        "sha256": "ccdafa46473f26d0b65add409c59327e23897d3486ecbdf80c9b32af16a3a15c"
+      },
+      "tissue": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/anat/sub-PAT16_ses-preop_dseg.nii.gz",
+        "sha256": "811fe480ab01264f54248e05b0ed7c068739184d4b3ddf88fe4ca90ba7c72fd2"
+      },
+      "CSF": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/anat/sub-PAT16_ses-preop_label-CSF_probseg.nii.gz",
+        "sha256": "6d4c027de2b33bafb1e94e4d45a8422d7079906ecc6a6f81fb21d62730399c5f"
+      },
+      "GM": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/anat/sub-PAT16_ses-preop_label-GM_probseg.nii.gz",
+        "sha256": "4cf797fd38500dc88a6529fcc6325776709697df46005bb3534621dfa54759ba"
+      },
+      "WM": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/anat/sub-PAT16_ses-preop_label-WM_probseg.nii.gz",
+        "sha256": "874da7f1cf76a154998fc3e24c3cf4660ded8aa5963f6289e3f127e290c06fbc"
+      },
+      "lesion": {
+        "path": "data/BIDS_preop_postop/derivatives/tumor_masks/sub-PAT16/anat/sub-PAT16_space_T1_label-tumor.nii.gz",
+        "sha256": "29305846ad9966ce805089dbf067d76ba08813016272e3276e0f17f88ba29d5e"
+      },
+      "tensor": {
+        "path": "derivatives/mrtrix_recon/sub-PAT16/ses-preop/dti.mif",
+        "sha256": "0ff447aeaac187be40b82a229b2c35c1caca21876d610c488b880eed3ed1b519"
+      },
+      "pullback": {
+        "path": "derivatives/registered_t1w/sub-PAT16/ses-preop/transforms/acpc_to_t1w_mrtrix.txt",
+        "sha256": "70ca144a0951ebe3cde49b73848cf1b21884e56a4041a6a382269598bc45e3a7"
+      },
+      "fa_registered": {
+        "path": "derivatives/registered_t1w/sub-PAT16/ses-preop/fa_space-T1w.nii.gz",
+        "sha256": "b0938a09a0f224e9f16618bcf1a26d084402e5d1e0546fa182ed1eb77e40751c"
+      },
+      "parcellation": {
+        "path": "derivatives/registered_t1w/sub-PAT16/ses-preop/aparc+aseg_space-T1w.nii.gz",
+        "sha256": "b2c8148d99c80a240968df6b811b759828aec843aa759fe73a53fe73482b71e7"
+      },
+      "bold": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/func/sub-PAT16_ses-preop_task-rest_space-T1w_desc-preproc_bold.nii.gz",
+        "sha256": "17ed7bf4cf60e677e7e899d2581f3b52040a954cb71ed9b15fcba476560b0bdb"
+      },
+      "bold_json": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/func/sub-PAT16_ses-preop_task-rest_space-T1w_desc-preproc_bold.json",
+        "sha256": "59a4260b55087df7c910ad7539b6d806b8f5787261eb88ad9b5e2448c3e0fa36"
+      },
+      "confounds": {
+        "path": "derivatives/fmriprep/sub-PAT16/ses-preop/func/sub-PAT16_ses-preop_task-rest_desc-confounds_timeseries.tsv",
+        "sha256": "713157696bfee9ef85e21e87e6d1437715a9039e92d2da8e60c77be3996157b7"
+      }
+    },
+    "grid_shape": [
+      51,
+      62,
+      50
+    ],
+    "affine_RAS_mm": [
+      [
+        3.0,
+        0.0,
+        0.0,
+        -75.0
+      ],
+      [
+        0.0,
+        3.0,
+        0.0,
+        -78.0
+      ],
+      [
+        0.0,
+        0.0,
+        3.0,
+        -75.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "spacing_mm": 3.0,
+    "active_voxels": 44667,
+    "lesion_tissue_override_voxels": 603,
+    "internal_tissue_labels": {
+      "CSF": 1,
+      "GM": 2,
+      "WM": 3
+    },
+    "tissue_method": "argmax of named CSF/GM/WM probability maps; no assumed dseg label ordering",
+    "fa_alignment_correlation": 0.996777494672504,
+    "tensor_basis": "MRtrix scanner RAS; xx yy zz xy xz yz",
+    "registration": "MRtrix T1-to-ACPC pullback; inverse rigid rotation applied to tensor",
+    "dti_history": [
+      "mrconvert",
+      "dwi2tensor"
+    ],
+    "dti_b_shells_s_per_mm2": [
+      0,
+      500,
+      1000,
+      3000
+    ],
+    "interpretation": "Real anatomy/dMRI/fMRI; conditional synthetic growth, no patient rate fit"
+  },
+  "software_sha256": {
+    "pat16.py": "c7c9c6b198c17f4ea8beb10801a6a215e3236bd3596cf188297887539fce720c",
+    "anisotropic.py": "b007274fe1c6c803d97ad90bacbd38f3727669cdca209fb8c1034722b048511e",
+    "pat16_inference.py": "c9d7f5e4cc79f282ed7767372c4f3bc2ed1df76549594142a0f0e8ee8f201b2d",
+    "pat16_recovery.py": "5dbb7a4cec317b8d30a87840191c13d96debeb6b687229debd7758709d6e86f9"
+  },
+  "software_versions": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "numba": "0.68.0",
+    "nibabel": "5.4.2",
+    "matplotlib": "3.11.2"
+  },
+  "outputs_sha256": {
+    "recovery_data.npz": "81bfc7ea7642db36c2d0547b8fd6f8ed4ebefa9da874dd4d7f4183b0a1689858",
+    "summary.json": "404306bf5f0efd05cf0044b5f1423cf54d430b28f441737b961eb425cf34c236",
+    "parameters.csv": "fe3a2a795af8d6d39fe65f6941757b92a1e647744f93d629b9f629d5691ea73c",
+    "parameter_recovery.png": "0643c6e4cf784a16549bf9904b2ffc5169da69c435163fbf661ffd3149f1abe7",
+    "validation.png": "3f644e1c9076a981d9c64073f577dd205ea089382f9d3ea8cbd076cbf6fceacd",
+    "withheld_forecast.png": "eb79a843ac62a8567bb9ab7bd1182c01907b874b7ff75aa9f4c2f4b40d83da53"
+  }
+}
