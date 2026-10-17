@@ -51,5 +51,50 @@ At 2 mm, reducing the maximum time step from 0.25 to 0.125 day decreased the fin
 
 The native 1 mm calculation contained 2.452 billion viable cells, compared with 2.878 billion in its matched M0 reference, a \NativeCellReduction\% reduction. This relative reduction is similar to the primary result. However, minimum oxygen fell to \NativeMinimumOxygen{}, the necrotic-equivalent count increased to 3.607 million and peak $z/K$ rose to \NativeMaximumNecrosis{}. The necrotic threshold occupied 0.032 mL (32 native voxels), while low-oxygen volume was 0.027 mL. These local quantities are sensitive to spatial resolution and to the discrete anatomy. Neither grid resolves the assigned 0.2 mm oxygen length; spatial convergence of the oxygen--necrosis subsystem has not been demonstrated.
 
-\subsection{Status of parameter estimates}
-No biological parameters were estimated from measurements. The reported values are forward-simulation inputs, and no posterior distributions, patient-specific confidence intervals or predictive clinical errors can be inferred from them. The ablations identify influential assumptions for this example; influence alone does not show that a parameter is recoverable from available measurements. The next section specifies the measurements, priors and withheld-data tests needed to turn the simulator into an inference workflow.
+\subsection{Synthetic parameter recovery and uncertainty}\label{sec:recovery_results}
+In the separate homogeneous experiment, all three initial guesses converged to the same fit at the reported precision. Estimated diffusion was \RecoveryDEstimate{} mm$^2$/day and proliferation was \RecoveryRhoEstimate{} day$^{-1}$, relative errors of \RecoveryDRelativeError\% and \RecoveryRhoRelativeError\%, respectively (Table~\ref{tab:recovery}). Both known values lay within the local and bootstrap marginal 95\% intervals. The log-parameter correlation was \RecoveryCorrelation{}, indicating that uncertainty in the two rates should be propagated jointly. No primary or replicate fit reached a bound or failed. Agreement across starts and finite sensitivity singular values support local estimation for this experiment; they do not establish global identifiability under unknown initialization.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Recovery from the first three noisy scans of the homogeneous phantom. Local intervals use the known-noise residual Jacobian; bootstrap intervals are percentiles of \RecoveryBootstraps{} refits. Intervals are marginal, frequentist and conditional on known initialization and imaging assumptions.}\label{tab:recovery}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{lrrYY}
+\toprule Parameter & Known & Estimate & Local 95\% CI & Bootstrap 95\% CI\\\midrule
+\RecoveryRows
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Across \RecoveryTrials{} independent noise realizations, local intervals covered $D$ in \RecoveryDCoverageCount/\RecoveryTrials{} trials and $\rho$ in \RecoveryRhoCoverageCount/\RecoveryTrials{} trials (Table~\ref{tab:recovery_coverage}; Figure~\ref{fig:recovery}). The exact binomial intervals include the nominal 95\% rate and remain broad. The observed 98.3\% and 100\% fractions therefore neither establish exact calibration nor imply guaranteed coverage. The study varies measurement noise at one fixed biology, initialization and imaging setting, rather than sampling a virtual patient population. The time-zero-only control was correctly rejected as locally unidentifiable.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Independent repeated-noise recovery audit of local 95\% intervals. Bias and RMSE retain the units in the parameter column. The last column quantifies sampling uncertainty in empirical coverage, not uncertainty in an individual parameter estimate.}\label{tab:recovery_coverage}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{lrrYY}
+\toprule Parameter & Bias & RMSE & Coverage & Binomial 95\% CI\\\midrule
+\RecoveryCoverageRows
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figures/synthetic_recovery.pdf}
+\caption{Synthetic recovery and conditional uncertainty. (a) Joint bootstrap estimates and a local joint 95\% ellipse, linearized into physical units. The star marks the known rates. (b) A day-90 line profile through the nearest observation-voxel centers to the seed's $y,z$ coordinates. The darker mean-signal confidence band accounts for parameter uncertainty; the lighter new-scan prediction band also includes independent noise. Both are pointwise intervals. (c,d) Local marginal 95\% intervals for the \RecoveryTrials{} independent noise realizations, sorted by fitted rate. Red denotes a missed known value; the dashed line is ground truth. These trials audit local intervals, not bootstrap coverage or clinical variability.}\label{fig:recovery}
+\end{figure}
+
+\subsection{Withheld synthetic forecasts and numerical discrepancy}
+Day-75 and day-90 predictions used no observations beyond day 60. Whole-image RMSE against the known noise-free signal was $4.72\times10^{-4}$ and \RecoveryDayNinetyRMSE{}, respectively, while RMSE against the withheld noisy images was approximately the 0.03 noise standard deviation (Table~\ref{tab:recovery_forecast}). The 95\% new-scan prediction intervals contained 94.0\% and 94.6\% of the withheld voxel measurements. These are spatial fractions in two scans, not coverage estimates from independent patients; the whole-box metrics include background voxels. Figure~\ref{fig:recovery}b separately displays the signal near the tumor. Confidence in the mean signal is narrower than prediction uncertainty for a future noisy measurement.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Withheld synthetic-scan forecast errors in normalized signal units, evaluated over all 1,000 observation voxels per scan. Prediction intervals are approximate and pointwise, conditional on the fitted model.}\label{tab:recovery_forecast}
+\begin{tabularx}{\textwidth}{rYYY}
+\toprule Day & RMSE vs clean truth & RMSE vs noisy scan & Voxel fraction in 95\% prediction interval\\\midrule
+\RecoveryForecastRows
+\bottomrule
+\end{tabularx}
+\end{table}
+
+At day 90, the observation-space RMSE between the inference grid and fine generator at the known parameters was \RecoveryDayNinetyGridRMSE{}, approximately 1.14\% of the noise standard deviation. Halving the inference time step changed the signal by RMSE \RecoveryDayNinetyTimeRMSE{}. The finer generator is still a numerical reference, and a small per-voxel discrepancy does not by itself ensure negligible bias when many voxels are used; the repeated-noise audit supplies a complementary check. The BrainWeb oxygen--necrosis parameters remain assigned inputs. No patient parameters, oxygen/death rates or clinical predictive errors were estimated by this recovery study.

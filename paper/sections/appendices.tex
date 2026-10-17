@@ -53,7 +53,7 @@ Otherwise $c_i^b=c_i^*$. With $q_i=\delta h(o_i^n)$, the subsequent death/cleara
  c_i^{n+1}=c_i^b-L_i,\quad
  z_i^{n+1}=(z_i^n+L_i)\exp(-\lambda_z\Delta t).
 \end{equation}
-The same $L_i$ leaves $c$ and enters $z$, preserving cell equivalents when clearance is zero. Exact frozen-coefficient substeps do not make the full coupled update exact: diffusion, birth, death and clearance are Lie-split, and oxygen is lagged. The complete method is first order in time. The centered spatial stencil has second-order consistency in smooth regions, without a global spatial-order claim at sharp tissue boundaries. Tumor and necrosis arrays use float32 and compiled Numba CPU kernels.
+The same $L_i$ leaves $c$ and enters $z$, preserving cell equivalents when clearance is zero. Exact frozen-coefficient substeps do not make the full coupled update exact: diffusion, birth, death and clearance are Lie-split, and oxygen is lagged. The complete method is first order in time. The centered spatial stencil has second-order consistency in smooth regions, without a global spatial-order claim at sharp tissue boundaries. The BrainWeb tumor and necrosis arrays use float32 and compiled Numba CPU kernels; the synthetic inference wrapper uses float64 for stable finite-difference sensitivities.
 
 \subsection{Quasi-steady oxygen solve}
 Let $L_h$ be the unit-diffusivity no-flux Laplacian on the active voxel graph, $u=c/K$, and $p_i=[1+\alpha(c_i+z_i)/K_i]^{-1}$. After initialization and each tumor update, solve
@@ -65,7 +65,7 @@ The positive reaction diagonal makes this system symmetric positive definite, in
 The primary M2 run required 361 solves and 873 total conjugate-gradient iterations; the largest recorded relative residual was below $10^{-7}$. This residual measures algebraic solution accuracy, not accuracy of the continuum approximation on the chosen grid.
 
 \subsection{Recorded checks and refinement comparisons}
-The \TestCount{}-test suite includes exact logistic growth; reflecting-boundary diffusion modes; heterogeneous-flux conservation; impermeable interfaces and no wrapping; positivity and unsafe-step rejection; parameter checks; exact output times; data affine/tissue checks; uniform and nonuniform oxygen solutions; oxygen barriers; exact death transfer and clearance; occupied-capacity behavior; Fisher--KPP recovery; live-plus-dead balance; coupled temporal refinement against an independent Runge--Kutta calculation; failed-solver reporting; rendering; and replay compatibility. Test results are stored in \texttt{paper/data/pytest.xml}. Notebook smoke checks and media review are separate interface checks.
+The \TestCount{}-test suite includes exact logistic growth; reflecting-boundary diffusion modes; heterogeneous-flux conservation; impermeable interfaces and no wrapping; positivity and unsafe-step rejection; parameter checks; exact output times; data affine/tissue checks; uniform and nonuniform oxygen solutions; oxygen barriers; exact death transfer and clearance; occupied-capacity behavior; Fisher--KPP recovery; live-plus-dead balance; coupled temporal refinement against an independent Runge--Kutta calculation; failed-solver reporting; rendering; and replay compatibility. Eight inference tests additionally check the exact reaction limit, transport/imaging mass conservation, unclipped linear imaging, noiseless two-rate recovery and withheld forecasts, known-noise covariance scaling, uninformative-data rejection, and invalid inputs. Test results are stored in \texttt{paper/data/pytest.xml}. Notebook smoke checks and media review are separate interface checks.
 
 For field $v$, final relative $L^2$ differences are $\|v_{\Delta t}-v_{0.0625}\|_2/\|v_{0.0625}\|_2$ on the same 2 mm grid (Table~\ref{tab:errors}). The denominator is nonzero in these cases. These are finite-reference differences, not rigorous continuum error bounds. The 1 mm assessment is reported in Table~\ref{tab:refinement}; because the tissue labels also change under resampling, it is not used to infer spatial order.
 
@@ -79,6 +79,38 @@ For field $v$, final relative $L^2$ differences are $\|v_{\Delta t}-v_{0.0625}\|
 \end{tabular}
 \end{table}
 
+\section{Synthetic recovery: observation, optimization and resampling}\label{app:recovery}
+\subsection{Imaging operator and fixed design}
+The homogeneous box is $[-30,30]^3$ mm with reflecting boundaries. For known $u_0$, the initial cell averages are computed from the product of one-dimensional Gaussian integrals using the error function. The fine generator has $60^3$ cells and inversion has $30^3$ cells. Both map to $10^3$ observation voxels per scan. For a Gaussian point-spread kernel $G_{\sigma_b}$ with $\sigma_b=2$ mm and an observation voxel $V_v$ of volume $6^3$ mm$^3$,
+\begin{equation}
+ H_v[u(t)]=\frac{1}{|V_v|}\int_{V_v}(G_{\sigma_b}*u)(\bm x,t)\,\dd\bm x,\qquad
+ y_{jv}=H_v[u(t_j)]+\epsilon_{jv},\quad
+ \epsilon_{jv}\sim\mathcal N(0,0.03^2).
+\end{equation}
+Implementation uses a discrete Gaussian filter with reflecting extension, followed by aligned block averages. The same signal calibration and blur are assumed known in both models. Noise is independent across observation voxels and scan times and is added after averaging; blurring independently generated noise instead would require a correlated likelihood. Values outside $[0,1]$ are retained. All training voxels are used without a data-dependent region selection. The cellularity proxy has a known normalized scale and does not identify an absolute $K$ from imaging.
+
+\subsection{Maximum likelihood and local information}
+With $\theta=(\log D,\log\rho)$, using numerical values in mm$^2$/day and day$^{-1}$, define
+\begin{equation}
+ r_{jv}(\theta)=\frac{H_v[u(e^{\theta_1},e^{\theta_2},t_j)]-y_{jv}}{0.03},\qquad
+ \widehat\theta=\arg\min_\theta\tfrac12\|\bm r(\theta)\|_2^2.
+\end{equation}
+The bounds are $0.05\leq D\leq0.8$ mm$^2$/day and $0.01\leq\rho\leq0.09$ day$^{-1}$; they are optimizer constraints, not a prior distribution. Starting pairs are $(0.12,0.02)$, $(0.30,0.04)$ and $(0.65,0.075)$. Bounded trust-region least squares uses a three-point finite-difference Jacobian with relative step $10^{-4}$ and Jacobian column scaling \citep{virtanen2020}. Termination tolerances are $10^{-8}$ for objective/step changes and $10^{-6}$ for the gradient. The selected fit minimizes training residual sum of squares. Inversion has a fixed maximum time step that is stable throughout the bounds; it does not change with the fitted rate except for landing at exact output times.
+
+Let $J=\partial\bm r/\partial\theta$ at the fit. The singular-value decomposition gives
+\begin{equation}
+ J=USV^{\mathsf T},\qquad C_\theta=VS^{-2}V^{\mathsf T},\qquad
+ I_i=\exp\left[\widehat\theta_i\pm1.95996\sqrt{(C_\theta)_{ii}}\right].
+\end{equation}
+Because measurement variance is known, $C_\theta$ is not rescaled by fitted residual variance. The smallest singular value must exceed $10^{-8}$ times the largest. A fit within $10^{-4}$ log units of a bound is flagged and its Wald intervals must not be interpreted as calibrated. In the primary experiment, weighted singular values were approximately 107.9 and 18.0. With only $t=0$, both rate sensitivities vanish, and the fit is rejected as locally unidentifiable.
+
+\subsection{Bootstrap, forecasts and repeated-noise audit}
+For each of \RecoveryBootstraps{} bootstrap trials, training observations were generated from the fitted coarse-grid mean plus new Gaussian noise and refitted from the primary estimate \citep{efron1979}. Marginal percentile intervals use the 2.5th and 97.5th percentiles. Every fitted parameter pair was propagated to the five scan times. Pointwise mean-signal bands use trajectory percentiles. Approximate new-scan prediction bands resample these bootstrap trajectories 1,000 times and add independent observation noise before taking percentiles. These constructions are conditional frequentist approximations, not samples from a Bayesian posterior, and do not provide simultaneous spatial coverage.
+
+The separate coverage audit generated \RecoveryTrials{} noisy training datasets from the fine-grid signal at the known parameters. Each fit started from $(0.25,0.04)$. Bias is the mean estimate minus the known value; RMSE is the square root of mean squared estimation error. Coverage counts intervals containing the known rate. Exact two-sided binomial 95\% intervals quantify sampling uncertainty in these fractions. The audit concerns local Jacobian intervals; bootstrap coverage would require a separate repeated or nested study. All optimization failures or boundary fits stop execution rather than being discarded. There were none in the recorded experiment.
+
+NumPy seed 20261017 spawns four independent streams for the primary noise, bootstrap, repeated-noise audit and predictive noise. The known truth is used to evaluate recovery and forecasts, not to select fitted parameters or tune uncertainty. Unknown age, seed geometry, noise variance, capacity, registration, observation calibration and model discrepancy are not inferred. The mesh/time comparison uses the same PDE family and is a numerical sensitivity check, not validation against a different biological mechanism.
+
 \section{Inverse formulation, priors and identifiability}\label{app:inference}
 \subsection{An example estimation objective}
 With the observation model in Equation~\eqref{eq:observation}, a possible maximum-a-posteriori objective for continuous approximately Gaussian observations is
@@ -89,7 +121,7 @@ With the observation model in Equation~\eqref{eq:observation}, a possible maximu
  -\log\pi(\bm\theta,\bm\eta),\qquad
  \bm r_{mj}=\mathcal H_m[\bm s_{\bm\theta}(t_j);\bm\eta_m]-\bm y_{mj},
 \end{align}
-where $\bm s=(c,o,z)$ and $\Sigma$ models measurement covariance. Cross-time or cross-modality correlations require a joint likelihood rather than independent terms. Segmentations may need a probabilistic classification likelihood rather than Gaussian residuals. Registration, partial volume, scanner bias, initial fields and uncertain state-to-signal mappings should enter the likelihood or be propagated as nuisance uncertainty. Bayesian sampling can quantify uncertainty; an optimizer alone does not provide calibrated predictive intervals. No such fit was performed in this study.
+where $\bm s=(c,o,z)$ and $\Sigma$ models measurement covariance. Cross-time or cross-modality correlations require a joint likelihood rather than independent terms. Segmentations may need a probabilistic classification likelihood rather than Gaussian residuals. Registration, partial volume, scanner bias, initial fields and uncertain state-to-signal mappings should enter the likelihood or be propagated as nuisance uncertainty. Bayesian sampling can quantify uncertainty; an optimizer alone does not provide calibrated predictive intervals. No coupled-model or patient-data maximum-a-posteriori fit was performed; the separate synthetic analysis in Appendix~\ref{app:recovery} used maximum likelihood without a prior.
 
 \subsection{Important structural and practical ambiguities}
 \begin{enumerate}
@@ -116,6 +148,8 @@ Before a full fit, evaluate scaled observation sensitivities, their singular val
 \section{Reproducibility and interactive artifacts}
 \path{paper/run_experiments.py} runs the nine model/step/grid cases using \path{examples/coupled.json}, verifies the bundled data and checks that the primary viable-count trajectory matches the saved example. It records final metrics and settings in \texttt{experiments.json}, time courses in \texttt{timecourses.csv}, lossless final seed-plane fields in \texttt{day90\_planes.npz}, and provenance in \texttt{provenance.json}, all under \texttt{paper/data/}. Source hashes include the model, data loader, renderer, configuration, lockfile and experiment script. The experiments were generated before their implementation changes were committed, so provenance records working-file hashes alongside the base Git revision. The hashes identify the simulation sources independently of that earlier revision.
 
-\texttt{paper/make\_figures.py} reads these records to generate figures, table rows and numerical macros used directly by the manuscript. The local Python environment is defined by \texttt{pyproject.toml} and \texttt{uv.lock}. A \texttt{Makefile} rebuilds the figures and PDF, with a separate target to rerun the experiments. The native and 2 mm examples are deterministic; they do not sample biological uncertainty.
+\texttt{paper/make\_figures.py} reads these records to generate figures, table rows and numerical macros used directly by the manuscript. The local Python environment is defined by \texttt{pyproject.toml} and \texttt{uv.lock}. A \texttt{Makefile} rebuilds the figures and PDF, with separate targets to rerun the anatomical experiments and synthetic recovery. The native and 2 mm anatomical examples are deterministic; they do not sample biological uncertainty.
+
+\path{synthetic_parameter_recovery.ipynb} executes the inference experiment using \path{src/brainweb_kpp/inference.py} and the shared transport/reaction kernel. \path{scripts/run_recovery_notebook.py} runs and saves the executed notebook. Under \path{outputs/synthetic_recovery/}, \texttt{summary.json} records settings, units, seeds, intervals, errors, coverage, software versions and source/data hashes; \texttt{recovery\_data.npz} retains clean and noisy observations, fitted observations, bootstrap parameters and forecast bands, and independent estimates/intervals. Five PNG figures accompany these arrays. A code-cell hash identifies notebook source independently of output metadata. \path{paper/make_recovery_figures.py} checks the recorded source and array hashes and regenerates the manuscript's vector recovery figure, numerical macros and three tables. The full reproduction target reruns both experiments before compiling the PDF.
 
 \texttt{tumor\_growth\_explorer.ipynb} exposes both models; \texttt{coupled\_example.ipynb} presets the 90-day comparison. Time and RAS slices are shared across the four-field view. Live histories permit arbitrary 3D slicing, while compact replay files retain the three seed-plane histories and final full volumes. The slower comparison MP4 uses 400 frames at 20 frames/s, including a 120-frame day-90 hold; playback duration is distinct from simulated time. Synchronized movies help inspect output but are not quantitative validation. Manuscript figures retain the full computed necrotic range, unlike a display limited to $0$--$1$.

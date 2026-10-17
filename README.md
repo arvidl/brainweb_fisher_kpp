@@ -74,16 +74,47 @@ These are proposed next steps, building on the current phantom demonstration:
    trials must establish effects on survival, neurological function and quality
    of life before model-guided strategies can claim clinical benefit.
 
+## Synthetic parameter recovery
+
+Open [synthetic_parameter_recovery.ipynb](synthetic_parameter_recovery.ipynb)
+and **Run All** to estimate diffusion D and proliferation ρ from noisy MRI-like
+observations of a homogeneous 3D phantom. Known values are D = 0.300 mm²/day and
+ρ = 0.045 day⁻¹. A finer simulation generates blurred, voxel-averaged signals;
+scans at days 20/40/60 are fitted and days 75/90 are withheld for forecasting.
+
+The notebook includes multiple starting guesses, local 95% confidence intervals,
+100 parametric bootstrap fits, forecast intervals and 60 independent noise
+realizations to check recovery bias and local-interval coverage. It also measures
+numerical discrepancy and rejects an unidentifiable time-zero-only experiment.
+The initial state, imaging calibration, capacity and noise level are known:
+these conditional uncertainty estimates demonstrate synthetic recovery, not
+patient MRI validation. No Bayesian prior is used.
+
+```bash
+uv run --locked jupyter lab synthetic_parameter_recovery.ipynb
+# Or execute and save the notebook without opening Jupyter:
+uv run --locked python scripts/run_recovery_notebook.py
+```
+
+Allow roughly 1–3 minutes for the default experiment. The executed notebook and
+[recorded results](outputs/synthetic_recovery/summary.json) include parameter
+estimates, uncertainty, withheld errors and coverage diagnostics. Arrays and five
+figures are saved alongside the summary. Increase the replication counts for a
+more precise uncertainty audit; the defaults keep the demonstration practical.
+
 ## Scientific manuscript
 
 The [paper (PDF)](paper/output/pdf/brainweb_fisher_kpp_manuscript.pdf) and
 [LaTeX/BibTeX sources](paper/README.md) report the 90-day coupled comparison,
-controlled model ablations and numerical refinement, with appendices covering
-the equations, schemes, BrainWeb data, parameter inference and validation.
-Figures and tables are generated from recorded simulation arrays and metrics.
-Biological parameters are assigned demonstration values; no patient fitting or
-biological validation is claimed. Build with `make -C paper`, or rerun the
-simulations and build with `make -C paper reproduce` after `uv sync --locked`.
+controlled ablations, numerical refinement and synthetic two-rate recovery.
+The recovery Methods and Results include parameter confidence intervals,
+independent noise trials and withheld-scan forecasts; appendices document the
+imaging operator, optimization and resampling. Figures and tables are generated
+from recorded arrays and metrics. The anatomical simulations use assigned
+parameters; the separate recovery experiment fits synthetic observations.
+No patient fitting or biological validation is claimed. Build with `make -C paper`,
+or rerun both experiments and build with `make -C paper reproduce` after
+`uv sync --locked`. Use `make -C paper recovery` to rerun only the recovery study.
 
 ## Start the notebook
 
@@ -482,6 +513,9 @@ mass conservation and positivity, impermeable CSF/extracerebral boundaries,
 absence of periodic wrapping, unstable-step rejection, the uniform capacity
 bound, a reflecting-boundary cosine eigenmode, temporal refinement, exact output
 times, parameter validation, and bundled BrainWeb alignment/tissue counts.
+Inference tests also check noiseless two-rate recovery and withheld forecasts,
+imaging mass conservation, covariance scaling with known noise, and rejection of
+unidentifiable time-zero observations and invalid input.
 
 The notebook is also executed as a smoke test; the actual GUI can be opened in
 JupyterLab for clicks and playback. The generated MP4 and GIF are decoded and

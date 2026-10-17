@@ -9,7 +9,7 @@
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[colorlinks=true,allcolors=blue,breaklinks=true]{hyperref}
 \usepackage{doi}
-\hypersetup{pdftitle={Extending Fisher-KPP glioma growth with oxygen and necrosis},pdfauthor={}}
+\hypersetup{pdftitle={Extending Fisher-KPP glioma growth with oxygen and necrosis: simulation and synthetic parameter recovery},pdfauthor={}}
 \setlength{\emergencystretch}{2em}
 \setlength{\parskip}{3pt}
 \setlist{nosep,leftmargin=*}
@@ -20,16 +20,20 @@
 \input{generated/ablation_rows}
 \input{generated/refinement_rows}
 \input{generated/error_rows}
-\title{Extending Fisher--KPP glioma growth with oxygen and necrosis:\\a reproducible BrainWeb simulation study and a framework for parameter inference}
+\input{generated/recovery_numbers}
+\input{generated/recovery_rows}
+\input{generated/recovery_coverage_rows}
+\input{generated/recovery_forecast_rows}
+\title{Extending Fisher--KPP glioma growth with oxygen and necrosis:\\a reproducible BrainWeb simulation and synthetic parameter recovery study}
 \author{}
 \date{Working manuscript --- 17 October 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
 \noindent\textbf{Background.} Fisher--Kolmogorov--Petrovskii--Piskunov (Fisher--KPP) models describe glioma spread and growth but do not explicitly represent oxygen limitation or necrotic material. We developed a minimal coupled extension and an interactive workflow to examine these assumptions.\par
-\noindent\textbf{Methods.} Tissue-dependent cell diffusion and logistic growth were compared with oxygen-limited growth and a three-field model coupling viable tumor, quasi-steady relative oxygen and immobile necrotic cell equivalents. Simulations used the BrainWeb normal phantom, an identical dense Gaussian seed and assigned biological parameters over 90 days. Conservative finite-volume transport, operator splitting and an elliptic oxygen solver were assessed using analytical limits, conservation checks, ablations and refinement. Measurement-based inference and independent validation were formulated as future protocols.\par
-\noindent\textbf{Results.} On the 2 mm grid, the coupled model contained \CoupledCells{} billion viable cells at day 90, compared with \ReferenceCells{} billion for Fisher--KPP, a \CellReduction\% reduction. Volumes above 0.2 of the density scale differed by \VolumeReduction\%. Minimum relative oxygen was \MinimumOxygen{}, and necrotic material totaled \NecroticCells{} million cell equivalents. Only three voxels exceeded the necrotic threshold of 0.2. Suppressing hypoxic death had a small effect on total viable burden, whereas removing burden-dependent supply suppression largely restored the reference burden. Time refinement reduced field errors, while the necrotic peak and minimum oxygen remained sensitive to spatial resolution.\par
-\noindent\textbf{Conclusions.} Oxygen feedback can change the simulated interior substantially while producing similar threshold-defined extent. This is a reproducible computational comparison, not patient-specific parameter estimation or biological validation. Translation requires calibrated observation operators, identifiable parameter subsets, independent spatial measurements and withheld-data forecasts.
+\noindent\textbf{Methods.} Tissue-dependent Fisher--KPP growth was compared with oxygen-limited growth and a three-field viable-tumor--oxygen--necrosis model on the BrainWeb normal phantom over 90 days, using assigned biological parameters. Analytical limits, conservation checks, ablations and refinement assessed the numerical method. A separate homogeneous 3D experiment recovered diffusion and proliferation from noisy, blurred, voxel-averaged synthetic scans. Early scans calibrated the model; later scans were withheld. Confidence intervals used local sensitivities and \RecoveryBootstraps{} bootstrap fits, with \RecoveryTrials{} independent noise realizations auditing local-interval coverage.\par
+\noindent\textbf{Results.} On the 2 mm BrainWeb grid, the coupled model contained \CoupledCells{} billion viable cells at day 90, versus \ReferenceCells{} billion for Fisher--KPP, a \CellReduction\% reduction; low-threshold volumes differed by \VolumeReduction\%. Growth inhibition dominated this difference. Necrotic material totaled \NecroticCells{} million cell equivalents, but its peak and minimum oxygen remained grid sensitive. In the separate recovery experiment, known $D=\RecoveryDTrue$ mm$^2$/day and $\rho=\RecoveryRhoTrue$ day$^{-1}$ were estimated as \RecoveryDEstimate{} and \RecoveryRhoEstimate{}, respectively; both lay within bootstrap 95\% intervals. Local intervals covered the known rates in \RecoveryDCoverageCount/\RecoveryTrials{} and \RecoveryRhoCoverageCount/\RecoveryTrials{} trials. Day-90 noise-free signal RMSE was \RecoveryDayNinetyRMSE{}.\par
+\noindent\textbf{Conclusions.} Oxygen feedback can change the modeled interior while preserving similar threshold-defined extent. Two-rate recovery is feasible under known initialization and imaging assumptions, but does not validate patient-level estimation or the oxygen--necrosis mechanisms. Translation requires calibrated observation operators, broader uncertainty assessment, independent biological targets and external forecasts.
 \end{abstract}
 \noindent\textbf{Keywords:} glioma; reaction--diffusion; oxygen; necrosis; BrainWeb; parameter identifiability; MRI; validation.
 \input{sections/introduction}
@@ -37,9 +41,9 @@
 \input{sections/results}
 \input{sections/discussion}
 \subsection*{Code, data and supplementary material}
-The manuscript, source code, interactive Jupyter notebooks, recorded simulations and synchronized visualizations are available at \url{https://github.com/arvidl/brainweb_fisher_kpp}. The manuscript project includes LaTeX/BibTeX sources, simulation and figure-generation scripts, machine-readable experiment records, source and data hashes, and numerical-test results. Repository history and the recorded source hashes identify the implementation used for this study. An immutable release identifier and archival DOI should accompany a submitted version when available. BrainWeb attribution and source records are retained separately from the software.
+The manuscript, source code, interactive Jupyter notebooks, recorded simulations, synthetic recovery observations and synchronized visualizations are available at \url{https://github.com/arvidl/brainweb_fisher_kpp}. The manuscript project includes LaTeX/BibTeX sources, simulation and figure-generation scripts, machine-readable experiment records, source and data hashes, and numerical-test results. Repository history and the recorded source hashes identify the implementation used for this study. An immutable release identifier and archival DOI should accompany a submitted version when available. BrainWeb attribution and source records are retained separately from the software.
 \subsection*{Study scope and declarations}
-All experiments are computer simulations on an anatomical phantom. No patient measurements, new human sampling or new animal experiments were used. Biological parameter inference and external validation remain proposed work. Authorship, affiliations, funding, competing interests, contributions and any required AI-use declaration must be finalized before journal submission.
+All experiments are computer simulations on anatomical or homogeneous phantoms. No patient measurements, new human sampling or new animal experiments were used. Parameter recovery used synthetic measurements only; patient calibration and external biological validation remain proposed work. Authorship, affiliations, funding, competing interests, contributions and any required AI-use declaration must be finalized before journal submission.
 \clearpage
 \appendix
 \input{sections/appendices}

@@ -1,0 +1,190 @@
+{
+  "experiment": "Homogeneous 3D synthetic Fisher\u2013KPP recovery; calibrated MRI-like proxy",
+  "seed": 20261017,
+  "rng_streams": [
+    "observations",
+    "bootstrap",
+    "coverage",
+    "prediction"
+  ],
+  "versions": {
+    "python": "3.12.2",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "parameter_names": [
+    "diffusion",
+    "proliferation"
+  ],
+  "parameter_units": [
+    "mm^2/day",
+    "1/day"
+  ],
+  "inference_phantom": {
+    "width_mm": 60.0,
+    "dx_mm": 2.0,
+    "dt_days": 0.25,
+    "voxel_mm": 6.0,
+    "blur_sigma_mm": 2.0,
+    "seed_sigma_mm": [
+      5.0,
+      4.0,
+      5.0
+    ],
+    "seed_center_mm": [
+      -3.0,
+      2.0,
+      0.0
+    ],
+    "seed_peak": 0.2
+  },
+  "truth_phantom": {
+    "width_mm": 60.0,
+    "dx_mm": 1.0,
+    "dt_days": 0.0625,
+    "voxel_mm": 6.0,
+    "blur_sigma_mm": 2.0,
+    "seed_sigma_mm": [
+      5.0,
+      4.0,
+      5.0
+    ],
+    "seed_center_mm": [
+      -3.0,
+      2.0,
+      0.0
+    ],
+    "seed_peak": 0.2
+  },
+  "scan_days": [
+    20.0,
+    40.0,
+    60.0,
+    75.0,
+    90.0
+  ],
+  "training_indices": [
+    0,
+    1,
+    2
+  ],
+  "withheld_indices": [
+    3,
+    4
+  ],
+  "noise_sd": 0.03,
+  "optimizer_bounds": [
+    [
+      0.05,
+      0.01
+    ],
+    [
+      0.8,
+      0.09
+    ]
+  ],
+  "true_parameters": [
+    0.3,
+    0.045
+  ],
+  "estimate": [
+    0.3032623584159813,
+    0.0451010601135155
+  ],
+  "local_95_ci": [
+    [
+      0.2721706288194343,
+      0.33790588804877003
+    ],
+    [
+      0.04413222005137823,
+      0.04609116924085977
+    ]
+  ],
+  "log_parameter_correlation": 0.540128370203037,
+  "log_parameter_covariance": [
+    [
+      0.0030458632516377495,
+      0.0003302755250939446
+    ],
+    [
+      0.00033027552509394466,
+      0.00012275760419330753
+    ]
+  ],
+  "bootstrap_replicates": 100,
+  "bootstrap_95_ci": [
+    [
+      0.2725714759684671,
+      0.33506769320131935
+    ],
+    [
+      0.04429546997536018,
+      0.04604212403995142
+    ]
+  ],
+  "coverage_replicates": 60,
+  "coverage_method": "local known-noise Jacobian 95% CI",
+  "coverage_counts": [
+    59,
+    60
+  ],
+  "coverage_fraction": [
+    0.9833333333333333,
+    1.0
+  ],
+  "coverage_binomial_95_ci": [
+    [
+      0.910600949942513,
+      0.999578125547658
+    ],
+    [
+      0.9403705077138331,
+      1.0
+    ]
+  ],
+  "repeated_noise_bias": [
+    0.0026367239014127852,
+    3.603754023875916e-07
+  ],
+  "repeated_noise_rmse": [
+    0.01712117927747465,
+    0.00044784054281915504
+  ],
+  "withheld_clean_rmse": [
+    0.0004715477636092868,
+    0.0008417248315063703
+  ],
+  "withheld_noisy_rmse": [
+    0.030364811626082237,
+    0.030178427057075904
+  ],
+  "withheld_prediction_interval_voxel_coverage": [
+    0.94,
+    0.946
+  ],
+  "coarse_fine_observation_rmse": [
+    5.5448669451323974e-05,
+    0.00011130456517494468,
+    0.00018510572968716504,
+    0.00025457521949589357,
+    0.0003411522201283899
+  ],
+  "halved_dt_observation_rmse": [
+    6.126092193503858e-06,
+    1.2279826567782556e-05,
+    2.3359929522179446e-05,
+    3.86298293392962e-05,
+    6.18912968646402e-05
+  ],
+  "limitations": "Known seed/time/K/imaging/noise; Gaussian iid post-imaging noise; no patient validation; conditional pointwise intervals.",
+  "source_sha256": {
+    "src/brainweb_kpp/model.py": "2c6da092c0b4e4eb6871094b3826485ba45b6887452094aa2bae17c6ba316e50",
+    "src/brainweb_kpp/inference.py": "6f4878b81f77204526ed3389d8b69414e4113a9ee3e627b39806b0206ac22e0f",
+    "scripts/run_recovery_notebook.py": "27f7e9ca7dad00e3ad0fe428c6ec6558570762bfebe76dc1b8652df4c57fecbc",
+    "pyproject.toml": "5be63bfe51d30a8040df7671ea6151439d0cd19bebff9ce8e4756fc5123d8046",
+    "uv.lock": "4ea070161c73d5b27df4943e4f1b9c60de6750bd652680a1c7485463490921a2"
+  },
+  "notebook_code_sha256": "19509024f1b6a0b44ac5f7a6fce8b2bd6f1f2de9e55816cdd04a9fb232dfe2da",
+  "recovery_data_sha256": "841011da7d3a7490cb9875416357ab68f26870c499dec1108443cc51701f3c86"
+}

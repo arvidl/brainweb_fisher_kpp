@@ -1,15 +1,34 @@
 {
-  "pdf_pages": 19,
-  "bibliography_entries": 19,
-  "linked_bibliography_targets": 19,
+  "pdf_pages": 27,
+  "bibliography_entries": 26,
+  "linked_bibliography_targets": 26,
   "all_references_resolved": true,
   "no_overfull_boxes": true,
   "source_hashes_match_recorded_experiments": true,
-  "tests_passed": 35,
+  "recovery_source_and_notebook_hashes_match": true,
+  "recovery_arrays_match_summary_hash": true,
+  "tests_passed": 43,
   "notebook_checks": {
-    "explorer_widget_smoke": "passed",
-    "clean_coupled_90_day_example": "passed"
+    "synthetic_recovery_full_execution": "passed",
+    "explorer_widget_smoke": "previously passed; solver and UI unchanged in this update",
+    "clean_coupled_90_day_example": "previously passed; forward sources unchanged"
   },
-  "pdf_sha256": "c2f87df00e394df2504ba7bf79fac453177eb9b6fde9c4cd766ee198442ba17c",
-  "scope": "Document and numerical reproducibility checks; no biological validation"
+  "recovery_replicates": {
+    "bootstrap": 100,
+    "independent_noise": 60
+  },
+  "visual_review": {
+    "all_pages_rendered": 27,
+    "contact_sheet": "reviewed",
+    "individual_pages_reviewed": [
+      1,
+      9,
+      10,
+      21,
+      26
+    ],
+    "layout_defects_found": false
+  },
+  "pdf_sha256": "4bea72bc8ce2cc289de5cdbc52316f05a20d9b485c47d0987eeda449addef24b",
+  "scope": "Document and numerical/synthetic reproducibility checks; conditional recovery only, no patient or biological validation"
 }
