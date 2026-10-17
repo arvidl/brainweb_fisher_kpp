@@ -6,6 +6,11 @@ It reports the saved 90-day BrainWeb comparison plus controlled ablations and
 time/grid refinement runs. All biological parameters are **assigned illustrative
 values**, not fitted patient estimates or empirical prior means. Parameter
 inference and independent biological validation are proposed protocols.
+The Discussion includes a staged MRI-inference and uncertainty roadmap, external
+and prospective validation, and proposed evaluation of adaptive radiation,
+dose painting, hypoxia-modifying combinations and treatment sequencing.
+Treatment effects and clinical benefit have not been simulated or demonstrated
+in this study.
 
 ## Read and edit
 
