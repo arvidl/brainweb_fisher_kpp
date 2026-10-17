@@ -1,0 +1,35 @@
+{
+  "origin_mm": [
+    -30.0,
+    25.0,
+    30.0
+  ],
+  "radii_mm": [
+    6.0,
+    6.0,
+    6.0
+  ],
+  "seed_profile": "gaussian",
+  "initial_density": 80000.0,
+  "d_white": 0.5,
+  "d_gray": 0.1,
+  "d_csf": 0.0,
+  "spatial_multiplier": 1.0,
+  "spatial_width_mm": 30.0,
+  "rho": 0.04,
+  "carrying_capacity": 100000.0,
+  "duration_days": 90.0,
+  "dt_days": 0.25,
+  "frame_days": 3.0,
+  "auto_substep": true,
+  "model": "coupled",
+  "oxygen_length_mm": 0.2,
+  "oxygen_uptake_ratio": 4.0,
+  "perfusion_suppression": 4.0,
+  "oxygen_prolif_level": 0.3,
+  "oxygen_death_level": 0.1,
+  "necrosis_rate": 0.5,
+  "necrosis_clearance": 0.0,
+  "oxygen_rtol": 1e-07,
+  "oxygen_maxiter": 200
+}

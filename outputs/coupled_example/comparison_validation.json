@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "days": [
+    0,
+    90
+  ],
+  "saved_states": 31,
+  "mp4_frames": 38,
+  "mp4_size": [
+    1920,
+    1440
+  ],
+  "gif_frames": 31,
+  "gif_size": [
+    960,
+    720
+  ],
+  "fps": 5,
+  "seconds": 7.6,
+  "final_mp4_mean_pixel_error": 1.302658661265432,
+  "final_gif_mean_pixel_error": 1.4183212770061728,
+  "selected_slice_indices": [
+    30,
+    76,
+    51
+  ],
+  "selected_slice_xyz_mm": [
+    -30.0,
+    26.0,
+    30.0
+  ],
+  "codec": "h264",
+  "pixel_format": "yuv420p(progressive)",
+  "sha256": {
+    "comparison.mp4": "c518b22fe5017f33d9ad95a20c3656a42e870d8586462fddb9342cc13011a495",
+    "comparison.gif": "702e54b9a4cff8535b29131ed8785a13296f4d3a3470eacb1178e9a10860fcb2",
+    "comparison_poster.png": "b06fd3f902c1a71027e3bc58e54fce309deaca2c39788f0706c5361733cebd2a"
+  }
+}

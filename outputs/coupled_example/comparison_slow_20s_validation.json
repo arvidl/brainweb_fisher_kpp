@@ -1,0 +1,14 @@
+{
+  "decoded_frames": 400,
+  "fps": 20.0,
+  "duration_seconds": 20.0,
+  "resolution": [
+    1920,
+    1440
+  ],
+  "final_hold_start_seconds": 14,
+  "final_hold_seconds": 6,
+  "final_hold_max_mean_pixel_difference": 0.0035030864197530863,
+  "final_frame_poster_mean_pixel_difference": 1.3036276282793209,
+  "synchronized": true
+}

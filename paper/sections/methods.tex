@@ -1,0 +1,71 @@
+\section{Methods}
+\subsection{Study design and anatomical data}
+This deterministic study used the original BrainWeb normal phantom, with its noise-free, intensity-uniform T1-weighted image and discrete tissue labels \citep{collins1998,brainweb}. The input is an anatomical substrate, not a longitudinal glioma dataset. No tumor masks, oxygen measurements or patient outcomes were available for calibration. The native 1 mm volumes contain $181\times217\times181$ voxels. The primary simulation used a 2 mm grid of $91\times109\times91$ voxels; intensities were resampled linearly and labels by nearest neighbor. Arrays use canonical RAS coordinates. Gray matter, white matter and the phantom's glial class form the transport domain $\Omega$. CSF and other tissues are impermeable in every matched comparison. Data preparation and checksums are in Appendix~\ref{app:data}.
+
+\subsection{Reference model: Fisher--KPP}
+Let $c(\bm{x},t)$ denote viable tumor-cell density in cells/mm$^3$. The reference, M0, is
+\begin{equation}
+ \partial_t c=\nabla\!\cdot\!\left(D(\bm{x})\nabla c\right)+\rho(\bm{x})c\left(1-\frac{c}{K}\right),\qquad\bm{x}\in\Omega .\label{eq:kpp}
+\end{equation}
+$D$ is effective cell migration in mm$^2$/day, $\rho$ is growth in day$^{-1}$, and $K$ is a density scale. $D$ is scalar with separate white- and gray-matter values; fiber-aligned transport is absent. Cell and, when present, oxygen transport have homogeneous no-flux boundaries. The matched reference uses the same seed, coefficients, anatomy and output times as the extension.
+
+\subsection{Oxygen-limited and three-field extensions}
+The coupled model, M2, adds relative oxygen availability $o(\bm{x},t)$ and immobile necrotic material $z(\bm{x},t)$ in tumor-cell equivalents/mm$^3$. Define
+\begin{equation}
+ \phi=\frac{c+z}{K},\quad g(o)=\min\left(1,\frac{o}{\theta_p}\right),\quad h(o)=\pos{1-\frac{o}{\theta_d}},\quad p(\phi)=\frac{1}{1+\alpha\phi},\label{eq:closures}
+\end{equation}
+where $[a]_+=\max(a,0)$ and $0<\theta_d<\theta_p<1$. The system is
+\begin{align}
+ \partial_t c&=\nabla\!\cdot(D\nabla c)+\rho g(o)c\pos{1-\phi}-\delta h(o)c,\label{eq:viable}\\
+ \partial_t z&=\delta h(o)c-\lambda_z z,\label{eq:dead}\\
+ 0&=\ell_o^2\nabla^2o+p(\phi)(1-o)-\beta(c/K)o.\label{eq:oxygen}
+\end{align}
+Oxygen is solved at initialization and after every cell step. Its quasi-steady treatment imposes faster oxygen equilibration than tumor evolution, an assumption not tested by these data. Normal-tissue metabolism is implicit in the baseline $o=1$. Distributed restoration replaces explicit vessels, and $p$ is a phenomenological supply coefficient rather than measured blood flow. Viable cells consume oxygen. Necrotic material affects supply and available growth capacity but consumes no oxygen.
+
+The two-field model M1 sets $\delta=0$ and starts with $z=0$, so oxygen only modulates growth. M2 includes death transfer and optional clearance. All examples start with $z=0$. With $\beta=0$, oxygen is one and M2 reduces to M0 for uniform $K$ and the stated initial condition. Setting $\alpha=0$ holds restoration fixed while retaining uptake. These nested cases provide implementation checks and ablations.
+
+$K$ regulates births rather than imposing hard packing on $c+z$. Diffusion can enter an already occupied location. Consequently, $z/K$ and $\phi$ can exceed one: $z/K$ is not a physical necrotic volume fraction. No healthy-cell population, edema, angiogenic state, tissue displacement, directed hypoxic migration or treatment response is included.
+
+\subsection{Initialization, parameters and numerical experiments}
+The initial density was a tissue-restricted Gaussian centered at RAS $(-30,25,30)$ mm, with standard deviations of 6 mm in each direction, a peak of $80{,}000$ cells/mm$^3$, and truncation at three standard deviations. This dense seed was selected to produce an oxygen-limited interior early in the demonstration. Simulations cover 90 days, saving every 3 days. All biological values in Table~\ref{tab:parameters} were assigned working values, not fitted estimates or established patient-level priors.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Assigned parameters for the primary comparison. All are illustrative. Numerical tolerances and initialization details are in the appendices.}\label{tab:parameters}
+\begin{tabularx}{\textwidth}{l Y l l}
+\toprule Symbol & Interpretation & Value & Unit\\\midrule
+$D_{\rm WM}$ & White-matter migration & 0.5 & mm$^2$/day\\
+$D_{\rm GM}$ & Gray/glial-matter migration & 0.1 & mm$^2$/day\\
+$\rho$ & Growth coefficient & 0.04 & day$^{-1}$\\
+$K$ & Density scale & $100{,}000$ & cells/mm$^3$\\
+$\ell_o$ & Effective oxygen exchange length & 0.2 & mm\\
+$\beta$ & Relative tumor oxygen uptake & 4 & dimensionless\\
+$\alpha$ & Supply suppression by total burden & 4 & dimensionless\\
+$\theta_p$ & Oxygen for unrestricted proliferation & 0.3 & relative oxygen\\
+$\theta_d$ & Hypoxic-death threshold & 0.1 & relative oxygen\\
+$\delta$ & Maximum death-transfer rate & 0.5 & day$^{-1}$\\
+$\lambda_z$ & Necrotic-material clearance & 0 & day$^{-1}$\\\bottomrule
+\end{tabularx}
+\end{table}
+
+The primary M0--M2 comparison used $\Delta x=2$ mm and maximum $\Delta t=0.25$ day. Additional 2 mm runs evaluated M1, M2 with $\alpha=0$, and M2 with $\beta=0$. Temporal assessment repeated M2 with $\Delta t=0.125$ and 0.0625 day. Native-grid assessment repeated M2 and matched M0 at 1 mm with a 0.125-day step. These nine model/step/grid cases are controlled simulations, not biological replicates. The grid comparison changes discretized anatomy as well as the numerical mesh, and is not a pure spatial-order experiment.
+
+Cell transport uses conservative face fluxes with harmonic interface coefficients. Explicit diffusion is followed by exact frozen-coefficient logistic birth, hypoxic-death transfer and clearance substeps. Oxygen uses a compact no-flux stencil and preconditioned conjugate gradients. The method is first order in time. A diffusion positivity bound controls substeps but does not guarantee reaction accuracy. Details are in Appendix~\ref{app:numerics}.
+
+\subsection{Outcome measures and interactive visualization}
+We recorded viable count $N_c=\int_\Omega c\,\dd V$, necrotic equivalents $N_z=\int_\Omega z\,\dd V$, peak density, minimum tissue oxygen, and volumes above $c/K=0.2$ and 0.8. Necrotic threshold volume uses $z/K\geq0.2$; low-oxygen volume uses $o<\theta_d$. These are model-defined quantities, not validated MRI detection thresholds. With closed boundaries,
+\begin{equation}
+ \frac{\dd}{\dd t}(N_c+N_z)=\int_\Omega\rho g(o)c\pos{1-\phi}\,\dd V-\lambda_zN_z .\label{eq:balance}
+\end{equation}
+Death transfer cancels. With zero clearance and matched initial states, the M0 viable-count minus M2 live-plus-dead-count difference measures the cumulative birth deficit within the numerical balance.
+
+The Jupyter interface exposes biological and numerical controls and retains Fisher--KPP. Four fields share time and slice coordinates, with axial, coronal and sagittal views. Live 3D histories support arbitrary slicing; compact saved results retain seed-plane histories and final volumes. MP4/GIF exports share a frame schedule. A slower movie spans 20 seconds with a 6-second day-90 hold. Display settings do not alter fields. The paper uses lossless arrays and displays the full necrotic range.
+
+\subsection{Proposed estimation and validation protocol}
+No inverse problem was solved. For future observations, modality $m$ at time $t_j$ would be represented by
+\begin{equation}
+ y_{mj}=\mathcal H_m[c_{\boldsymbol\theta}(t_j),o_{\boldsymbol\theta}(t_j),z_{\boldsymbol\theta}(t_j);\boldsymbol\eta_m]+\varepsilon_{mj},\label{eq:observation}
+\end{equation}
+where $\mathcal H_m$ includes contrast, resolution, partial volume and the biological-state-to-measurement link. $\boldsymbol\theta$ includes biology and initialization; $\boldsymbol\eta_m$ contains observation parameters. Calibration must incorporate noise, registration and initial-state uncertainty. An objective and identifiability restrictions are in Appendix~\ref{app:inference}.
+
+The proposed sequence estimates a small growth--migration subset from serial MRI, introduces oxygen parameters when additional modalities support them, and calibrates cell-scale and necrosis mappings using independent samples. Numerical verification, synthetic recovery, withheld-time prediction, tissue agreement and external-cohort performance are evaluated separately. M0 and M2 must be fitted separately to identical calibration data before predictive comparison.

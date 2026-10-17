@@ -1,0 +1,19 @@
+{
+  "fps": 4,
+  "width": 640,
+  "height": 360,
+  "gif_width": 640,
+  "display_threshold_n_over_K": null,
+  "simulation_days": 90.0,
+  "video_seconds": 9.25,
+  "formats": [
+    "mp4",
+    "gif"
+  ],
+  "codec": "H.264",
+  "pixel_format": "yuv420p",
+  "view": "oxygen",
+  "color_scale": "o / normal baseline",
+  "gif_frames": 31,
+  "gif_seconds": 9.25
+}

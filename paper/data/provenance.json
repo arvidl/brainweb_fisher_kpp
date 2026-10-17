@@ -1,0 +1,63 @@
+{
+  "study": "Deterministic anatomical-phantom study; all biological parameters assigned, not fitted",
+  "configuration": {
+    "model": "coupled",
+    "origin_mm": [
+      -30,
+      25,
+      30
+    ],
+    "radii_mm": [
+      6,
+      6,
+      6
+    ],
+    "seed_profile": "gaussian",
+    "initial_density": 80000,
+    "d_white": 0.5,
+    "d_gray": 0.1,
+    "d_csf": 0,
+    "rho": 0.04,
+    "carrying_capacity": 100000,
+    "duration_days": 90,
+    "dt_days": 0.25,
+    "frame_days": 3,
+    "oxygen_length_mm": 0.2,
+    "oxygen_uptake_ratio": 4,
+    "perfusion_suppression": 4,
+    "oxygen_prolif_level": 0.3,
+    "oxygen_death_level": 0.1,
+    "necrosis_rate": 0.5,
+    "necrosis_clearance": 0
+  },
+  "elapsed_seconds": 44.95960537499923,
+  "source_sha256": {
+    "src/brainweb_kpp/model.py": "2c6da092c0b4e4eb6871094b3826485ba45b6887452094aa2bae17c6ba316e50",
+    "src/brainweb_kpp/data.py": "448fae0074d732e666271a75fc92c5c07c27a511e7985062ba57ca61e7023f82",
+    "src/brainweb_kpp/render.py": "cb3c921783778f3fa7943c6e113c2f581c191adfe179f88fc746e1cb7f5a0346",
+    "examples/coupled.json": "2e6f24735fc64e33eb4fb94aaac41f5409ff84df6fd8cc5de548c80891b266e8",
+    "uv.lock": "4ea070161c73d5b27df4943e4f1b9c60de6750bd652680a1c7485463490921a2",
+    "paper/run_experiments.py": "9642b8440d2364a6b0faca91e7213bf7e2f26383aa1cd779b815871af649aa5f"
+  },
+  "data_manifest": {
+    "source": "https://brainweb.bic.mni.mcgill.ca/cgi/brainweb1",
+    "model": "BrainWeb original normal phantom (not the 20-subject models)",
+    "anatomy": "https://brainweb.bic.mni.mcgill.ca/anatomic_normal.html",
+    "files": {
+      "t1_icbm_normal_1mm_pn0_rf0.nii.gz": {
+        "sha256": "aa40262b2702653188fd51bdec844a393b825650fe1155a84d8606f5dfd99eb3",
+        "bytes": 8299415,
+        "brainweb_alias": "T1 ICBM normal 1mm pn0 rf0"
+      },
+      "phantom_1.0mm_normal_crisp.nii.gz": {
+        "sha256": "afdff78fc1b06ad7c7d8216cf96be737a1450ef5b6abf27eb732c0bf8b66fac0",
+        "bytes": 947188,
+        "brainweb_alias": "phantom_1.0mm_normal_crisp"
+      }
+    }
+  },
+  "git_head": "849e1bd6b4276ae8d87e3b952ec78850136dcd71",
+  "working_tree_has_uncommitted_model_changes": true,
+  "zero_uptake_max_absolute_error_over_K": 6.640625e-07,
+  "note": "The Git revision alone does not identify the working sources; use the recorded source hashes."
+}

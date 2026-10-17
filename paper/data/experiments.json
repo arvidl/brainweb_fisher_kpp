@@ -1,0 +1,813 @@
+[
+  {
+    "name": "coupled",
+    "spacing_mm": 2.0,
+    "dt_days": 0.25,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.25,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "coupled",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 4,
+      "perfusion_suppression": 4,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.5,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 2.0,
+      "shape": [
+        91,
+        109,
+        91
+      ],
+      "safe_dt_days": 1.2,
+      "actual_max_dt_days": 0.25,
+      "internal_steps": 360,
+      "elapsed_seconds": 2.25603620801121,
+      "model": "coupled",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF",
+      "field_units": {
+        "viable": "cells/mm3",
+        "necrosis": "cell equivalents/mm3",
+        "oxygen": "relative to normal tissue; zero outside tissue_mask"
+      },
+      "oxygen_solver": {
+        "solves": 361,
+        "iterations": 873,
+        "max_relative_residual": 9.996217993556355e-08
+      },
+      "comparison": "reference_fisher_kpp",
+      "elapsed_seconds_with_reference": 2.5011540000123205
+    },
+    "final": {
+      "cells": 2425848229.143629,
+      "volume_20_ml": 48.832,
+      "volume_80_ml": 0.0,
+      "max_density": 63706.31640625,
+      "necrotic_cells": 2930223.3508033752,
+      "necrotic_volume_20_ml": 0.024,
+      "hypoxic_volume_ml": 0.104,
+      "min_oxygen": 0.0803668275475502,
+      "max_necrosis_over_K": 1.2258862257003784,
+      "necrotic_voxels_20": 3
+    },
+    "initial": {
+      "cells": 260374750.0234375,
+      "volume_20_ml": 3.952,
+      "volume_80_ml": 0.0,
+      "max_density": 78896.5703125,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.224,
+      "min_oxygen": 0.0709649845957756
+    },
+    "errors_against_dt00625": {
+      "density": {
+        "relative_l1": 0.0013836687101356588,
+        "relative_l2": 0.001269951718630149
+      },
+      "oxygen": {
+        "relative_l1": 3.36461662138256e-05,
+        "relative_l2": 0.00012930532223576782
+      },
+      "necrosis": {
+        "relative_l1": 0.029178767038735464,
+        "relative_l2": 0.042378644493198184
+      }
+    }
+  },
+  {
+    "name": "fisher_kpp",
+    "spacing_mm": 2.0,
+    "dt_days": 0.25,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0.0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.25,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "fisher_kpp",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 4,
+      "perfusion_suppression": 4,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.5,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 2.0,
+      "shape": [
+        91,
+        109,
+        91
+      ],
+      "safe_dt_days": 1.2,
+      "actual_max_dt_days": 0.25,
+      "internal_steps": 360,
+      "elapsed_seconds": 0.24361229200439993,
+      "model": "fisher_kpp",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF"
+    },
+    "final": {
+      "cells": 2847088623.5808616,
+      "volume_20_ml": 49.752,
+      "volume_80_ml": 1.944,
+      "max_density": 89554.46875
+    },
+    "initial": {
+      "cells": 260374750.0234375,
+      "volume_20_ml": 3.952,
+      "volume_80_ml": 0.0,
+      "max_density": 78896.5703125
+    }
+  },
+  {
+    "name": "oxygen_only",
+    "spacing_mm": 2.0,
+    "dt_days": 0.25,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.25,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "coupled",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 4,
+      "perfusion_suppression": 4,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.0,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 2.0,
+      "shape": [
+        91,
+        109,
+        91
+      ],
+      "safe_dt_days": 1.2,
+      "actual_max_dt_days": 0.25,
+      "internal_steps": 360,
+      "elapsed_seconds": 1.872485083003994,
+      "model": "coupled",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF",
+      "field_units": {
+        "viable": "cells/mm3",
+        "necrosis": "cell equivalents/mm3",
+        "oxygen": "relative to normal tissue; zero outside tissue_mask"
+      },
+      "oxygen_solver": {
+        "solves": 361,
+        "iterations": 873,
+        "max_relative_residual": 9.999460824025867e-08
+      }
+    },
+    "final": {
+      "cells": 2429218899.4493856,
+      "volume_20_ml": 48.856,
+      "volume_80_ml": 0.0,
+      "max_density": 65172.35546875,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.12,
+      "min_oxygen": 0.09617114067077637,
+      "max_necrosis_over_K": 0.0,
+      "necrotic_voxels_20": 0
+    },
+    "initial": {
+      "cells": 260374750.0234375,
+      "volume_20_ml": 3.952,
+      "volume_80_ml": 0.0,
+      "max_density": 78896.5703125,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.224,
+      "min_oxygen": 0.0709649845957756
+    }
+  },
+  {
+    "name": "fixed_supply",
+    "spacing_mm": 2.0,
+    "dt_days": 0.25,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.25,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "coupled",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 4,
+      "perfusion_suppression": 0.0,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.5,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 2.0,
+      "shape": [
+        91,
+        109,
+        91
+      ],
+      "safe_dt_days": 1.2,
+      "actual_max_dt_days": 0.25,
+      "internal_steps": 360,
+      "elapsed_seconds": 1.8240419999929145,
+      "model": "coupled",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF",
+      "field_units": {
+        "viable": "cells/mm3",
+        "necrosis": "cell equivalents/mm3",
+        "oxygen": "relative to normal tissue; zero outside tissue_mask"
+      },
+      "oxygen_solver": {
+        "solves": 361,
+        "iterations": 800,
+        "max_relative_residual": 9.983554457238919e-08
+      }
+    },
+    "final": {
+      "cells": 2829460005.011275,
+      "volume_20_ml": 49.744,
+      "volume_80_ml": 0.976,
+      "max_density": 86372.8984375,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.0,
+      "min_oxygen": 0.22449791431427002,
+      "max_necrosis_over_K": 0.0,
+      "necrotic_voxels_20": 0
+    },
+    "initial": {
+      "cells": 260374750.0234375,
+      "volume_20_ml": 3.952,
+      "volume_80_ml": 0.0,
+      "max_density": 78896.5703125,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.0,
+      "min_oxygen": 0.24077340960502625
+    }
+  },
+  {
+    "name": "zero_uptake",
+    "spacing_mm": 2.0,
+    "dt_days": 0.25,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.25,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "coupled",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 0.0,
+      "perfusion_suppression": 4,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.5,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 2.0,
+      "shape": [
+        91,
+        109,
+        91
+      ],
+      "safe_dt_days": 1.2,
+      "actual_max_dt_days": 0.25,
+      "internal_steps": 360,
+      "elapsed_seconds": 1.0984145840047859,
+      "model": "coupled",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF",
+      "field_units": {
+        "viable": "cells/mm3",
+        "necrosis": "cell equivalents/mm3",
+        "oxygen": "relative to normal tissue; zero outside tissue_mask"
+      },
+      "oxygen_solver": {
+        "solves": 361,
+        "iterations": 0,
+        "max_relative_residual": 0.0
+      }
+    },
+    "final": {
+      "cells": 2847090962.9926825,
+      "volume_20_ml": 49.752,
+      "volume_80_ml": 1.944,
+      "max_density": 89554.453125,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.0,
+      "min_oxygen": 1.0,
+      "max_necrosis_over_K": 0.0,
+      "necrotic_voxels_20": 0
+    },
+    "initial": {
+      "cells": 260374750.0234375,
+      "volume_20_ml": 3.952,
+      "volume_80_ml": 0.0,
+      "max_density": 78896.5703125,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.0,
+      "min_oxygen": 1.0
+    }
+  },
+  {
+    "name": "coupled_dt0125",
+    "spacing_mm": 2.0,
+    "dt_days": 0.125,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.125,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "coupled",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 4,
+      "perfusion_suppression": 4,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.5,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 2.0,
+      "shape": [
+        91,
+        109,
+        91
+      ],
+      "safe_dt_days": 1.2,
+      "actual_max_dt_days": 0.125,
+      "internal_steps": 720,
+      "elapsed_seconds": 3.2467748329945607,
+      "model": "coupled",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF",
+      "field_units": {
+        "viable": "cells/mm3",
+        "necrosis": "cell equivalents/mm3",
+        "oxygen": "relative to normal tissue; zero outside tissue_mask"
+      },
+      "oxygen_solver": {
+        "solves": 721,
+        "iterations": 1448,
+        "max_relative_residual": 9.840864971447722e-08
+      }
+    },
+    "final": {
+      "cells": 2423943626.3345265,
+      "volume_20_ml": 48.776,
+      "volume_80_ml": 0.0,
+      "max_density": 63701.421875,
+      "necrotic_cells": 2943055.3663105965,
+      "necrotic_volume_20_ml": 0.024,
+      "hypoxic_volume_ml": 0.104,
+      "min_oxygen": 0.07975321263074875,
+      "max_necrosis_over_K": 1.2657262086868286,
+      "necrotic_voxels_20": 3
+    },
+    "initial": {
+      "cells": 260374750.0234375,
+      "volume_20_ml": 3.952,
+      "volume_80_ml": 0.0,
+      "max_density": 78896.5703125,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.224,
+      "min_oxygen": 0.0709649845957756
+    },
+    "errors_against_dt00625": {
+      "density": {
+        "relative_l1": 0.0004609292874731389,
+        "relative_l2": 0.00042279357849040437
+      },
+      "oxygen": {
+        "relative_l1": 1.1214842072645284e-05,
+        "relative_l2": 4.311505165960231e-05
+      },
+      "necrosis": {
+        "relative_l1": 0.009583950494019108,
+        "relative_l2": 0.013858196160123874
+      }
+    }
+  },
+  {
+    "name": "coupled_dt00625",
+    "spacing_mm": 2.0,
+    "dt_days": 0.0625,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.0625,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "coupled",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 4,
+      "perfusion_suppression": 4,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.5,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 2.0,
+      "shape": [
+        91,
+        109,
+        91
+      ],
+      "safe_dt_days": 1.2,
+      "actual_max_dt_days": 0.0625,
+      "internal_steps": 1440,
+      "elapsed_seconds": 6.263091582994093,
+      "model": "coupled",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF",
+      "field_units": {
+        "viable": "cells/mm3",
+        "necrosis": "cell equivalents/mm3",
+        "oxygen": "relative to normal tissue; zero outside tissue_mask"
+      },
+      "oxygen_solver": {
+        "solves": 1441,
+        "iterations": 2884,
+        "max_relative_residual": 6.786933596781698e-08
+      }
+    },
+    "final": {
+      "cells": 2422991285.143251,
+      "volume_20_ml": 48.76,
+      "volume_80_ml": 0.0,
+      "max_density": 63698.9453125,
+      "necrotic_cells": 2949314.3346271515,
+      "necrotic_volume_20_ml": 0.024,
+      "hypoxic_volume_ml": 0.104,
+      "min_oxygen": 0.07945554703474045,
+      "max_necrosis_over_K": 1.2850693464279175,
+      "necrotic_voxels_20": 3
+    },
+    "initial": {
+      "cells": 260374750.0234375,
+      "volume_20_ml": 3.952,
+      "volume_80_ml": 0.0,
+      "max_density": 78896.5703125,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.224,
+      "min_oxygen": 0.0709649845957756
+    }
+  },
+  {
+    "name": "coupled_dx1",
+    "spacing_mm": 1.0,
+    "dt_days": 0.125,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.125,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "coupled",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 4,
+      "perfusion_suppression": 4,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.5,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 1.0,
+      "shape": [
+        181,
+        217,
+        181
+      ],
+      "safe_dt_days": 0.3,
+      "actual_max_dt_days": 0.125,
+      "internal_steps": 720,
+      "elapsed_seconds": 25.79685349999636,
+      "model": "coupled",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF",
+      "field_units": {
+        "viable": "cells/mm3",
+        "necrosis": "cell equivalents/mm3",
+        "oxygen": "relative to normal tissue; zero outside tissue_mask"
+      },
+      "oxygen_solver": {
+        "solves": 721,
+        "iterations": 2169,
+        "max_relative_residual": 9.439740250144674e-08
+      },
+      "comparison": "reference_fisher_kpp",
+      "elapsed_seconds_with_reference": 28.006301791989245
+    },
+    "final": {
+      "cells": 2452363383.5787554,
+      "volume_20_ml": 49.593,
+      "volume_80_ml": 0.0,
+      "max_density": 63740.046875,
+      "necrotic_cells": 3606720.3781092763,
+      "necrotic_volume_20_ml": 0.032,
+      "hypoxic_volume_ml": 0.027,
+      "min_oxygen": 0.05126119777560234,
+      "max_necrosis_over_K": 3.4158506393432617,
+      "necrotic_voxels_20": 32
+    },
+    "initial": {
+      "cells": 260782967.9177246,
+      "volume_20_ml": 4.118,
+      "volume_80_ml": 0.001,
+      "max_density": 80000.0,
+      "necrotic_cells": 0.0,
+      "necrotic_volume_20_ml": 0.0,
+      "hypoxic_volume_ml": 0.257,
+      "min_oxygen": 0.06936312466859818
+    }
+  },
+  {
+    "name": "fisher_kpp_dx1",
+    "spacing_mm": 1.0,
+    "dt_days": 0.125,
+    "parameters": {
+      "origin_mm": [
+        -30,
+        25,
+        30
+      ],
+      "radii_mm": [
+        6,
+        6,
+        6
+      ],
+      "seed_profile": "gaussian",
+      "initial_density": 80000,
+      "d_white": 0.5,
+      "d_gray": 0.1,
+      "d_csf": 0.0,
+      "spatial_multiplier": 1.0,
+      "spatial_width_mm": 30.0,
+      "rho": 0.04,
+      "carrying_capacity": 100000,
+      "duration_days": 90,
+      "dt_days": 0.125,
+      "frame_days": 3,
+      "auto_substep": true,
+      "model": "fisher_kpp",
+      "oxygen_length_mm": 0.2,
+      "oxygen_uptake_ratio": 4,
+      "perfusion_suppression": 4,
+      "oxygen_prolif_level": 0.3,
+      "oxygen_death_level": 0.1,
+      "necrosis_rate": 0.5,
+      "necrosis_clearance": 0,
+      "oxygen_rtol": 1e-07,
+      "oxygen_maxiter": 200
+    },
+    "metadata": {
+      "spacing_mm": 1.0,
+      "shape": [
+        181,
+        217,
+        181
+      ],
+      "safe_dt_days": 0.3,
+      "actual_max_dt_days": 0.125,
+      "internal_steps": 720,
+      "elapsed_seconds": 2.2050038750021486,
+      "model": "fisher_kpp",
+      "coefficient_maps": {
+        "diffusion": false,
+        "proliferation": false,
+        "capacity": false
+      },
+      "transport_domain": "gray/white/glial tissue; no CSF"
+    },
+    "final": {
+      "cells": 2877542425.357653,
+      "volume_20_ml": 50.577,
+      "volume_80_ml": 1.766,
+      "max_density": 89547.5703125
+    },
+    "initial": {
+      "cells": 260782967.9177246,
+      "volume_20_ml": 4.118,
+      "volume_80_ml": 0.001,
+      "max_density": 80000.0
+    }
+  }
+]

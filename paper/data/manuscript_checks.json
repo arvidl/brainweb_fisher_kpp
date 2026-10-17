@@ -1,0 +1,15 @@
+{
+  "pdf_pages": 19,
+  "bibliography_entries": 19,
+  "linked_bibliography_targets": 19,
+  "all_references_resolved": true,
+  "no_overfull_boxes": true,
+  "source_hashes_match_recorded_experiments": true,
+  "tests_passed": 35,
+  "notebook_checks": {
+    "explorer_widget_smoke": "passed",
+    "clean_coupled_90_day_example": "passed"
+  },
+  "pdf_sha256": "c2f87df00e394df2504ba7bf79fac453177eb9b6fde9c4cd766ee198442ba17c",
+  "scope": "Document and numerical reproducibility checks; no biological validation"
+}

@@ -1,0 +1,52 @@
+{
+  "day": 90.0,
+  "grid_spacing_mm": 2.0,
+  "slice_indices": [
+    30,
+    76,
+    51
+  ],
+  "slice_ras_mm": [
+    -30.0,
+    26.0,
+    30.0
+  ],
+  "crop_width_mm": 72.0,
+  "coupled_viable_cells": 2425848229.143629,
+  "reference_viable_cells": 2847088623.5808616,
+  "fewer_viable_cells_percent": 14.795478825222762,
+  "coupled_volume_above_0p2K_ml": 48.832,
+  "reference_volume_above_0p2K_ml": 49.752,
+  "coupled_volume_above_0p8K_ml": 0.0,
+  "reference_volume_above_0p8K_ml": 1.944,
+  "coupled_peak_viable_over_K": 0.6370631456375122,
+  "reference_peak_viable_over_K": 0.895544707775116,
+  "minimum_tissue_relative_oxygen": 0.0803668275475502,
+  "necrotic_cell_equivalents": 2930223.3508033752,
+  "necrotic_peak_over_K": 1.2258862257003784,
+  "necrotic_volume_above_0p2K_ml": 0.024,
+  "necrotic_voxels_above_0p2K": 3,
+  "cell_gap": 421240394.4372325,
+  "net_birth_deficit": 418310171.0864291,
+  "necrosis_clearance_per_day": 0.0,
+  "display_scales": {
+    "viable": [
+      0,
+      1
+    ],
+    "oxygen": [
+      0,
+      1
+    ],
+    "necrosis": [
+      0,
+      1.25
+    ],
+    "reference": [
+      0,
+      1
+    ]
+  },
+  "interpolation": "nearest; native voxels",
+  "global_metrics": true
+}

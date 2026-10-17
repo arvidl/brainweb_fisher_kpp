@@ -1,0 +1,84 @@
+{
+  "example_grid_mm": 2,
+  "example_days": 90.0,
+  "example_metadata": {
+    "spacing_mm": 2.0,
+    "shape": [
+      91,
+      109,
+      91
+    ],
+    "safe_dt_days": 1.2,
+    "actual_max_dt_days": 0.25,
+    "internal_steps": 360,
+    "elapsed_seconds": 2.3151650420040824,
+    "model": "coupled",
+    "coefficient_maps": {
+      "diffusion": false,
+      "proliferation": false,
+      "capacity": false
+    },
+    "transport_domain": "gray/white/glial tissue; no CSF",
+    "field_units": {
+      "viable": "cells/mm3",
+      "necrosis": "cell equivalents/mm3",
+      "oxygen": "relative to normal tissue; zero outside tissue_mask"
+    },
+    "oxygen_solver": {
+      "solves": 361,
+      "iterations": 873,
+      "max_relative_residual": 9.996217993556355e-08
+    },
+    "comparison": "reference_fisher_kpp",
+    "elapsed_seconds_with_reference": 2.529954875004478
+  },
+  "example_final_metrics": {
+    "cells": 2425848229.143629,
+    "volume_20_ml": 48.832,
+    "volume_80_ml": 0.0,
+    "max_density": 63706.31640625,
+    "necrotic_cells": 2930223.3508033752,
+    "necrotic_volume_20_ml": 0.024,
+    "hypoxic_volume_ml": 0.104,
+    "min_oxygen": 0.0803668275475502
+  },
+  "reference_final_cells": 2847088623.5808616,
+  "native_grid": {
+    "spacing_mm": 1.0,
+    "shape": [
+      181,
+      217,
+      181
+    ],
+    "safe_dt_days": 0.3,
+    "actual_max_dt_days": 0.25,
+    "internal_steps": 4,
+    "elapsed_seconds": 0.5654805410013068,
+    "model": "coupled",
+    "coefficient_maps": {
+      "diffusion": false,
+      "proliferation": false,
+      "capacity": false
+    },
+    "transport_domain": "gray/white/glial tissue; no CSF",
+    "field_units": {
+      "viable": "cells/mm3",
+      "necrosis": "cell equivalents/mm3",
+      "oxygen": "relative to normal tissue; zero outside tissue_mask"
+    },
+    "oxygen_solver": {
+      "solves": 5,
+      "iterations": 21,
+      "max_relative_residual": 9.439740250144674e-08
+    },
+    "comparison": "reference_fisher_kpp",
+    "elapsed_seconds_with_reference": 0.8827635829948122
+  },
+  "legacy_supplied_replay": "passed",
+  "checks": {
+    "pytest": "33 passed",
+    "notebook_callbacks": "passed for both models and all fields",
+    "oxygen_mp4_gif_decode": "passed",
+    "cli_simulation_and_necrosis_replay": "passed"
+  }
+}

@@ -1,0 +1,55 @@
+\section{Results}
+\subsection{Matched 90-day comparison}
+The coupled model produced a lower-density interior than Fisher--KPP, despite a similar spatial extent at the lower density threshold (Figure~\ref{fig:fields}). At day 90, M2 contained \CoupledCells{} billion viable cells versus \ReferenceCells{} billion in M0, a \CellReduction\% reduction. The respective volumes with $c/K\geq0.2$ were \CoupledVolume{} and \ReferenceVolume{} mL, differing by only \VolumeReduction\%. In contrast, the volume with $c/K\geq0.8$ was zero in M2 and 1.944 mL in M0. Peak viable densities were \CoupledPeak{} and \ReferencePeak{} times $K$, respectively.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.94\textwidth]{figures/day90_fields.pdf}
+\caption{Day-90 fields in the matched primary simulations. Axial views at RAS $z=30$ mm show a $72\times72$ mm region, with the original 2 mm simulation pixels retained. Viable density and the reference share the same $0$--$1$ color scale; oxygen is relative to the normal baseline. Necrotic material is shown over $0$--$1.3$ without clipping its peak at one. White solid and cyan dashed contours mark $c/K=0.2$ in M2 and M0, respectively. Tumor/necrosis overlays below 0.02 of $K$ are transparent for display only. The scale bar is 10 mm. These thresholds and colors have no calibrated correspondence to MRI contrast.}\label{fig:fields}
+\end{figure}
+
+Minimum tissue oxygen in M2 was \MinimumOxygen{}. Necrotic material totaled \NecroticCells{} million cell equivalents, with $z/K\geq0.2$ occupying \NecroticVolume{} mL, or three 2 mm voxels. Low-oxygen volume ($o<0.1$) was 0.104 mL. The dense initial seed was already oxygen limited; this experiment therefore does not demonstrate the spontaneous emergence of a macroscopic necrotic core from a dilute initial tumor. The tiny thresholded focus is not a resolved anatomical cavity. Moreover, the maximum $z/K=\MaximumNecrosis{}$ exceeds one, as permitted by the cell-equivalent formulation.
+
+The viable-count gap between M0 and M2 was \CellGapMillion{} million cells. Only \NecroticCells{} million cell equivalents were stored as necrotic material. With no clearance, the remaining \BirthGapMillion{} million difference in live-plus-dead burden is attributable to reduced cumulative births in the discrete balance. Thus, in this case, the smaller viable burden mainly reflects inhibited proliferation rather than death transfer.
+
+\subsection{Controlled model ablations}
+Table~\ref{tab:ablations} and Figure~\ref{fig:curves} separate growth inhibition, death transfer and the chosen supply feedback. Removing hypoxic death (M1) increased day-90 viable count by approximately 0.14\% relative to M2. In contrast, removing burden-dependent suppression of oxygen supply ($\alpha=0$) gave 2.829 billion viable cells, approximately 0.62\% below M0. Its minimum oxygen, 0.2245, remained above the death threshold, and no necrotic material formed. The supply closure therefore has a much larger effect on this particular comparison than the death term. This finding is conditional on the assigned parameters and dense seed, and does not establish the closure biologically.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Day-90 outcomes for 2 mm model ablations with a maximum 0.25-day step. $V_{0.2}$ and $V_{0.8}$ are viable-density threshold volumes in mL. Oxygen and necrotic state variables are absent from M0, indicated by dashes.}\label{tab:ablations}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{Yrrrrr}
+\toprule Model & $N_c/10^9$ & $V_{0.2}$ & $V_{0.8}$ & $\min o$ & $N_z/10^6$\\\midrule
+\AblationRows
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Setting uptake to zero ($\beta=0$) maintained $o=1$, yielded no necrotic material and reproduced the M0 solution. The largest final density discrepancy divided by $K$ was below $10^{-5}$, consistent with finite-precision differences between the numerical paths. This is a limiting-case verification, not an independent biological comparison.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figures/timecourses.pdf}
+\caption{Time courses for the matched reference and selected ablations. Panels show viable cell count, threshold-defined viable volume, minimum tissue oxygen and necrotic cell equivalents. M0 has no oxygen or necrosis state; these curves are consequently omitted. The dashed horizontal line in panel c marks $\theta_d=0.1$. M1 and M2 burden curves nearly overlap. All curves are deterministic simulations with assigned parameters; they are not measurements, replicate averages or uncertainty intervals.}\label{fig:curves}
+\end{figure}
+
+\subsection{Numerical verification and resolution dependence}
+The software test suite passed all \TestCount{} tests. Checks include analytical logistic behavior, diffusion conservation, boundary behavior, positivity, death-transfer balance, oxygen bounds and model limits (Appendix~\ref{app:numerics}). These results verify implemented properties without validating the biological assumptions.
+
+At 2 mm, reducing the maximum time step from 0.25 to 0.125 day decreased the final relative $L^2$ difference in viable density against the 0.0625-day calculation from 0.1270\% to 0.0423\%. Corresponding necrotic-field differences decreased from 4.238\% to 1.386\%. The relative oxygen differences were 0.0129\% and 0.0043\%. These comparisons support temporal refinement of the implemented scheme; a finite reference calculation does not provide an exact error or establish an asymptotic convergence order.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Day-90 outcomes under temporal and anatomical-grid refinement for M2. $h$ is voxel spacing in mm and $\Delta t$ is the maximum step in days. The 1 mm run changes both the numerical mesh and the discretized tissue boundaries.}\label{tab:refinement}
+\begin{tabular}{rrrrrr}
+\toprule $h$ & $\Delta t$ & $N_c/10^9$ & $N_z/10^6$ & $\min o$ & $\max(z/K)$\\\midrule
+\RefinementRows
+\bottomrule
+\end{tabular}
+\end{table}
+
+The native 1 mm calculation contained 2.452 billion viable cells, compared with 2.878 billion in its matched M0 reference, a \NativeCellReduction\% reduction. This relative reduction is similar to the primary result. However, minimum oxygen fell to \NativeMinimumOxygen{}, the necrotic-equivalent count increased to 3.607 million and peak $z/K$ rose to \NativeMaximumNecrosis{}. The necrotic threshold occupied 0.032 mL (32 native voxels), while low-oxygen volume was 0.027 mL. These local quantities are sensitive to spatial resolution and to the discrete anatomy. Neither grid resolves the assigned 0.2 mm oxygen length; spatial convergence of the oxygen--necrosis subsystem has not been demonstrated.
+
+\subsection{Status of parameter estimates}
+No biological parameters were estimated from measurements. The reported values are forward-simulation inputs, and no posterior distributions, patient-specific confidence intervals or predictive clinical errors can be inferred from them. The ablations identify influential assumptions for this example; influence alone does not show that a parameter is recoverable from available measurements. The next section specifies the measurements, priors and withheld-data tests needed to turn the simulator into an inference workflow.
