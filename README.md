@@ -8,6 +8,37 @@ Everything needed is inside this folder: source, BrainWeb data, a `uv` project
 and lockfile, a local `.venv`, tests, and generated examples. The parent repository
 and its Conda environment are not used.
 
+## Brief history and clinical perspective
+
+**Fisher–KPP** stands for Fisher–Kolmogorov–Petrovskii–Piskunov. In 1937,
+[Fisher](https://doi.org/10.1111/j.1469-1809.1937.tb02153.x) and
+[Kolmogorov–Petrovskii–Piskunov](https://math.i-learn.unito.it/mod/resource/view.php?forceview=1&id=73373)
+developed reaction–diffusion descriptions of biological spread. Glioma models
+later combined cell proliferation with invasion through brain tissue;
+[Swanson et al. (2000)](https://doi.org/10.1046/j.1365-2184.2000.00177.x)
+distinguished migration in gray and white matter. Extensions introduced
+[oxygen, hypoxic phenotypes and necrosis](https://doi.org/10.1007/s11538-012-9786-1).
+
+Recent work connects these models to measurements. A
+[2025 study](https://doi.org/10.1186/s12885-025-14557-3) used serial MRI and
+data assimilation to forecast treatment response in 21 patients. In 2026,
+[MRI-derived cellularity, perfusion and hypoxia habitats](https://doi.org/10.1016/j.mri.2026.110744)
+showed high test–retest repeatability in 24 glioma-bearing rats. A
+[poromechanical-model preprint](https://arxiv.org/abs/2605.05013) reported
+held-out tumor-volume errors of 4.7–36.0% in four rats; a
+[September 2026 preprint](https://arxiv.org/abs/2609.22363) used simulated
+biopsies to show that infiltration length can be estimated without tumor age,
+whereas growth speed requires age information.
+
+The clinical motivation is to estimate infiltration beyond visible MRI and
+support individualized growth forecasts and treatment planning. Translation
+requires identifiable parameters, uncertainty estimates and independent,
+prospective validation. This repository provides a reproducible research
+example: at day 90, oxygen–necrosis coupling reduced viable cell count by about
+14.8% versus Fisher–KPP, while the volume above 20% of carrying capacity changed
+by only about 1.9%. These BrainWeb-phantom results use assigned parameters and
+are not patient predictions; see the manuscript for numerical limitations.
+
 ## Scientific manuscript
 
 The [paper (PDF)](paper/output/pdf/brainweb_fisher_kpp_manuscript.pdf) and
