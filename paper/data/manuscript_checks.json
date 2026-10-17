@@ -1,17 +1,18 @@
 {
-  "pdf_pages": 35,
-  "bibliography_entries": 32,
-  "linked_bibliography_targets": 32,
+  "pdf_pages": 41,
+  "bibliography_entries": 35,
+  "linked_bibliography_targets": 35,
   "all_references_resolved": true,
   "no_overfull_boxes": true,
   "source_hashes_match_recorded_experiments": true,
   "recovery_source_and_notebook_hashes_match": true,
   "recovery_arrays_match_summary_hash": true,
-  "tests_passed": 50,
+  "tests_passed": 63,
   "notebook_checks": {
     "synthetic_recovery_full_execution": "Executed Parts A/B retained; all 16 cells have execution counts and no error outputs, with source/code/data hashes reverified; notebook not rerun in this documentation-only update",
     "explorer_widget_smoke": "previously passed; solver and UI unchanged in this update",
-    "clean_coupled_90_day_example": "previously passed; forward sources unchanged"
+    "clean_coupled_90_day_example": "previously passed; forward sources unchanged",
+    "PAT16_retained_execution": "All 8 code cells executed without errors; sources/code/export hashes verified. Retained numerical run was not repeated for this manuscript-only integration."
   },
   "recovery_replicates": {
     "homogeneous": {
@@ -37,34 +38,40 @@
     "manuscript_tables": 4
   },
   "visual_review": {
-    "all_pages_rendered": 35,
-    "contact_sheets": "all pages reviewed",
+    "all_pages_rendered": 41,
+    "contact_sheets": "All pages reviewed; revised appendix and bibliography re-rendered after layout repair.",
     "individual_pages_reviewed": [
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      34,
-      35
+      16,
+      17,
+      37
     ],
     "layout_defects_found": false
   },
-  "pdf_sha256": "40e68af8b2a1d49e88a4d148af6906258abbb9fc087ab2ddde636d3c4aca75e8",
-  "scope": "Document, citation-link and retained numerical/synthetic reproducibility checks. Added literature metadata verified; existing 2025-2026 sources retained. No patient or biological validation, no MRI/digital-twin integration implemented, and no numerical experiments rerun in this documentation-only update.",
+  "pdf_sha256": "f609445b248c30aac7742996f2f0e48a0f213d60d4a2a6b4274326dc4ad874b8",
+  "scope": "Numerical tests, source/data/export hashes, recomputed metrics, notebook execution records, PDF layout and bibliography links. PAT16 MRI anatomy/directions/static FC implemented with assumed growth; no patient growth-rate fit, biological validation or functional prediction.",
   "software_test_record": {
-    "passed": 50,
-    "timestamp": "2026-10-17T20:22:28.689305+02:00",
-    "scope": "Retained 50-test record; solver, tests, scripts, notebooks and numerical outputs unchanged in this documentation-only update. Software tests were not rerun."
+    "passed": 63,
+    "timestamp": "2026-10-17T19:25:25.431953+00:00",
+    "scope": "Full current repository suite rerun: 63 passed, zero failures/errors."
   },
   "documentation_update": {
-    "new_discussion_subsections": 2,
-    "new_modality_table": true,
-    "added_journal_references": 5,
-    "added_revision_pinned_repository_reference": 1,
-    "literature_provenance": "paper/data/multimodal_literature.json",
-    "patient_data_analysed": false,
+    "PAT16_methods_results_discussion_appendix": true,
+    "new_PAT16_figures": 2,
+    "new_PAT16_tables": 2,
+    "added_methods_references": 3,
+    "patient_MRI_inputs_analysed": true,
+    "patient_growth_rates_fitted": false,
     "clinical_or_functional_validation_claimed": false
+  },
+  "PAT16_checks": {
+    "paired_scenarios": 32,
+    "source_input_hashes_verified": 14,
+    "code_modules_verified": 3,
+    "notebook_executed_code_cells": 8,
+    "notebook_error_outputs": 0,
+    "published_export_files_verified": 10,
+    "all_scenario_metric_quantiles_recomputed": true,
+    "full_state_cache_and_raw_MRI_excluded": true,
+    "compact_field_summaries_and_measured_FC_published": true
   }
 }

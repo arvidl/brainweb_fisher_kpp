@@ -5,3 +5,7 @@ __pycache__/
 .ipynb_checkpoints/
 *.partial
 .DS_Store
+
+# PAT16 input/cache volumes are local; provenance and summary figures are retained.
+data/pat16_pilot/
+outputs/pat16_pilot/ensemble_cache.npz

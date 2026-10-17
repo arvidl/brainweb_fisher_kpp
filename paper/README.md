@@ -3,7 +3,7 @@
 The working manuscript uses conventional Introduction, Methods, Results and
 Discussion sections, followed by technical appendices and a linked bibliography.
 It reports the saved 90-day BrainWeb comparison, controlled ablations and
-time/grid refinement, and two synthetic parameter recovery experiments.
+time/grid refinement, two synthetic parameter recovery experiments, and an MRI-informed PAT16 pilot.
 The anatomical simulations use **assigned illustrative values**. The recovery
 experiments estimate known homogeneous Fisher–KPP diffusion/proliferation and
 separate BrainWeb white-/gray-matter diffusion with shared proliferation from
@@ -14,12 +14,13 @@ parameters or coupled oxygen/death parameters have been fitted. Measurement-base
 patient inference and independent biological validation remain proposed work.
 The Discussion includes a staged MRI-inference and uncertainty roadmap, external
 and prospective validation, and proposed evaluation of adaptive radiation,
-dose painting, hypoxia-modifying combinations and treatment sequencing. Two
-additional Discussion subsections and a modality table describe sequence-specific
-T1/T1-Gd/T2/FLAIR/dMRI/fMRI roles, anisotropic migration as a proposed extension,
+dose painting, hypoxia-modifying combinations and treatment sequencing. Discussion subsections and a modality table describe sequence-specific
+T1/T1-Gd/T2/FLAIR/dMRI/fMRI roles, the implemented PAT16 directional migration comparison,
 and integration with biomechanics, connectomics and neural dynamics. The BTC
 cohort and linked PAT16 prototype are discussed as possible integration resources;
-their patient data were not used in this study. Pre/postoperative imaging,
+the pilot reads their existing preoperative T1/dMRI/BOLD derivatives. The MRI
+inputs supply anatomy, orientation and static connectivity; growth parameters
+remain assumed, and no patient growth-rate fit is performed. Pre/postoperative imaging,
 neurovascular uncoupling and the distinction between BOLD and tissue oxygen
 are explicit limits. Functional and cognitive forecasts require separate
 validation alongside tumor forecasts.
@@ -33,7 +34,7 @@ in this study.
 - [references.bib](references.bib): verified bibliography, including 2025–2026 literature.
 - `figures/`: vector PDF figures and PNG previews.
 - `data/`: anatomical experiment settings, metrics, lossless figure arrays,
-  provenance and the recorded 50-test result.
+  provenance and the recorded 63-test result.
 - [Recovery records](../outputs/synthetic_recovery/summary.json): settings,
   source/data hashes, estimates, intervals, coverage and withheld errors;
   the adjacent NPZ contains observations and resampling arrays.
@@ -46,17 +47,28 @@ in this study.
 - [BrainWeb recovery figure](figures/brainweb_recovery.pdf) and
   [anatomy sensitivity figure](figures/brainweb_anatomy_sensitivity.pdf): vector
   manuscript figures generated directly from verified records.
+- [Executed PAT16 notebook](../pat16_anisotropic_pilot.ipynb) and
+  [compact MRI-pilot results](../outputs/pat16_pilot/README.md): paired simulations,
+  static measured FC, field summaries, provenance and verification.
 - `generated/`: numerical macros and table rows generated from the data.
 
 Sources, figures and generated tables are tracked together in this directory.
+The PAT16 Methods/Results report 32 paired isotropic/anisotropic scenarios,
+assumed prior-sensitivity bands, fMRI QC, two new vector figures and a day-90
+outcome table. Its appendix documents tensor reorientation, full 19-point mixed-
+derivative transport, numerical restrictions, priors and functional limits.
+`make_pat16_figures.py` checks public export/code/notebook hashes and recomputes
+reported quantiles from all-scenario metrics. Raw MRI and the full local state
+cache are not required to build the paper.
+
 The supplied figures and tables allow a direct LaTeX/BibTeX build without rerunning
 the solver; the Makefile also rebuilds them from the recorded numerical data.
 
 The three 2026 arXiv records are explicitly identified as preprints. The 2026
 MRI repeatability article was published online in July, with a November issue
 assignment. The original motivating illustration is cited and is not reproduced;
-all manuscript figures were generated from recorded simulations and synthetic
-observations. The bootstrap and SciPy references document the recovery methods.
+manuscript figures were generated from recorded simulations, synthetic
+observations and the documented PAT16 MRI derivatives. The bootstrap and SciPy references document the recovery methods.
 The added BTC, brain-network, neurovascular and neuron--glioma references were
 checked against publication records. The Finse prototype citation pins its
 inspected Git revision; [literature provenance](data/multimodal_literature.json)
@@ -80,6 +92,16 @@ synthetic recovery notebook before building:
 
 ```bash
 make -C paper reproduce
+```
+
+The `reproduce` target reruns the self-contained phantom experiments. The PAT16
+pilot additionally requires the processed inputs described in
+[the pilot guide](../examples/pat16_pilot.md). To rerun and export that pilot:
+
+```bash
+export PAT16_SOURCE=/absolute/path/to/processed/glioma-brain-digital-twin
+make -C paper pat16
+make -C paper
 ```
 
 To rerun only synthetic recovery, then rebuild the paper:

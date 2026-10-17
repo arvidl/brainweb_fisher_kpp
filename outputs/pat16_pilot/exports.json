@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "scope": "Real MRI geometry/connectivity; assumed untreated growth, no patient rate fitting",
+  "notebook_code_sha256": "f218f3df57c54a830790c78cda7b5cda1841403326e9e49d48ff20f79a6fc740",
+  "local_cache_sha256": "34afac5acf59c3cba75760168c0ca52e2ff0686437818278a0c5e9efdfe1d4a1",
+  "excluded": "Raw MRI and full ensemble_cache.npz remain local; rerun notebook from required source derivatives",
+  "directional_WM_voxels": 18202,
+  "files": {
+    "sample_metrics.npz": {
+      "sha256": "58c11b92fedc6f178f999269708486bbe5c48396df5c8cafbc6eb59e6c0a3bcc",
+      "bytes": 174821
+    },
+    "summary_fields.npz": {
+      "sha256": "375ff2ed5bb0234ac8a655e1016ac1cc8eb65f80d954405ac61cfb0d0bdede1c",
+      "bytes": 7441494
+    },
+    "functional_connectivity.csv": {
+      "sha256": "b8e88b88f323823c5398e990eaa92b61e07376319abd44dac4728fcc9ec71fcf",
+      "bytes": 134442
+    },
+    "summary.json": {
+      "sha256": "560b9039cddba656861407920ab22c5d3864b4cf4c9e9e404b6da265d0a8109f",
+      "bytes": 10694
+    },
+    "provenance.json": {
+      "sha256": "6271975370ba48621ed4251370e23c0aac27c13f89c1c5483abf0ec79049c537",
+      "bytes": 5723
+    },
+    "verification.json": {
+      "sha256": "2d1edd34af8140835224ed2e226035413345c90e1ddd725d0ba8f9b64bbb32a2",
+      "bytes": 288
+    },
+    "regional_exposure.csv": {
+      "sha256": "6f30e0c3d3e7df9cbfceb2d5982d511d7316b4414b6315a3bac8a4872199eff8",
+      "bytes": 110785
+    },
+    "input_qa.png": {
+      "sha256": "d8b277c2ab13241fe237fa9ad25ad06ec4b929d26a90794c8a2b2fab09b10f84",
+      "bytes": 284446
+    },
+    "day90_comparison.png": {
+      "sha256": "b36c410acb051fbffa6142fd37254e22a677ce8f5dfbac95ad24af2011ec20fc",
+      "bytes": 328454
+    },
+    "uncertainty_and_regions.png": {
+      "sha256": "b954b61c32f5c4f4bbebcc04d3602e4586a74bb3bc8314af60e065b0d87ba48e",
+      "bytes": 249501
+    }
+  }
+}

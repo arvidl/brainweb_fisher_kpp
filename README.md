@@ -4,9 +4,43 @@ A standalone 3D tumor-growth demonstration with an interactive Jupyter notebook,
 a conservative numerical solver, and PowerPoint/Google Slides media exports.
 Choose the original Fisher–KPP model or coupled viable tumor, oxygen and
 necrosis, with an optional matching Fisher–KPP reference.
-Everything needed is inside this folder: source, BrainWeb data, a `uv` project
-and lockfile, a local `.venv`, tests, and generated examples. The parent repository
-and its Conda environment are not used.
+The BrainWeb examples include source, data, a `uv` project and lockfile, tests,
+and generated results. The optional PAT16 multimodal pilot reads external real
+MRI derivatives; see its input instructions below. The parent repository and
+its Conda environment are not used.
+
+## PAT16 multimodal pilot
+
+[pat16_anisotropic_pilot.ipynb](pat16_anisotropic_pilot.ipynb) compares isotropic
+and dMRI-directed Fisher–KPP growth on **real pre-operative PAT16 MRI anatomy**.
+It matches local mean diffusivity between models, propagates 32 paired,
+explicitly assumed parameter scenarios, and overlays measured resting-state
+fMRI connectivity. Time, plane, slice and uncertainty-quantile controls are
+synchronized. Regional simulated tumor overlap is reported with uncertainty.
+
+This is conditional simulated growth with assumed rates, not patient parameter
+recovery or clinical prediction. It requires the processed source project's T1,
+tissue maps, lesion mask, diffusion tensor, registration and BOLD/confounds;
+missing imaging is never replaced with synthetic data. See
+[input and execution instructions](examples/pat16_pilot.md),
+[day-90 comparison](outputs/pat16_pilot/day90_comparison.png) and
+[uncertainty/regions](outputs/pat16_pilot/uncertainty_and_regions.png).
+
+At day 90, the 32 scenarios give:
+
+| Simulated quantity | Isotropic median [5th, 95th] | Anisotropic median [5th, 95th] | Paired difference median [5th, 95th] |
+|---|---|---|---|
+| Normalized burden (mL equivalents) | 110.42 [86.30, 137.58] | 106.74 [85.28, 133.17] | −2.98 [−6.80, −0.85] |
+| Volume with u ≥ 0.16 (mL) | 167.48 [142.55, 199.30] | 161.06 [138.24, 195.44] | −6.36 [−12.83, −2.46] |
+
+These are **assumed-parameter sensitivity percentiles**, not fitted patient
+intervals. Paired differences are computed within scenarios and need not equal
+the difference of marginal medians. The threshold is illustrative; normalized
+burden is neither observed MRI volume nor an absolute cell count.
+The paper includes the methods, results, two new figures and technical appendix.
+[Compact published results](outputs/pat16_pilot/README.md) retain all-scenario
+metrics, all-time field summaries, measured FC, regional CSV and checksum
+provenance; raw MRI and the full local state cache are excluded.
 
 ## Brief history and clinical perspective
 
@@ -41,12 +75,14 @@ are not patient predictions; see the manuscript for numerical limitations.
 
 ## Roadmap
 
-These are proposed next steps, building on the current phantom demonstration:
+These are next steps, building on the phantom demonstrations and the conditional
+PAT16 multimodal pilot:
 
 1. **Estimate parameters from multimodal MRI.** Register serial T1, T1-Gd,
    T2/FLAIR and dMRI, with a calibrated observation model for each sequence.
-   Start with tissue-dependent migration and proliferation, then test
-   dMRI-informed migration directions; water diffusion is not tumor-cell
+   Build on the PAT16 pilot's tissue-dependent and dMRI-directed transport;
+   estimate migration magnitudes and proliferation from longitudinal data.
+   Water diffusion is not tumor-cell
    migration. Enhancement and FLAIR are not universal cell-density contours.
    Add oxygen/death parameters only with independent physiological information
    or justified priors; routine BOLD does not measure tissue oxygen concentration.
@@ -94,12 +130,14 @@ The [BTC dataset](https://doi.org/10.1038/s41597-022-01806-4) underlying the
 related prototype contains T1, dMRI and resting-state fMRI; T1-Gd, T2 and FLAIR
 would be additions. Its preoperative cohort comprises **11 glioma patients,
 14 meningioma patients and 11 controls**, with incomplete follow-up around six
-months after surgery. These tumor types need separate analyses. A PAT16 pilot
-could test anatomical integration and conditional network effects of the observed
-resection; that scan pair cannot directly measure untreated growth. Serial tumor
-MRI and treatment metadata are needed for growth estimation. Patient-data
-integration, anisotropic migration, mechanics and neural dynamics are proposed
-extensions; they have not been implemented or validated in this repository.
+months after surgery. These tumor types need separate analyses. The new PAT16
+notebook implements anatomical integration, directional transport and static
+measured fMRI overlays with assumed growth-rate uncertainty. It does not model
+the observed resection or predict network dynamics; that scan pair cannot
+directly measure untreated growth. Serial tumor MRI and treatment metadata
+are needed for growth estimation. Coupled mechanics, neural dynamics and
+clinical validation remain proposed extensions. The manuscript now reports the
+PAT16 pilot separately from the BrainWeb simulations and synthetic recovery.
 
 ## Synthetic parameter recovery
 
@@ -176,7 +214,8 @@ intervals; it does not establish bootstrap coverage.
 The [paper (PDF)](paper/output/pdf/brainweb_fisher_kpp_manuscript.pdf) and
 [LaTeX/BibTeX sources](paper/README.md) report the 90-day coupled comparison,
 controlled ablations, numerical refinement, homogeneous two-rate recovery and
-BrainWeb three-rate recovery with anatomy/grid sensitivity. The recovery Methods
+BrainWeb three-rate recovery with anatomy/grid sensitivity, and the separate
+PAT16 MRI-informed directional pilot. The recovery Methods
 and Results include local/bootstrap confidence intervals, independent noise
 trials, regional withheld-scan forecasts and the retained proliferation interval
 miss. The Discussion addresses the +14.35% GM rate shift under anatomy/grid
@@ -191,7 +230,11 @@ to rerun both notebook recovery sections. The build verifies each recovery
 experiment's source/code/data hashes before generating manuscript assets.
 The Discussion also sets out multimodal MRI observation roles and a proposed
 growth--brain digital twin, with explicit BTC data limits, functional validation
-targets and treatment-evaluation perspectives.
+targets and treatment-evaluation perspectives. PAT16 Methods, Results and a
+technical appendix distinguish measured inputs, assumed priors, numerical
+verification and untested clinical/functional predictions. `make -C paper pat16`
+reruns and exports the MRI-dependent pilot when `PAT16_SOURCE` is available;
+ordinary PDF builds use checked public results without those external inputs.
 
 ## Start the notebook
 
@@ -397,7 +440,9 @@ The model is
 
 It models simultaneous invasion and proliferation. It does not explicitly
 implement a go-or-grow phenotype switch. There is no treatment, tissue
-deformation/mass effect or DTI fiber anisotropy. The original model has no necrosis. D is an isotropic
+deformation/mass effect. This original explorer uses scalar transport; the
+separate PAT16 notebook adds DTI-directed tensors. The original model has no
+necrosis. D is an isotropic
 scalar field within each tissue, optionally modulated smoothly in space.
 
 Cell-centered fluxes use a symmetric harmonic mean of D at neighboring voxels.

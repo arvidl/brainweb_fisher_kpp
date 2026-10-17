@@ -1,6 +1,6 @@
 {
   "checked_date": "2026-10-17",
-  "scope": "Literature and repository context for proposed multimodal MRI / brain digital-twin integration; no patient data were analysed. Existing numerical results and recovery records are unchanged.",
+  "scope": "Multimodal MRI / brain digital-twin literature context, updated for the implemented conditional PAT16 pilot. Patient MRI inputs are used for geometry, directions and static FC, not growth-rate fitting.",
   "new_references": [
     {
       "citation_key": "aerts2022",
@@ -191,6 +191,23 @@
     "Neurovascular uncoupling can obscure neuronal function",
     "A postoperative cavity is not the accumulated cell-equivalent state z",
     "Neuron-glioma feedback is a hypothesis requiring independent calibration",
-    "Anisotropy, mechanics, neural dynamics and patient-data integration remain proposed extensions"
+    "PAT16 anisotropy, MRI geometry and static FC overlays implemented; mechanics, evolving neural dynamics and clinical validation remain proposed"
+  ],
+  "pilot_methods_references": [
+    {
+      "citation_key": "tournier2019",
+      "primary_source": "https://www.mrtrix.org/publications/",
+      "role": "MRtrix3 input provenance"
+    },
+    {
+      "citation_key": "esteban2019",
+      "primary_source": "https://www.nature.com/articles/s41592-018-0235-4",
+      "role": "fMRIPrep input provenance"
+    },
+    {
+      "citation_key": "desikan2006",
+      "primary_source": "https://surfer.nmr.mgh.harvard.edu/ftp/articles/desikan06-parcellation.pdf",
+      "role": "Cortical atlas identities"
+    }
   ]
 }

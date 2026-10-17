@@ -1,0 +1,11 @@
+{
+  "representative_day90_dt_half_relative_L1": 0.0008056312217377126,
+  "dt_days": [
+    0.5,
+    0.25
+  ],
+  "pure_diffusion_5day_relative_mass_error": 5.685595440537716e-10,
+  "ensemble_density_min": 0.0,
+  "ensemble_density_max": 0.9973234534263611,
+  "shared_initial_states": true
+}

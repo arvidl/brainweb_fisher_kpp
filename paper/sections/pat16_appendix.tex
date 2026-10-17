@@ -1,0 +1,44 @@
+\section{PAT16 inputs, tensor transport and sensitivity design}\label{app:pat16}
+\subsection{Coordinates and lesion-aware domain}
+Full NIfTI affines map scalar images to an axis-aligned RAS grid with 3 mm spacing and origin $(-75,-78,-75)$ mm. The $51\times62\times50$ bounding box covers the brain, rather than cropping the PDE to the tumor. Tissue classes are the argmax of named CSF/GM/WM probabilities; integer dseg conventions are not assumed to match BrainWeb. Within the brain mask, the domain includes gray/white matter and voxels with resampled lesion value above 0.2. Lesion voxels otherwise assigned CSF receive assumed gray-matter migration (603 voxels). This is a modeling choice for lesion--tissue inconsistency, not histological proof of a segmentation error. It remains an unpropagated sensitivity target.
+
+The embedded MRtrix MIF reader handles signed/permuted layouts and Float32 little-endian data. Six components are interpreted in scanner RAS order $(xx,yy,zz,xy,xz,yz)$. The stored rigid matrix is used as a T1-target-to-ACPC-source pullback for component interpolation. With its proper rotation $R$ mapping target coordinates to source coordinates, the interpolated tensor is transformed as $R^{\mathsf T}T R$ before eigendecomposition. Eigenvector signs cancel in $\bm v\bm v^{\mathsf T}$. A correlation above 0.85 with independently saved T1-space FA is required as a transformation check, not a test of original image alignment. Input history records \texttt{dwi2tensor}; the processed header contains shells near 0/500/1000/3000 s/mm$^2$. The existing tensor was not refitted. Single-tensor directions cannot resolve crossing fibers or establish tumor-cell routes.
+
+For amplitude $A$ and lesion threshold $\tau$, the initial state is $u_0=A\,G_{0.7\,\mathrm{vox}}*\mathbf1_{\{L>\tau\}}$, restricted to the shared tissue domain, where $L$ is the resampled lesion mask. The Gaussian is a discrete initialization smoother (2.1 mm standard deviation), not an observation model. The notebook records its exact threshold convention. The source lesion supplies geometry, not calibrated density or tumor age.
+
+\subsection{Full tensor stencil and time stepping}
+For symmetric, diagonally dominant $\mathbf D$, use the unnormalized lattice offsets $\bm e_i$ and $\bm e_i\pm\bm e_j$ to write
+\begin{align}
+ \mathbf D&=\sum_i a_i\bm e_i\bm e_i^{\mathsf T}
+ +\sum_{i<j}\sum_{s\in\{-1,1\}}b_{ij}^{s}(\bm e_i+s\bm e_j)(\bm e_i+s\bm e_j)^{\mathsf T},\\
+ a_i&=D_{ii}-\sum_{j\ne i}|D_{ij}|,\qquad b_{ij}^{s}=\max(sD_{ij},0).
+\end{align}
+Nonnegative coefficients yield a 19-point stencil including all mixed derivatives. The implemented $1\leq r\leq3.5$ restriction ensures diagonal dominance for the prolate tensor at every orientation; it is a numerical restriction, not a biological bound. Non-dominant tensors are rejected. Axis-only tensor-diagonal fluxes would omit orientation-dependent mixed derivatives and are not used.
+
+Each undirected edge has harmonic conductance $g_{pq}=2k_pk_q/[(k_p+k_q)h^2]$, zero if either coefficient vanishes, and contributes $g_{pq}(u_q-u_p)$ to voxel $p$ and its negative to $q$. Offsets are unnormalized, so the $h^2$ denominator also applies to diagonal edges. Diagonal connections require both intermediate square corners to lie in tissue; no link crosses the domain boundary. This defines a conservative staircase/graph no-flux approximation whose interface geometry needs separate spatial assessment. With symmetric generator $L$ and $d_p=\sum_q g_{pq}$, choose $\Delta t\leq\min(0.5,0.9/\max_p d_p)$ days. Explicit diffusion is followed by exact logistic reaction $u\mapsto u e^{\rho\Delta t}/[1+u(e^{\rho\Delta t}-1)]$. The diffusion update is a convex combination and reaction preserves $[0,1]$; no density clipping is used. At $r=1$, diagonal links vanish and the operator matches the original harmonic-face reference. Saved states are float32, with internal evolution in float64.
+
+\subsection{Assigned distributions and paired propagation}
+\begin{table}[tbp]
+\centering\small
+\caption{PAT16 independent assumed distributions used in the 32-scenario sensitivity design. Lognormal medians retain physical units; log standard deviations are dimensionless. No distribution is estimated from patient growth, and synthetic-recovery estimates do not calibrate these values.}\label{tab:pat16_priors}
+\begin{tabularx}{\textwidth}{lY}
+\toprule Quantity & Assigned distribution\\\midrule
+$D_{\rm WM}$ & Lognormal, median 0.5 mm$^2$/day, log SD 0.25\\
+$D_{\rm GM}$ & Lognormal, median 0.1 mm$^2$/day, log SD 0.25\\
+$\rho$ & Lognormal, median 0.04 day$^{-1}$, log SD 0.20\\
+$r=D_\parallel/D_\perp$ & Uniform on $[1.5,3.5]$; isotropic partner fixes $r=1$\\
+Initial amplitude $A$ & Uniform on $[0.4,0.8]$\\
+Lesion threshold $\tau$ & Uniform on $[0.4,0.6]$\\
+Global direction angle & Normal, mean zero, SD 3 degrees, around one random unit axis per scenario\\\bottomrule
+\end{tabularx}
+\end{table}
+
+A seven-dimensional Latin hypercube uses seed 16026 and inverse-normal transforms for normal/lognormal variables; seed 16027 draws the rotation axes. Direction perturbations are global rotations, not local orientation or registration posterior samples. Each pair uses identical scalar rates, mask, lesion threshold, amplitude, directions and output times; only the anisotropy ratio changes. The 5th/95th quantiles interpolate the 32 empirical samples. This small design does not establish tail stability or coverage. Joint parameter distributions, broader initial-state/segmentation alternatives and increased ensemble size require further study.
+
+\subsection{Measured static fMRI overlay}
+The cortical/subcortical atlas is nearest-neighbor resampled using the full affine onto the BOLD grid even when array shapes happen to agree. ROI means require at least eight voxels. Frames with FD $>0.5$ mm or a supplied nonsteady-state flag are censored. On retained frames, a single ordinary least-squares design jointly removes 24 motion terms (six parameters, their derivatives and both sets squared), the first five supplied aCompCor components, five supplied high-pass cosine terms, linear trend and intercept. No additional low-pass filtering or global-signal regression is applied. Pearson correlations of residual ROI time series form the 82-by-82 FC matrix; its diagonal is set to zero for graph display and export. The input has TR 2.4 s, 180 frames, 157 retained frames and nuisance rank 36. Residual algebraic DOF 121 is not an effective independent-sample count in temporally correlated BOLD. Positive/negative FC edges are projected only for visualization and are not simulated tracts, directed causal interactions or a neural-dynamics model.
+
+\subsection{Public artifacts and reproduction}
+\path{pat16_anisotropic_pilot.ipynb} retains executed QA, simulations and synchronized controls. Under \path{outputs/pat16_pilot/}, public records include all-scenario metrics, regional CSV, measured FC, all-time field summaries and figures. Provenance identifies 14 source inputs by SHA256, transformations, code and software versions. Raw MRI and the 64 MB per-scenario trajectory cache remain local.
+
+With external derivatives configured by \path{PAT16_SOURCE}, \path{scripts/run_pat16_notebook.py} reruns the pilot; missing inputs cause an error. \path{scripts/export_pat16_results.py} verifies input/code hashes and exports compact records. \path{paper/make_pat16_figures.py} checks export/source/notebook hashes and recomputes reported quantiles before generating manuscript assets, without requiring MRI. The \texttt{make pat16} target reruns/exports the MRI pilot; \texttt{make reproduce} retains the self-contained phantom workflow. Numerical checks do not establish clinical or functional validity.
