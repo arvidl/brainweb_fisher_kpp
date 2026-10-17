@@ -1,0 +1,196 @@
+{
+  "checked_date": "2026-10-17",
+  "scope": "Literature and repository context for proposed multimodal MRI / brain digital-twin integration; no patient data were analysed. Existing numerical results and recovery records are unchanged.",
+  "new_references": [
+    {
+      "citation_key": "aerts2022",
+      "doi": "10.1038/s41597-022-01806-4",
+      "title": "Pre- and post-surgery brain tumor multimodal magnetic resonance imaging data optimized for large scale computational modelling",
+      "authors": [
+        "Hannelore Aerts",
+        "Nigel Colenbier",
+        "Hannes Almgren",
+        "Thijs Dhollander",
+        "Javier Rasero Daparte",
+        "Kenzo Clauw",
+        "Amogh Johri",
+        "Jil Meier",
+        "Jessica Palmer",
+        "Michael Schirner",
+        "Petra Ritter",
+        "Daniele Marinazzo"
+      ],
+      "year": 2022,
+      "journal": "Scientific Data",
+      "volume": "9",
+      "issue": "1",
+      "pages_or_article_number": "676",
+      "metadata_source": "https://api.crossref.org/works/10.1038/s41597-022-01806-4",
+      "primary_source": "https://www.nature.com/articles/s41597-022-01806-4",
+      "discussion_role": "BTC imaging modalities, cohort composition and postoperative follow-up"
+    },
+    {
+      "citation_key": "aerts2018",
+      "doi": "10.1523/ENEURO.0083-18.2018",
+      "title": "Modeling Brain Dynamics in Brain Tumor Patients Using the Virtual Brain",
+      "authors": [
+        "Hannelore Aerts",
+        "Michael Schirner",
+        "Ben Jeurissen",
+        "Dirk Van Roost",
+        "Eric Achten",
+        "Petra Ritter",
+        "Daniele Marinazzo"
+      ],
+      "year": 2018,
+      "journal": "eNeuro",
+      "volume": "5",
+      "issue": "3",
+      "pages_or_article_number": "ENEURO.0083-18.2018",
+      "metadata_source": "https://api.crossref.org/works/10.1523/ENEURO.0083-18.2018",
+      "primary_source": "https://pubmed.ncbi.nlm.nih.gov/29911173/",
+      "discussion_role": "Individual structural connectomes and The Virtual Brain modelling"
+    },
+    {
+      "citation_key": "aerts2020",
+      "doi": "10.1016/j.neuroimage.2020.116738",
+      "title": "Modeling brain dynamics after tumor resection using The Virtual Brain",
+      "authors": [
+        "Hannelore Aerts",
+        "Michael Schirner",
+        "Thijs Dhollander",
+        "Ben Jeurissen",
+        "Eric Achten",
+        "Dirk Van Roost",
+        "Petra Ritter",
+        "Daniele Marinazzo"
+      ],
+      "year": 2020,
+      "journal": "NeuroImage",
+      "volume": "213",
+      "issue": null,
+      "pages_or_article_number": "116738",
+      "metadata_source": "https://api.crossref.org/works/10.1016/j.neuroimage.2020.116738",
+      "primary_source": "https://doi.org/10.1016/j.neuroimage.2020.116738",
+      "discussion_role": "Brain-network modelling after tumor resection"
+    },
+    {
+      "citation_key": "sun2020",
+      "doi": "10.1148/radiol.2019190089",
+      "title": "Decreased Hand Motor Resting-State Functional Connectivity in Patients with Glioma: Analysis of Factors including Neurovascular Uncoupling",
+      "authors": [
+        "Herie Sun",
+        "Behroze Vachha",
+        "Maria E. Laino",
+        "Mehrnaz Jenabi",
+        "Jessica R. Flynn",
+        "Zhigang Zhang",
+        "Andrei I. Holodny",
+        "Kyung K. Peck"
+      ],
+      "year": 2020,
+      "journal": "Radiology",
+      "volume": "294",
+      "issue": "3",
+      "pages_or_article_number": "610-621",
+      "metadata_source": "https://api.crossref.org/works/10.1148/radiol.2019190089",
+      "primary_source": "https://pubs.rsna.org/doi/10.1148/radiol.2019190089",
+      "discussion_role": "Tumor-related neurovascular uncoupling and interpretation of resting-state connectivity"
+    },
+    {
+      "citation_key": "krishna2023",
+      "doi": "10.1038/s41586-023-06036-1",
+      "title": "Glioblastoma remodelling of human neural circuits decreases survival",
+      "authors": [
+        "Saritha Krishna",
+        "Abrar Choudhury",
+        "Michael B. Keough",
+        "Kyounghee Seo",
+        "Lijun Ni",
+        "Sofia Kakaizada",
+        "Anthony Lee",
+        "Alexander Aabedi",
+        "Galina Popova",
+        "Benjamin Lipkin",
+        "Caroline Cao",
+        "Cesar Nava Gonzales",
+        "Rasika Sudharshan",
+        "Andrew Egladyous",
+        "Nyle Almeida",
+        "Yalan Zhang",
+        "Annette M. Molinaro",
+        "Humsa S. Venkatesh",
+        "Andy G. S. Daniel",
+        "Kiarash Shamardani",
+        "Jeanette Hyer",
+        "Edward F. Chang",
+        "Anne Findlay",
+        "Joanna J. Phillips",
+        "Srikantan Nagarajan",
+        "David R. Raleigh",
+        "David Brang",
+        "Michelle Monje",
+        "Shawn L. Hervey-Jumper"
+      ],
+      "year": 2023,
+      "journal": "Nature",
+      "volume": "617",
+      "issue": "7961",
+      "pages_or_article_number": "599-607",
+      "metadata_source": "https://api.crossref.org/works/10.1038/s41586-023-06036-1",
+      "primary_source": "https://pubmed.ncbi.nlm.nih.gov/37138086/",
+      "discussion_role": "Evidence motivating neuron-glioma coupling; no calibration from BOLD to proliferation"
+    }
+  ],
+  "prototype": {
+    "citation_key": "lundervold2026twin",
+    "repository": "https://github.com/arvidl/glioma-brain-digital-twin-public",
+    "revision": "d0159ec273ac808d5f9b039a823e88e3b887d67b",
+    "inspected_file": "README.md",
+    "status": "One-patient research prototype (sub-PAT16)",
+    "available_imaging": [
+      "T1",
+      "dMRI",
+      "resting-state fMRI"
+    ],
+    "additional_imaging_for_proposed_protocol": [
+      "T1-Gd",
+      "T2",
+      "FLAIR"
+    ]
+  },
+  "btc_context": {
+    "source": "https://www.nature.com/articles/s41597-022-01806-4",
+    "preoperative_dataset": "https://openneuro.org/datasets/ds001226/versions/5.0.0",
+    "postoperative_dataset": "https://openneuro.org/datasets/ds002080/versions/4.0.0",
+    "postoperative_dataset_record": "https://biblio.ugent.be/publication/01GM8HQDJGB52QQBJRRZ160AKV",
+    "preoperative_counts": {
+      "glioma": 11,
+      "meningioma": 14,
+      "control": 11
+    },
+    "postoperative_available_counts_before_analysis_quality_control": {
+      "glioma": 7,
+      "meningioma": 12,
+      "control": 10
+    },
+    "follow_up": "Approximately six months after surgery, not an untreated growth interval"
+  },
+  "existing_recent_references_reused": [
+    "hiremath2025",
+    "miniere2025",
+    "nocera2025",
+    "das2026",
+    "pash2026",
+    "balcerak2025",
+    "hager2026"
+  ],
+  "interpretation_checks": [
+    "Water diffusion is not tumor-cell migration",
+    "Conventional resting-state BOLD is not tissue oxygen concentration",
+    "Neurovascular uncoupling can obscure neuronal function",
+    "A postoperative cavity is not the accumulated cell-equivalent state z",
+    "Neuron-glioma feedback is a hypothesis requiring independent calibration",
+    "Anisotropy, mechanics, neural dynamics and patient-data integration remain proposed extensions"
+  ]
+}

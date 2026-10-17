@@ -43,16 +43,18 @@ are not patient predictions; see the manuscript for numerical limitations.
 
 These are proposed next steps, building on the current phantom demonstration:
 
-1. **Estimate parameters from MRI.** Register longitudinal structural,
-   diffusion and perfusion MRI; calibrate how model fields generate imaging
-   measurements. Start with migration and proliferation parameters, testing
-   identifiability before adding oxygen and death parameters. Use independent
-   experiments, pathology and population priors where imaging is insufficient;
-   MRI water diffusion is not tumor-cell migration.
+1. **Estimate parameters from multimodal MRI.** Register serial T1, T1-Gd,
+   T2/FLAIR and dMRI, with a calibrated observation model for each sequence.
+   Start with tissue-dependent migration and proliferation, then test
+   dMRI-informed migration directions; water diffusion is not tumor-cell
+   migration. Enhancement and FLAIR are not universal cell-density contours.
+   Add oxygen/death parameters only with independent physiological information
+   or justified priors; routine BOLD does not measure tissue oxygen concentration.
 2. **Quantify uncertainty.** Extend the homogeneous and BrainWeb recovery audits
    across rates, seed locations and scan schedules, then infer parameter
    distributions from calibrated measurements. Propagate measurement,
-   segmentation, initialization, prior, model and numerical uncertainty into
+   segmentation, registration, tract-direction, initialization, prior, model and
+   numerical uncertainty into
    forecast intervals and spatial maps. Check interval coverage and sensitivity
    to priors, following work on
    [glioma-model identifiability](https://doi.org/10.1098/rsta.2024.0212).
@@ -61,19 +63,43 @@ These are proposed next steps, building on the current phantom demonstration:
    baselines. Validate oxygen and necrosis against independent measurements.
    Progress to external cohorts and prospective, blinded forecasts, reporting
    spatial/volume errors and uncertainty calibration; distinguish untreated
-   growth from treatment response.
-4. **Model treatment explicitly.** Add resection, radiation and drug effects,
+   growth from postoperative and treatment response. Use localized pathology
+   for biological targets and patient-level splits for cohort evaluation.
+4. **Connect growth to a brain digital twin.** Link evolving tumor states to
+   biomechanics, tract involvement, structural connectivity and neural dynamics,
+   building on the related
+   [Finse 2026 prototype](https://github.com/arvidl/glioma-brain-digital-twin-public).
+   Use fMRI to constrain functional/hemodynamic models and test later functional
+   and cognitive outcomes. Account for
+   [neurovascular uncoupling](https://doi.org/10.1148/radiol.2019190089); weak BOLD
+   does not establish loss of function. Feedback motivated by
+   [neuron–glioma interactions](https://doi.org/10.1038/s41586-023-06036-1) remains
+   a hypothesis requiring separate evidence, rather than a rate map derived
+   directly from resting-state connectivity.
+5. **Model treatment explicitly.** Add resection, radiation and drug effects,
    including oxygen-dependent radiosensitivity and treatment-related tissue
    injury. Evaluate viable burden and recurrence patterns alongside normal-brain
-   toxicity and plan deliverability. Serial MRI could update forecasts during
+   toxicity, tract/network function and plan deliverability. Serial MRI could
+   update forecasts during
    treatment, as explored in
    [MRI-based data assimilation](https://doi.org/10.1186/s12885-025-14557-3).
-5. **Evaluate new strategies.** Use virtual cohorts to compare adaptive radiation
+6. **Evaluate new strategies.** Use virtual cohorts to compare adaptive radiation
    schedules, spatial dose painting, hypoxia-modifying combinations and treatment
    sequencing under uncertainty. Select informative scan times and prioritize
    robust treatment hypotheses for experimental testing. Prospective controlled
    trials must establish effects on survival, neurological function and quality
    of life before model-guided strategies can claim clinical benefit.
+
+The [BTC dataset](https://doi.org/10.1038/s41597-022-01806-4) underlying the
+related prototype contains T1, dMRI and resting-state fMRI; T1-Gd, T2 and FLAIR
+would be additions. Its preoperative cohort comprises **11 glioma patients,
+14 meningioma patients and 11 controls**, with incomplete follow-up around six
+months after surgery. These tumor types need separate analyses. A PAT16 pilot
+could test anatomical integration and conditional network effects of the observed
+resection; that scan pair cannot directly measure untreated growth. Serial tumor
+MRI and treatment metadata are needed for growth estimation. Patient-data
+integration, anisotropic migration, mechanics and neural dynamics are proposed
+extensions; they have not been implemented or validated in this repository.
 
 ## Synthetic parameter recovery
 
@@ -163,6 +189,9 @@ or rerun the forward cases and both recovery experiments with
 `make -C paper reproduce` after `uv sync --locked`. Use `make -C paper recovery`
 to rerun both notebook recovery sections. The build verifies each recovery
 experiment's source/code/data hashes before generating manuscript assets.
+The Discussion also sets out multimodal MRI observation roles and a proposed
+growth--brain digital twin, with explicit BTC data limits, functional validation
+targets and treatment-evaluation perspectives.
 
 ## Start the notebook
 

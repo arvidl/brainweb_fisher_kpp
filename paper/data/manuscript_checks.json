@@ -1,7 +1,7 @@
 {
-  "pdf_pages": 33,
-  "bibliography_entries": 26,
-  "linked_bibliography_targets": 26,
+  "pdf_pages": 35,
+  "bibliography_entries": 32,
+  "linked_bibliography_targets": 32,
   "all_references_resolved": true,
   "no_overfull_boxes": true,
   "source_hashes_match_recorded_experiments": true,
@@ -9,7 +9,7 @@
   "recovery_arrays_match_summary_hash": true,
   "tests_passed": 50,
   "notebook_checks": {
-    "synthetic_recovery_full_execution": "passed for homogeneous Part A and BrainWeb Part B; all 16 code cells have execution counts and no error outputs",
+    "synthetic_recovery_full_execution": "Executed Parts A/B retained; all 16 cells have execution counts and no error outputs, with source/code/data hashes reverified; notebook not rerun in this documentation-only update",
     "explorer_widget_smoke": "previously passed; solver and UI unchanged in this update",
     "clean_coupled_90_day_example": "previously passed; forward sources unchanged"
   },
@@ -33,25 +33,38 @@
     ],
     "primary_proliferation_truth_outside_both_95_intervals_retained": true,
     "anatomy_stress_noiseless_gray_diffusion_relative_shift_percent": 14.349614712595082,
-    "new_manuscript_figures": 2,
-    "new_manuscript_tables": 4
+    "manuscript_figures": 2,
+    "manuscript_tables": 4
   },
   "visual_review": {
-    "all_pages_rendered": 33,
+    "all_pages_rendered": 35,
     "contact_sheets": "all pages reviewed",
     "individual_pages_reviewed": [
-      1,
-      5,
-      11,
-      12,
-      13,
-      14,
-      15,
-      28,
-      30
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      34,
+      35
     ],
     "layout_defects_found": false
   },
-  "pdf_sha256": "c6e01921b21ce54a0e87e1d3ef6719ef228393c0586d56d81efbe88f697c3f94",
-  "scope": "Document and numerical/synthetic reproducibility checks; conditional recovery and a separate deterministic anatomy/grid stress test, no patient or biological validation. Bibliography link annotations verified; remote link availability was not rechecked in this update."
+  "pdf_sha256": "40e68af8b2a1d49e88a4d148af6906258abbb9fc087ab2ddde636d3c4aca75e8",
+  "scope": "Document, citation-link and retained numerical/synthetic reproducibility checks. Added literature metadata verified; existing 2025-2026 sources retained. No patient or biological validation, no MRI/digital-twin integration implemented, and no numerical experiments rerun in this documentation-only update.",
+  "software_test_record": {
+    "passed": 50,
+    "timestamp": "2026-10-17T20:22:28.689305+02:00",
+    "scope": "Retained 50-test record; solver, tests, scripts, notebooks and numerical outputs unchanged in this documentation-only update. Software tests were not rerun."
+  },
+  "documentation_update": {
+    "new_discussion_subsections": 2,
+    "new_modality_table": true,
+    "added_journal_references": 5,
+    "added_revision_pinned_repository_reference": 1,
+    "literature_provenance": "paper/data/multimodal_literature.json",
+    "patient_data_analysed": false,
+    "clinical_or_functional_validation_claimed": false
+  }
 }

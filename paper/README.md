@@ -14,7 +14,15 @@ parameters or coupled oxygen/death parameters have been fitted. Measurement-base
 patient inference and independent biological validation remain proposed work.
 The Discussion includes a staged MRI-inference and uncertainty roadmap, external
 and prospective validation, and proposed evaluation of adaptive radiation,
-dose painting, hypoxia-modifying combinations and treatment sequencing.
+dose painting, hypoxia-modifying combinations and treatment sequencing. Two
+additional Discussion subsections and a modality table describe sequence-specific
+T1/T1-Gd/T2/FLAIR/dMRI/fMRI roles, anisotropic migration as a proposed extension,
+and integration with biomechanics, connectomics and neural dynamics. The BTC
+cohort and linked PAT16 prototype are discussed as possible integration resources;
+their patient data were not used in this study. Pre/postoperative imaging,
+neurovascular uncoupling and the distinction between BOLD and tissue oxygen
+are explicit limits. Functional and cognitive forecasts require separate
+validation alongside tumor forecasts.
 Treatment effects and clinical benefit have not been simulated or demonstrated
 in this study.
 
@@ -49,6 +57,11 @@ MRI repeatability article was published online in July, with a November issue
 assignment. The original motivating illustration is cited and is not reproduced;
 all manuscript figures were generated from recorded simulations and synthetic
 observations. The bootstrap and SciPy references document the recovery methods.
+The added BTC, brain-network, neurovascular and neuron--glioma references were
+checked against publication records. The Finse prototype citation pins its
+inspected Git revision; [literature provenance](data/multimodal_literature.json)
+records the new sources and their roles. Existing 2025--2026 references support
+the proposed imaging, inference and treatment workflow.
 
 ## Build
 
