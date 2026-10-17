@@ -49,8 +49,9 @@ These are proposed next steps, building on the current phantom demonstration:
    identifiability before adding oxygen and death parameters. Use independent
    experiments, pathology and population priors where imaging is insufficient;
    MRI water diffusion is not tumor-cell migration.
-2. **Quantify uncertainty.** Test parameter recovery on realistic synthetic
-   observations, then infer parameter distributions. Propagate measurement,
+2. **Quantify uncertainty.** Extend the homogeneous and BrainWeb recovery audits
+   across rates, seed locations and scan schedules, then infer parameter
+   distributions from calibrated measurements. Propagate measurement,
    segmentation, initialization, prior, model and numerical uncertainty into
    forecast intervals and spatial maps. Check interval coverage and sensitivity
    to priors, following work on
@@ -77,8 +78,9 @@ These are proposed next steps, building on the current phantom demonstration:
 ## Synthetic parameter recovery
 
 Open [synthetic_parameter_recovery.ipynb](synthetic_parameter_recovery.ipynb)
-and **Run All** to estimate diffusion D and proliferation ρ from noisy MRI-like
-observations of a homogeneous 3D phantom. Known values are D = 0.300 mm²/day and
+and **Run All** for two synthetic inference experiments. **Part A** estimates
+diffusion D and proliferation ρ from noisy MRI-like observations of a homogeneous
+3D phantom. Known values are D = 0.300 mm²/day and
 ρ = 0.045 day⁻¹. A finer simulation generates blurred, voxel-averaged signals;
 scans at days 20/40/60 are fitted and days 75/90 are withheld for forecasting.
 
@@ -90,31 +92,77 @@ The initial state, imaging calibration, capacity and noise level are known:
 these conditional uncertainty estimates demonstrate synthetic recovery, not
 patient MRI validation. No Bayesian prior is used.
 
+**Part B** estimates three independent rates on the **full BrainWeb anatomy**:
+white-matter diffusion D_WM, gray-matter diffusion D_GM and a shared proliferation
+rate ρ. Known values are **0.500 mm²/day, 0.100 mm²/day and 0.040 day⁻¹**.
+There is no fixed WM:GM ratio. Gray/glial labels share D_GM; CSF and extracerebral
+tissue have zero transport and growth. The existing harmonic face-flux solver
+evolves the full 3 mm tissue domain, while a fixed 60 mm observation cube supplies
+blurred, 6 mm voxel-averaged cellularity proxies. The BrainWeb T1 provides context;
+the tumor signals are generated synthetically, not measured from that T1 image.
+
+Part B has its own 100 bootstrap fits, 60 independent noise trials, three-rate
+correlations, known-value checks and withheld forecasts. The primary generator
+shares the 3 mm anatomy but uses a finer time step. A separate **2 mm anatomy/grid
+stress test** quantifies sensitivity to the shared spatial discretization and
+reports noise-free rate shifts as well as a paired noisy fit. This changes both
+the mesh and tissue geometry; it is not a pure convergence study. Forecasts are
+checked over the full observation region and a prespecified near-seed region.
+Known tissue labels and initialization remain strong assumptions. The notebook
+also rejects time-zero-only inference, and tests reject fitting two tissue rates
+in a domain with only one tissue class.
+
+The recorded Part B realization gives:
+
+| Parameter | Known | Estimate | Bootstrap 95% CI |
+| --- | ---: | ---: | ---: |
+| D_WM (mm²/day) | 0.500 | 0.498063 | [0.450332, 0.548917] |
+| D_GM (mm²/day) | 0.100 | 0.082643 | [0.055430, 0.107485] |
+| ρ (day⁻¹) | 0.040 | 0.039479 | [0.038857, 0.039920] |
+
+The true proliferation rate falls just outside both the local and bootstrap
+95% intervals for this one noise realization; the seed is retained. Across 60
+independent noise trials, local-interval coverage is 57/60, 55/60 and 59/60 for
+D_WM, D_GM and ρ, with exact binomial intervals reported in the notebook.
+Gray-matter diffusion has the broadest relative uncertainty. In the separate
+noise-free 2 mm anatomy/grid stress test, fitting with the 3 mm model shifts
+D_GM to 0.114350 (+14.35%); the primary noise-based intervals do not quantify
+this anatomy/discretization uncertainty.
+
 ```bash
 uv run --locked jupyter lab synthetic_parameter_recovery.ipynb
 # Or execute and save the notebook without opening Jupyter:
 uv run --locked python scripts/run_recovery_notebook.py
 ```
 
-Allow roughly 1–3 minutes for the default experiment. The executed notebook and
-[recorded results](outputs/synthetic_recovery/summary.json) include parameter
-estimates, uncertainty, withheld errors and coverage diagnostics. Arrays and five
-figures are saved alongside the summary. Increase the replication counts for a
-more precise uncertainty audit; the defaults keep the demonstration practical.
+Allow roughly 3–5 minutes for both default experiments after compilation. Each
+part can also be run separately. The executed notebook and recorded results for
+[Part A](outputs/synthetic_recovery/summary.json) and
+[Part B](outputs/brainweb_recovery/summary.json) include parameter estimates,
+uncertainty, withheld errors, coverage diagnostics and source/data hashes. Arrays
+and five/six figures respectively are saved alongside the summaries. Increase
+the replication counts for a more precise uncertainty audit; the defaults keep
+the demonstration practical. The coverage audit evaluates local Jacobian
+intervals; it does not establish bootstrap coverage.
 
 ## Scientific manuscript
 
 The [paper (PDF)](paper/output/pdf/brainweb_fisher_kpp_manuscript.pdf) and
 [LaTeX/BibTeX sources](paper/README.md) report the 90-day coupled comparison,
-controlled ablations, numerical refinement and synthetic two-rate recovery.
-The recovery Methods and Results include parameter confidence intervals,
-independent noise trials and withheld-scan forecasts; appendices document the
-imaging operator, optimization and resampling. Figures and tables are generated
+controlled ablations, numerical refinement, homogeneous two-rate recovery and
+BrainWeb three-rate recovery with anatomy/grid sensitivity. The recovery Methods
+and Results include local/bootstrap confidence intervals, independent noise
+trials, regional withheld-scan forecasts and the retained proliferation interval
+miss. The Discussion addresses the +14.35% GM rate shift under anatomy/grid
+mismatch. Dedicated appendices document both imaging operators, optimization,
+resampling and sensitivity designs. Figures and tables are generated
 from recorded arrays and metrics. The anatomical simulations use assigned
 parameters; the separate recovery experiment fits synthetic observations.
 No patient fitting or biological validation is claimed. Build with `make -C paper`,
-or rerun both experiments and build with `make -C paper reproduce` after
-`uv sync --locked`. Use `make -C paper recovery` to rerun only the recovery study.
+or rerun the forward cases and both recovery experiments with
+`make -C paper reproduce` after `uv sync --locked`. Use `make -C paper recovery`
+to rerun both notebook recovery sections. The build verifies each recovery
+experiment's source/code/data hashes before generating manuscript assets.
 
 ## Start the notebook
 
@@ -515,7 +563,10 @@ bound, a reflecting-boundary cosine eigenmode, temporal refinement, exact output
 times, parameter validation, and bundled BrainWeb alignment/tissue counts.
 Inference tests also check noiseless two-rate recovery and withheld forecasts,
 imaging mass conservation, covariance scaling with known noise, and rejection of
-unidentifiable time-zero observations and invalid input.
+unidentifiable time-zero observations and invalid input. Three-rate tests check
+independent tissue-rate recovery and withheld prediction, harmonic-interface
+equivalence, transport conservation, physical voxel alignment across grids,
+exclusion of CSF, and rank-deficiency rejection when a tissue class is absent.
 
 The notebook is also executed as a smoke test; the actual GUI can be opened in
 JupyterLab for clicks and playback. The generated MP4 and GIF are decoded and

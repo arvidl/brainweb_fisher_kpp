@@ -40,7 +40,11 @@ def main():
         if actual != expected:
             raise ValueError(f"Recovery source changed: {name}; rerun the notebook")
     notebook = nbformat.read(ROOT / "synthetic_parameter_recovery.ipynb", as_version=4)
-    code = "\n\n".join(c.source for c in notebook.cells if c.cell_type == "code")
+    # Part A and Part B have independent manuscript assets and scoped records.
+    # Older records hashed all code before the notebook acquired a second part.
+    scope = summary.get("notebook_code_scope")
+    code = "\n\n".join(c.source for c in notebook.cells if c.cell_type == "code"
+                       and (scope is None or c.metadata.get("recovery_experiment", "homogeneous") == scope))
     if hashlib.sha256(code.encode()).hexdigest() != summary["notebook_code_sha256"]:
         raise ValueError("Recovery notebook code changed; rerun the notebook")
     if hashlib.sha256((RECOVERY / "recovery_data.npz").read_bytes()).hexdigest() != summary["recovery_data_sha256"]:

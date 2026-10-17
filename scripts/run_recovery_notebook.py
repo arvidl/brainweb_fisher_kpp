@@ -1,4 +1,4 @@
-"""Execute and save the synthetic inference notebook with the project kernel.
+"""Execute and save both synthetic inference experiments with the project kernel.
 
 Run from the repository root with:
     uv run --locked python scripts/run_recovery_notebook.py
@@ -27,4 +27,4 @@ NotebookClient(notebook, timeout=300, kernel_name="python3",
                on_cell_executed=report_cell).execute()
 nbformat.validate(notebook)
 nbformat.write(notebook, path)
-print("Executed notebook saved; results in outputs/synthetic_recovery/.")
+print("Executed notebook saved; results in outputs/synthetic_recovery/ and outputs/brainweb_recovery/.")

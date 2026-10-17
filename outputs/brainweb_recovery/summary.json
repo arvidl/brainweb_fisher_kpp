@@ -1,0 +1,438 @@
+{
+  "experiment": "Full BrainWeb synthetic three-rate Fisher-KPP recovery; calibrated cellularity proxy",
+  "seed": 20261018,
+  "rng_streams": [
+    "observations",
+    "bootstrap",
+    "coverage",
+    "prediction"
+  ],
+  "versions": {
+    "python": "3.12.2",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "parameter_names": [
+    "D_WM",
+    "D_GM",
+    "rho"
+  ],
+  "parameter_units": [
+    "mm^2/day",
+    "mm^2/day",
+    "1/day"
+  ],
+  "design": {
+    "dt_days": 0.5,
+    "seed_center_mm": [
+      -30.0,
+      25.0,
+      30.0
+    ],
+    "seed_sigma_mm": [
+      6.0,
+      6.0,
+      6.0
+    ],
+    "seed_peak": 0.2,
+    "observation_center_mm": [
+      -30.0,
+      24.0,
+      30.0
+    ],
+    "observation_voxels": 10,
+    "voxel_mm": 6.0,
+    "blur_sigma_mm": 2.0,
+    "quadrature_points": 3
+  },
+  "truth_design": {
+    "dt_days": 0.125,
+    "seed_center_mm": [
+      -30.0,
+      25.0,
+      30.0
+    ],
+    "seed_sigma_mm": [
+      6.0,
+      6.0,
+      6.0
+    ],
+    "seed_peak": 0.2,
+    "observation_center_mm": [
+      -30.0,
+      24.0,
+      30.0
+    ],
+    "observation_voxels": 10,
+    "voxel_mm": 6.0,
+    "blur_sigma_mm": 2.0,
+    "quadrature_points": 3
+  },
+  "brainweb_manifest": {
+    "source": "https://brainweb.bic.mni.mcgill.ca/cgi/brainweb1",
+    "model": "BrainWeb original normal phantom (not the 20-subject models)",
+    "anatomy": "https://brainweb.bic.mni.mcgill.ca/anatomic_normal.html",
+    "files": {
+      "t1_icbm_normal_1mm_pn0_rf0.nii.gz": {
+        "sha256": "aa40262b2702653188fd51bdec844a393b825650fe1155a84d8606f5dfd99eb3",
+        "bytes": 8299415,
+        "brainweb_alias": "T1 ICBM normal 1mm pn0 rf0"
+      },
+      "phantom_1.0mm_normal_crisp.nii.gz": {
+        "sha256": "afdff78fc1b06ad7c7d8216cf96be737a1450ef5b6abf27eb732c0bf8b66fac0",
+        "bytes": 947188,
+        "brainweb_alias": "phantom_1.0mm_normal_crisp"
+      }
+    }
+  },
+  "inverse_grid": {
+    "spacing_mm": 3.0,
+    "shape": [
+      61,
+      73,
+      61
+    ],
+    "affine": [
+      [
+        3.0,
+        0.0,
+        0.0,
+        -90.0
+      ],
+      [
+        0.0,
+        3.0,
+        0.0,
+        -126.0
+      ],
+      [
+        0.0,
+        0.0,
+        3.0,
+        -72.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "active_voxels": 58669
+  },
+  "anatomy_stress_grid": {
+    "spacing_mm": 2.0,
+    "shape": [
+      91,
+      109,
+      91
+    ],
+    "affine": [
+      [
+        2.0,
+        0.0,
+        0.0,
+        -90.0
+      ],
+      [
+        0.0,
+        2.0,
+        0.0,
+        -126.0
+      ],
+      [
+        0.0,
+        0.0,
+        2.0,
+        -72.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "dt_days": 0.125
+  },
+  "tissue_rule": "WM label 3; GM/glial labels 2/8; CSF and extracerebral excluded; no-flux interfaces; harmonic faces",
+  "observation_rule": "Gaussian PSF then physical trilinear interpolation and 3x3x3 midpoint voxel quadrature; iid noise added after imaging",
+  "primary_generator_shares_spatial_mesh": true,
+  "scan_days": [
+    20.0,
+    40.0,
+    60.0,
+    75.0,
+    90.0
+  ],
+  "training_indices": [
+    0,
+    1,
+    2
+  ],
+  "withheld_indices": [
+    3,
+    4
+  ],
+  "noise_sd": 0.02,
+  "near_seed_region_radius_mm": 18.0,
+  "near_seed_region_voxels": 120,
+  "optimizer_bounds": [
+    [
+      0.05,
+      0.02,
+      0.01
+    ],
+    [
+      1.0,
+      0.6,
+      0.09
+    ]
+  ],
+  "true_parameters": [
+    0.5,
+    0.1,
+    0.04
+  ],
+  "estimate": [
+    0.49806302288691073,
+    0.08264334991097824,
+    0.039478515803588785
+  ],
+  "local_95_ci": [
+    [
+      0.4512091024519004,
+      0.5497822925540198
+    ],
+    [
+      0.057143712507709,
+      0.11952186836980525
+    ],
+    [
+      0.03899479585212818,
+      0.03996823617090817
+    ]
+  ],
+  "weighted_jacobian_singular_values": [
+    184.35386090115858,
+    24.64176953194403,
+    5.245565739545811
+  ],
+  "log_parameter_correlation": [
+    [
+      0.9999999999999998,
+      -0.5823964885610181,
+      0.31267238371630884
+    ],
+    [
+      -0.5823964885610181,
+      0.9999999999999998,
+      0.13712926967476075
+    ],
+    [
+      0.3126723837163089,
+      0.13712926967476075,
+      0.9999999999999998
+    ]
+  ],
+  "log_parameter_covariance": [
+    [
+      0.0025408575516629914,
+      -0.005526446611635212,
+      9.913776156711647e-05
+    ],
+    [
+      -0.005526446611635212,
+      0.03543840313728295,
+      0.00016237780276717726
+    ],
+    [
+      9.91377615671165e-05,
+      0.00016237780276717726,
+      3.956569970598246e-05
+    ]
+  ],
+  "multistart_estimates": [
+    [
+      0.49806163820569566,
+      0.08264506234726611,
+      0.03947852331016401
+    ],
+    [
+      0.49806302288691073,
+      0.08264334991097824,
+      0.039478515803588785
+    ],
+    [
+      0.49806423641264524,
+      0.08264183855185336,
+      0.03947850929400392
+    ]
+  ],
+  "bootstrap_replicates": 100,
+  "bootstrap_95_ci": [
+    [
+      0.45033159506048503,
+      0.5489173361430366
+    ],
+    [
+      0.055429534133723236,
+      0.10748505142598208
+    ],
+    [
+      0.038856607258246974,
+      0.03992014554849654
+    ]
+  ],
+  "coverage_replicates": 60,
+  "coverage_method": "local known-noise Jacobian 95% CI; NOT bootstrap coverage",
+  "coverage_counts": [
+    57,
+    55,
+    59
+  ],
+  "coverage_fraction": [
+    0.95,
+    0.9166666666666666,
+    0.9833333333333333
+  ],
+  "coverage_binomial_95_ci": [
+    [
+      0.8607567532789273,
+      0.9895676703556517
+    ],
+    [
+      0.8161422166234142,
+      0.9723866896625736
+    ],
+    [
+      0.910600949942513,
+      0.999578125547658
+    ]
+  ],
+  "repeated_noise_bias": [
+    0.0022132268043464354,
+    0.0010990595968238398,
+    -1.1316164377085658e-05
+  ],
+  "repeated_noise_rmse": [
+    0.0243884404950277,
+    0.01861094441520497,
+    0.0002062441635080024
+  ],
+  "forecast_metrics": {
+    "whole_FOV": {
+      "clean_rmse": [
+        0.00014806754583885682,
+        0.0005049853182861828,
+        0.001270344682598506,
+        0.0022675648391299688,
+        0.0037247965628710417
+      ],
+      "noisy_rmse": [
+        0.020088766128600204,
+        0.01970030427731906,
+        0.019550339520416113,
+        0.02004396276020275,
+        0.020641575031778117
+      ],
+      "prediction_voxel_fraction": [
+        0.953,
+        0.952,
+        0.953,
+        0.949,
+        0.942
+      ]
+    },
+    "near_seed_18mm": {
+      "clean_rmse": [
+        0.000402588523214664,
+        0.0012986170858766163,
+        0.003015950409549157,
+        0.004961530898790048,
+        0.007303155931298478
+      ],
+      "noisy_rmse": [
+        0.01894431037566894,
+        0.01907920244170014,
+        0.020113580561956283,
+        0.020560147997052382,
+        0.023440618917395364
+      ],
+      "prediction_voxel_fraction": [
+        0.9583333333333334,
+        0.975,
+        0.9416666666666667,
+        0.95,
+        0.8916666666666667
+      ]
+    }
+  },
+  "temporal_rmse_dt_0.5_vs_0.125": [
+    1.8739852238808287e-05,
+    3.498223757280828e-05,
+    6.245065920461521e-05,
+    9.826333059046885e-05,
+    0.00015014509793175306
+  ],
+  "temporal_rmse_dt_0.25_vs_0.125": [
+    6.217217860576926e-06,
+    1.163282824314594e-05,
+    2.079890205178282e-05,
+    3.274891620675215e-05,
+    5.0055669225027216e-05
+  ],
+  "anatomy_grid_observation_rmse_3mm_vs_2mm": [
+    0.00041824144298631665,
+    0.0009007683994504674,
+    0.0016979397724701927,
+    0.0025639409987128913,
+    0.0036814162052258123
+  ],
+  "anatomy_stress_noisy_estimate": [
+    0.49915997251956123,
+    0.09676983630983253,
+    0.03944544027051211
+  ],
+  "anatomy_stress_noisy_local_95_ci": [
+    [
+      0.45162175673469857,
+      0.5517021145464798
+    ],
+    [
+      0.06813385572708396,
+      0.13744123416325799
+    ],
+    [
+      0.03895938796318929,
+      0.03993755650383081
+    ]
+  ],
+  "anatomy_stress_noiseless_estimate": [
+    0.5002177673736692,
+    0.1143496147125951,
+    0.03994769847134768
+  ],
+  "anatomy_stress_forecast_rmse": [
+    0.00041023488055357243,
+    0.0009470337355540952,
+    0.0019989445995829886,
+    0.0032783556943484825,
+    0.005041463644960348
+  ],
+  "boundary_fits": 0,
+  "failed_fits": 0,
+  "time_zero_negative_control": "rank deficiency correctly rejected",
+  "limitations": "Known seed/time/K/labels/imaging/noise; same spatial mesh in primary recovery; isotropic tissue rates; iid Gaussian post-imaging noise; conditional pointwise intervals; no patient validation.",
+  "source_sha256": {
+    "src/brainweb_kpp/model.py": "2c6da092c0b4e4eb6871094b3826485ba45b6887452094aa2bae17c6ba316e50",
+    "src/brainweb_kpp/data.py": "448fae0074d732e666271a75fc92c5c07c27a511e7985062ba57ca61e7023f82",
+    "src/brainweb_kpp/tissue_inference.py": "f0ec36232b42855b5223589b961f84c2e2933cde2b1ace63596de742ad83b0f6",
+    "scripts/run_recovery_notebook.py": "cecfeae8c8e956a689d0b953457866784843843a95d95c22649153d21a2c03a7",
+    "pyproject.toml": "5be63bfe51d30a8040df7671ea6151439d0cd19bebff9ce8e4756fc5123d8046",
+    "uv.lock": "4ea070161c73d5b27df4943e4f1b9c60de6750bd652680a1c7485463490921a2"
+  },
+  "notebook_code_scope": "brainweb",
+  "notebook_code_sha256": "f49a8b6ec77ea04c82c247186bd2cb38707fa0cc0c7ddb762b7a09f64bc638df",
+  "recovery_data_sha256": "2baedc79fd3707a9a0f77e234e84bd0eb5be1f1f8a386eb4c29f5b4e0f9fa7b1"
+}

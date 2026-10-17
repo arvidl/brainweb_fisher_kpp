@@ -51,7 +51,7 @@ At 2 mm, reducing the maximum time step from 0.25 to 0.125 day decreased the fin
 
 The native 1 mm calculation contained 2.452 billion viable cells, compared with 2.878 billion in its matched M0 reference, a \NativeCellReduction\% reduction. This relative reduction is similar to the primary result. However, minimum oxygen fell to \NativeMinimumOxygen{}, the necrotic-equivalent count increased to 3.607 million and peak $z/K$ rose to \NativeMaximumNecrosis{}. The necrotic threshold occupied 0.032 mL (32 native voxels), while low-oxygen volume was 0.027 mL. These local quantities are sensitive to spatial resolution and to the discrete anatomy. Neither grid resolves the assigned 0.2 mm oxygen length; spatial convergence of the oxygen--necrosis subsystem has not been demonstrated.
 
-\subsection{Synthetic parameter recovery and uncertainty}\label{sec:recovery_results}
+\subsection{Homogeneous parameter recovery and uncertainty}\label{sec:recovery_results}
 In the separate homogeneous experiment, all three initial guesses converged to the same fit at the reported precision. Estimated diffusion was \RecoveryDEstimate{} mm$^2$/day and proliferation was \RecoveryRhoEstimate{} day$^{-1}$, relative errors of \RecoveryDRelativeError\% and \RecoveryRhoRelativeError\%, respectively (Table~\ref{tab:recovery}). Both known values lay within the local and bootstrap marginal 95\% intervals. The log-parameter correlation was \RecoveryCorrelation{}, indicating that uncertainty in the two rates should be propagated jointly. No primary or replicate fit reached a bound or failed. Agreement across starts and finite sensitivity singular values support local estimation for this experiment; they do not establish global identifiability under unknown initialization.
 
 \begin{table}[tbp]
@@ -84,7 +84,7 @@ Across \RecoveryTrials{} independent noise realizations, local intervals covered
 \caption{Synthetic recovery and conditional uncertainty. (a) Joint bootstrap estimates and a local joint 95\% ellipse, linearized into physical units. The star marks the known rates. (b) A day-90 line profile through the nearest observation-voxel centers to the seed's $y,z$ coordinates. The darker mean-signal confidence band accounts for parameter uncertainty; the lighter new-scan prediction band also includes independent noise. Both are pointwise intervals. (c,d) Local marginal 95\% intervals for the \RecoveryTrials{} independent noise realizations, sorted by fitted rate. Red denotes a missed known value; the dashed line is ground truth. These trials audit local intervals, not bootstrap coverage or clinical variability.}\label{fig:recovery}
 \end{figure}
 
-\subsection{Withheld synthetic forecasts and numerical discrepancy}
+\subsection{Withheld homogeneous forecasts and numerical discrepancy}
 Day-75 and day-90 predictions used no observations beyond day 60. Whole-image RMSE against the known noise-free signal was $4.72\times10^{-4}$ and \RecoveryDayNinetyRMSE{}, respectively, while RMSE against the withheld noisy images was approximately the 0.03 noise standard deviation (Table~\ref{tab:recovery_forecast}). The 95\% new-scan prediction intervals contained 94.0\% and 94.6\% of the withheld voxel measurements. These are spatial fractions in two scans, not coverage estimates from independent patients; the whole-box metrics include background voxels. Figure~\ref{fig:recovery}b separately displays the signal near the tumor. Confidence in the mean signal is narrower than prediction uncertainty for a future noisy measurement.
 
 \begin{table}[tbp]
@@ -97,4 +97,77 @@ Day-75 and day-90 predictions used no observations beyond day 60. Whole-image RM
 \end{tabularx}
 \end{table}
 
-At day 90, the observation-space RMSE between the inference grid and fine generator at the known parameters was \RecoveryDayNinetyGridRMSE{}, approximately 1.14\% of the noise standard deviation. Halving the inference time step changed the signal by RMSE \RecoveryDayNinetyTimeRMSE{}. The finer generator is still a numerical reference, and a small per-voxel discrepancy does not by itself ensure negligible bias when many voxels are used; the repeated-noise audit supplies a complementary check. The BrainWeb oxygen--necrosis parameters remain assigned inputs. No patient parameters, oxygen/death rates or clinical predictive errors were estimated by this recovery study.
+At day 90, the observation-space RMSE between the inference grid and fine generator at the known parameters was \RecoveryDayNinetyGridRMSE{}, approximately 1.14\% of the noise standard deviation. Halving the inference time step changed the signal by RMSE \RecoveryDayNinetyTimeRMSE{}. The finer generator is still a numerical reference, and a small per-voxel discrepancy does not by itself ensure negligible bias when many voxels are used; the repeated-noise audit supplies a complementary check.
+
+
+\subsection{BrainWeb tissue-specific parameter recovery}\label{sec:bw_results}
+The three starting guesses agreed to the reported precision. The estimated $(D_{\rm WM},D_{\rm GM},\rho)$ was $(\BWWhiteEstimate,\BWGrayEstimate,\BWRhoEstimate)$, with relative errors \BWWhiteError\%, \BWGrayError\% and \BWRhoError\%, respectively (Table~\ref{tab:bw_recovery}). Both diffusion truths lay within the local and bootstrap 95\% intervals. The true $\rho=0.040$ day$^{-1}$ fell just above their respective upper limits, 0.039968 and 0.039920 day$^{-1}$. This noise realization and its interval misses were retained. No primary, bootstrap or independent-trial fit failed or reached a bound.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Three-rate recovery from noisy BrainWeb signals. Units are mm$^2$/day for diffusion and day$^{-1}$ for proliferation. Intervals are marginal and conditional on the known seed, anatomy, imaging model and noise. The true proliferation rate is outside both intervals in this realization.}\label{tab:bw_recovery}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{lrrYY}
+\toprule Parameter & Known & Estimate & Local 95\% CI & Bootstrap 95\% CI\\\midrule
+\BWRecoveryRows
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Gray-matter diffusion had the widest relative uncertainty. The log-rate correlation between white- and gray-matter diffusion was \BWCorrelation{} (Figure~\ref{fig:bw_recovery}a). Weighted sensitivity singular values were approximately 184.35, 24.64 and 5.25, with Jacobian condition number \BWCondition{}. These local diagnostics support estimating three rates for this specific design, without proving global identifiability or robustness to uncertain initialization. Time-zero-only data were correctly rejected. A separate unit test rejected two-tissue inference in an all-white-matter domain.
+
+Across \BWTrials{} independent noise datasets, local 95\% interval coverage was \BWWhiteCoverage/\BWTrials{} for $D_{\rm WM}$, \BWGrayCoverage/\BWTrials{} for $D_{\rm GM}$ and \BWRhoCoverage/\BWTrials{} for $\rho$ (Table~\ref{tab:bw_coverage}; Figure~\ref{fig:bw_recovery}d--f). Exact binomial intervals include 95\% but are broad. Repeated-noise biases were small relative to single-fit uncertainty; the audit neither guarantees nominal coverage nor evaluates bootstrap coverage. The primary proliferation miss is compatible with sampling variation rather than grounds for replacing the noise seed.
+
+\begin{table}[tbp]
+\centering\small
+\caption{BrainWeb repeated-noise audit of local 95\% intervals. Bias and RMSE retain the units shown. Binomial intervals describe Monte Carlo uncertainty in the coverage fraction, not uncertainty in a fitted rate.}\label{tab:bw_coverage}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{lrrYY}
+\toprule Parameter & Bias & RMSE & Coverage & Binomial 95\% CI\\\midrule
+\BWCoverageRows
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figures/brainweb_recovery.pdf}
+\caption{BrainWeb recovery and conditional uncertainty. (a) Joint white-/gray-matter bootstrap estimates; the star denotes known rates and the cross the primary estimate. (b) Proliferation bootstrap distribution, with marginal percentile interval shading; its known value is just beyond the upper limit. (c) Withheld day-90 profile through the nearest observation-voxel centers to the seed's $y,z$ coordinates. Mean-signal confidence and new-scan prediction intervals are pointwise and have different meanings. (d--f) Local 95\% intervals for 60 independent noise realizations, sorted by fitted rate. Red marks a missed known value. These repetitions share anatomy and biology and do not constitute a virtual patient cohort.}\label{fig:bw_recovery}
+\end{figure}
+
+\subsection{BrainWeb withheld forecasts and anatomy sensitivity}\label{sec:bw_sensitivity}
+Day-90 RMSE against the noise-free signal was \BWDayNinetyRMSE{} over the full FOV and \BWNearDayNinetyRMSE{} in the prespecified near-seed region (Table~\ref{tab:bw_forecast}). New-scan prediction intervals contained 94.2\% of all withheld day-90 voxels but only 89.2\% of near-seed voxels. Thus, background-inclusive summaries can conceal less favorable performance near the tumor. These are descriptive spatial fractions for one noisy scan, not independent coverage trials or simultaneous spatial guarantees.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Withheld BrainWeb forecast metrics. The full FOV contains 1,000 observation voxels; the near-seed region contains 120. Errors use normalized signal units. The final column is the spatial fraction of noisy observations in approximate pointwise 95\% new-scan prediction intervals.}\label{tab:bw_forecast}
+\begin{tabularx}{\textwidth}{rlYYY}
+\toprule Day & Region & RMSE vs clean & RMSE vs noisy & Voxel fraction in prediction interval\\\midrule
+\BWForecastRows
+\bottomrule
+\end{tabularx}
+\end{table}
+
+On the shared 3 mm anatomy, changing the maximum step from 0.5 to 0.25 day reduced day-90 signal RMSE relative to the 0.125-day generator from \BWDayNinetyTimeRMSE{} to \BWHalfTimeRMSE{}. By contrast, the 3 mm versus 2 mm generator discrepancy at the known rates reached \BWDayNinetyGridRMSE{} at day 90, or 18.4\% of the 0.02 noise standard deviation (Figure~\ref{fig:bw_anatomy}). This is a change in discretized anatomy and numerical representation rather than a pure spatial-convergence comparison.
+
+Fitting the noise-free 2 mm signal with the 3 mm model estimated $D_{\rm GM}=\BWGrayStressEstimate$ mm$^2$/day, a +\BWGrayStressShift\% shift from the known value (Table~\ref{tab:bw_anatomy}). Corresponding white-matter and proliferation shifts were +0.04\% and -0.13\%. The paired noisy stress fit gave $(0.499160,0.096770,0.039445)$ in the respective units. Its conditional local intervals do not incorporate anatomy/grid discrepancy. Signal error below one noise standard deviation per voxel can therefore coexist with a material rate shift when systematic differences are fitted across many measurements. This sensitivity example does not estimate segmentation uncertainty or establish a universal gray-matter bias.
+
+\begin{table}[tbp]
+\centering\small
+\caption{Anatomy/grid sensitivity: full 2 mm data fitted with the 3 mm model. The noiseless fit isolates a deterministic rate shift under the changed representation. The noisy fit reuses the primary observation-noise draw. Neither fit estimates a distribution of anatomy uncertainty.}\label{tab:bw_anatomy}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{lrrrY}
+\toprule Parameter & Known & Noiseless fit & Relative shift & Paired noisy fit\\\midrule
+\BWAnatomyRows
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figures/brainweb_anatomy_sensitivity.pdf}
+\caption{Sensitivity to anatomy and numerical representation. (a) Full 3 mm tissue domain at RAS $z=30$ mm, with the known seed center and fixed 60 mm observation FOV. The forward PDE is not cropped to that box. (b) Difference between 2 mm and 3 mm noise-free generating signals at day 90, using identical physical observation voxels; the displayed observation plane is at $z=27$ mm. (c) Relative shifts after fitting the noise-free 2 mm data with the 3 mm inverse model. (d) Observation-space discrepancies at the known rates; temporal error on the shared 3 mm grid is smaller than the combined anatomy/grid effect. Both generators in the anatomy comparison use a 0.125-day step. No biological measurement or clinical validation is represented.}\label{fig:bw_anatomy}
+\end{figure}
+
+Both recovery experiments fit synthetic M0 observations only. The oxygen--necrosis parameters and the dense-seed forward comparisons remain assigned inputs; no patient parameters, oxygen/death rates or clinical predictive errors were estimated.
+\FloatBarrier

@@ -8,6 +8,7 @@ all: pdf
 figures:
 	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) make_figures.py
 	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) make_recovery_figures.py
+	MPLCONFIGDIR=/tmp/brainweb-paper-mpl $(PYTHON) make_brainweb_recovery_figures.py
 
 pdf: figures
 	mkdir -p build output/pdf

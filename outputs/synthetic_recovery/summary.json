@@ -181,10 +181,11 @@
   "source_sha256": {
     "src/brainweb_kpp/model.py": "2c6da092c0b4e4eb6871094b3826485ba45b6887452094aa2bae17c6ba316e50",
     "src/brainweb_kpp/inference.py": "6f4878b81f77204526ed3389d8b69414e4113a9ee3e627b39806b0206ac22e0f",
-    "scripts/run_recovery_notebook.py": "27f7e9ca7dad00e3ad0fe428c6ec6558570762bfebe76dc1b8652df4c57fecbc",
+    "scripts/run_recovery_notebook.py": "cecfeae8c8e956a689d0b953457866784843843a95d95c22649153d21a2c03a7",
     "pyproject.toml": "5be63bfe51d30a8040df7671ea6151439d0cd19bebff9ce8e4756fc5123d8046",
     "uv.lock": "4ea070161c73d5b27df4943e4f1b9c60de6750bd652680a1c7485463490921a2"
   },
-  "notebook_code_sha256": "19509024f1b6a0b44ac5f7a6fce8b2bd6f1f2de9e55816cdd04a9fb232dfe2da",
+  "notebook_code_scope": "homogeneous",
+  "notebook_code_sha256": "fedf7c0dc9b1249381872bdddab19343bb86d12ff6dad9690014ef4b92329f4a",
   "recovery_data_sha256": "841011da7d3a7490cb9875416357ab68f26870c499dec1108443cc51701f3c86"
 }

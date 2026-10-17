@@ -1,5 +1,5 @@
 {
-  "pdf_pages": 27,
+  "pdf_pages": 33,
   "bibliography_entries": 26,
   "linked_bibliography_targets": 26,
   "all_references_resolved": true,
@@ -7,28 +7,51 @@
   "source_hashes_match_recorded_experiments": true,
   "recovery_source_and_notebook_hashes_match": true,
   "recovery_arrays_match_summary_hash": true,
-  "tests_passed": 43,
+  "tests_passed": 50,
   "notebook_checks": {
-    "synthetic_recovery_full_execution": "passed",
+    "synthetic_recovery_full_execution": "passed for homogeneous Part A and BrainWeb Part B; all 16 code cells have execution counts and no error outputs",
     "explorer_widget_smoke": "previously passed; solver and UI unchanged in this update",
     "clean_coupled_90_day_example": "previously passed; forward sources unchanged"
   },
   "recovery_replicates": {
-    "bootstrap": 100,
-    "independent_noise": 60
+    "homogeneous": {
+      "bootstrap": 100,
+      "independent_noise": 60
+    },
+    "brainweb": {
+      "bootstrap": 100,
+      "independent_noise": 60
+    }
+  },
+  "brainweb_checks": {
+    "source_code_and_array_hashes_verified": true,
+    "coverage_bias_forecast_and_discrepancy_metrics_recomputed_from_arrays": true,
+    "independent_local_interval_coverage_counts": [
+      57,
+      55,
+      59
+    ],
+    "primary_proliferation_truth_outside_both_95_intervals_retained": true,
+    "anatomy_stress_noiseless_gray_diffusion_relative_shift_percent": 14.349614712595082,
+    "new_manuscript_figures": 2,
+    "new_manuscript_tables": 4
   },
   "visual_review": {
-    "all_pages_rendered": 27,
-    "contact_sheet": "reviewed",
+    "all_pages_rendered": 33,
+    "contact_sheets": "all pages reviewed",
     "individual_pages_reviewed": [
       1,
-      9,
-      10,
-      21,
-      26
+      5,
+      11,
+      12,
+      13,
+      14,
+      15,
+      28,
+      30
     ],
     "layout_defects_found": false
   },
-  "pdf_sha256": "4bea72bc8ce2cc289de5cdbc52316f05a20d9b485c47d0987eeda449addef24b",
-  "scope": "Document and numerical/synthetic reproducibility checks; conditional recovery only, no patient or biological validation"
+  "pdf_sha256": "c6e01921b21ce54a0e87e1d3ef6719ef228393c0586d56d81efbe88f697c3f94",
+  "scope": "Document and numerical/synthetic reproducibility checks; conditional recovery and a separate deterministic anatomy/grid stress test, no patient or biological validation. Bibliography link annotations verified; remote link availability was not rechecked in this update."
 }
