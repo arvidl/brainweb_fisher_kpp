@@ -39,6 +39,41 @@ example: at day 90, oxygen–necrosis coupling reduced viable cell count by abou
 by only about 1.9%. These BrainWeb-phantom results use assigned parameters and
 are not patient predictions; see the manuscript for numerical limitations.
 
+## Roadmap
+
+These are proposed next steps, building on the current phantom demonstration:
+
+1. **Estimate parameters from MRI.** Register longitudinal structural,
+   diffusion and perfusion MRI; calibrate how model fields generate imaging
+   measurements. Start with migration and proliferation parameters, testing
+   identifiability before adding oxygen and death parameters. Use independent
+   experiments, pathology and population priors where imaging is insufficient;
+   MRI water diffusion is not tumor-cell migration.
+2. **Quantify uncertainty.** Test parameter recovery on realistic synthetic
+   observations, then infer parameter distributions. Propagate measurement,
+   segmentation, initialization, prior, model and numerical uncertainty into
+   forecast intervals and spatial maps. Check interval coverage and sensitivity
+   to priors, following work on
+   [glioma-model identifiability](https://doi.org/10.1098/rsta.2024.0212).
+3. **Validate progressively.** Fit early scans and predict withheld later scans,
+   comparing separately calibrated coupled and Fisher–KPP models with simple
+   baselines. Validate oxygen and necrosis against independent measurements.
+   Progress to external cohorts and prospective, blinded forecasts, reporting
+   spatial/volume errors and uncertainty calibration; distinguish untreated
+   growth from treatment response.
+4. **Model treatment explicitly.** Add resection, radiation and drug effects,
+   including oxygen-dependent radiosensitivity and treatment-related tissue
+   injury. Evaluate viable burden and recurrence patterns alongside normal-brain
+   toxicity and plan deliverability. Serial MRI could update forecasts during
+   treatment, as explored in
+   [MRI-based data assimilation](https://doi.org/10.1186/s12885-025-14557-3).
+5. **Evaluate new strategies.** Use virtual cohorts to compare adaptive radiation
+   schedules, spatial dose painting, hypoxia-modifying combinations and treatment
+   sequencing under uncertainty. Select informative scan times and prioritize
+   robust treatment hypotheses for experimental testing. Prospective controlled
+   trials must establish effects on survival, neurological function and quality
+   of life before model-guided strategies can claim clinical benefit.
+
 ## Scientific manuscript
 
 The [paper (PDF)](paper/output/pdf/brainweb_fisher_kpp_manuscript.pdf) and
